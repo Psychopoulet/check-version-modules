@@ -1,6 +1,6 @@
 {
   "name": "check-version-modules",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Check modules's version for the package.",
   "main": "lib/main.js",
   "typings": "lib/index.d.ts",
