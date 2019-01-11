@@ -1,0 +1,58 @@
+{
+  "name": "check-version-modules",
+  "version": "1.0.0",
+  "description": "Check modules's version for the package.",
+  "main": "lib/main.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "lint": "npx eslint ./bin/*.js ./lib/**/*.js ./test/**/*.js",
+    "check-updates": "npx gulp check-updates",
+    "tests": "npm run-script lint && node ./bin/cmd.js && npx nyc --reporter=html --reporter=text mocha",
+    "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
+  },
+  "bin": {
+    "check-version-modules": "./bin/cmd.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run-script lint",
+      "pre-push": "npm run-script tests"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Psychopoulet/check-version-modules.git"
+  },
+  "keywords": [
+    "node",
+    "container",
+    "pattern",
+    "structure",
+    "skeleton",
+    "recursive",
+    "Map",
+    "data",
+    "ensure",
+    "formate",
+    "documentation"
+  ],
+  "author": "Sébastien VIDAL",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Psychopoulet/check-version-modules/issues"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "10.12.18",
+    "colors": "1.3.3",
+    "coveralls": "3.0.2",
+    "eslint": "5.12.0",
+    "mocha": "5.2.0",
+    "nyc": "13.1.0",
+    "husky": "1.3.1"
+  },
+  "homepage": "https://github.com/Psychopoulet/check-version-modules#readme",
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
