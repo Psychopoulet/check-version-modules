@@ -1,13 +1,13 @@
 {
   "name": "check-version-modules",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check modules's version for the package.",
   "main": "lib/main.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "npx eslint ./bin/*.js ./lib/**/*.js ./test/**/*.js",
-    "check-updates": "npx gulp check-updates",
-    "tests": "npm run-script lint && node ./bin/cmd.js && npx nyc --reporter=html --reporter=text mocha",
+    "check-updates": "node ./bin/cmd.js",
+    "tests": "npm run-script lint && npm run-script check-updates && npx nyc --reporter=html --reporter=text mocha",
     "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
   },
   "bin": {
@@ -31,10 +31,11 @@
   "bugs": {
     "url": "https://github.com/Psychopoulet/check-version-modules/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "colors": "1.3.3"
+  },
   "devDependencies": {
     "@types/node": "10.12.18",
-    "colors": "1.3.3",
     "coveralls": "3.0.2",
     "eslint": "5.12.0",
     "mocha": "5.2.0",
