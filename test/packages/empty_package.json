@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "../lib/main.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Sébastien VIDAL",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
