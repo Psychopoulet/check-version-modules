@@ -20,14 +20,43 @@ $ npm install check-version-modules
 
 ## Doc
 
-  * ``` (file: string) => Promise\<void\> ``` extract & compare data
+### Methods
+
+  * ``` (file: string, options?: iOptions) => Promise<boolean> ``` extract & compare data
+
+### Interfaces
+
+```typescript
+interface iOptions {
+  "failAtMajor": boolean; // default: true => used for the returned boolean
+  "failAtMinor": boolean; // default: true => used for the returned boolean
+  "failAtPatch": boolean; // default: false => used for the returned boolean
+  "dev": boolean; // default: true => analyse dev deps too
+  "console": boolean; // default: true => print analyse's result in the terminal
+}
+```
+
+### Command line options
+
+  * ``` --fail-at-major ``` => failAtMajor = true
+  * ``` --no-fail-at-major ``` => failAtMajor = false
+  * ``` --fail-at-minor ``` => failAtMinor = true
+  * ``` --no-fail-at-minor ``` => failAtMinor = false
+  * ``` --fail-at-patch ``` => failAtPatch = true
+  * ``` --no-fail-at-patch ``` => failAtPatch = false
+  * ``` --dev ``` => dev = true
+  * ``` --no-dev ``` => dev = false
+  * ``` --console ``` => console = true
+  * ``` --no-console ``` => console = false
+  * ``` --file ``` => specify analysed file with next argument, if not set analyse the "package.json" in the working directory
 
 ## Examples
 
 ### Command line
 
 ```bash
-$ cd ./myProject/ && npx check-version-modules
+$ cd ./myProject/ && npx check-version-modules --file /etc/tests/package.json --fail-at-patch --no-dev
+$ cd ./myProject/ && npx check-version-modules --no-console --no-fail-at-minor
 ```
 
 ### Native
@@ -35,7 +64,10 @@ $ cd ./myProject/ && npx check-version-modules
 ```javascript
 const checker = require("check-version-modules");
 
-checker("./package.json").then((valid) => {
+checker("/etc/tests/package.json", {
+  "failAtPatch": true,
+  "dev": false
+}).then((valid) => {
   console.log(valid ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);

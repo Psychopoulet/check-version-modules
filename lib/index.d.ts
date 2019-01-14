@@ -1,6 +1,18 @@
 declare module "check-version-modules" {
 
-	function checker (file: string): Promise<boolean>;
+	// interfaces
+
+	interface iOptions {
+		"failAtMajor": boolean;
+		"failAtMinor": boolean;
+		"failAtPatch": boolean;
+		"dev": boolean;
+		"console": boolean;
+	}
+
+	// module
+
+	function checker (file: string, options?: iOptions): Promise<boolean>;
 
 	export = checker;
 

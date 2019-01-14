@@ -15,7 +15,9 @@ describe("old versions", () => {
 
 	it("should test old major", () => {
 
-		return checker(join(__dirname, "packages", "old_major_package.json")).then((valid) => {
+		return checker(join(__dirname, "packages", "old_major_package.json"), {
+			"console": false
+		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
 			assert.strictEqual(valid, false, "Error detected is not as expected");
@@ -28,7 +30,9 @@ describe("old versions", () => {
 
 	it("should test old minor", () => {
 
-		return checker(join(__dirname, "packages", "old_minor_package.json")).then((valid) => {
+		return checker(join(__dirname, "packages", "old_minor_package.json"), {
+			"console": false
+		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
 			assert.strictEqual(valid, false, "Error detected is not as expected");
@@ -41,7 +45,9 @@ describe("old versions", () => {
 
 	it("should test old patch", () => {
 
-		return checker(join(__dirname, "packages", "old_patch_package.json")).then((valid) => {
+		return checker(join(__dirname, "packages", "old_patch_package.json"), {
+			"console": false
+		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
 			assert.strictEqual(valid, true, "Error detected is not as expected");
@@ -52,9 +58,27 @@ describe("old versions", () => {
 
 	});
 
+	it("should test old patch with fail", () => {
+
+		return checker(join(__dirname, "packages", "old_patch_package.json"), {
+			"failAtPatch": true,
+			"console": false
+		}).then((valid) => {
+
+			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
+			assert.strictEqual(valid, false, "Error detected is not as expected");
+
+			return Promise.resolve();
+
+		});
+
+	});
+
 	it("should test recent", () => {
 
-		return checker(join(__dirname, "packages", "recent_package.json")).then((valid) => {
+		return checker(join(__dirname, "packages", "recent_package.json"), {
+			"console": false
+		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
 			assert.strictEqual(valid, true, "Error detected is not as expected");

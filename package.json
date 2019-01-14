@@ -1,13 +1,14 @@
 {
   "name": "check-version-modules",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Check modules's version for the package.",
   "main": "lib/main.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "lint": "npx eslint ./bin/*.js ./lib/**/*.js ./test/**/*.js",
     "check-updates": "node ./bin/cmd.js",
-    "tests": "npm run-script lint && npm run-script check-updates && npx nyc --reporter=html --reporter=text mocha",
+    "unit-tests": "npx nyc --reporter=html --reporter=text mocha",
+    "tests": "npm run-script lint && npm run-script check-updates && npm run-script unit-tests",
     "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
   },
   "bin": {
