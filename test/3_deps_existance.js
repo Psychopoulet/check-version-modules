@@ -11,11 +11,11 @@
 
 // tests
 
-describe("file existance", () => {
+describe("deps existance", () => {
 
-	it("should test not existing file", (done) => {
+	it("should test not existing deps", (done) => {
 
-		checker("test.js", {
+		checker(join(__dirname, "packages", "not_exists_package.json"), {
 			"console": false
 		}).then(() => {
 			done(new Error("No error detected"));
@@ -25,21 +25,6 @@ describe("file existance", () => {
 			assert.strictEqual(err instanceof Error, true, "Error detected is not as expected");
 
 			done();
-
-		});
-
-	});
-
-	it("should test exists", () => {
-
-		return checker(join(__dirname, "packages", "empty_package.json"), {
-			"console": false
-		}).then((valid) => {
-
-			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
-			assert.strictEqual(valid, true, "Error detected is not as expected");
-
-			return Promise.resolve();
 
 		});
 
