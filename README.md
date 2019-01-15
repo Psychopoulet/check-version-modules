@@ -1,10 +1,12 @@
 # check-version-modules
 Check modules's version for the package.
 
-[![Build Status](https://api.travis-ci.org/Psychopoulet/check-version-modules.svg?branch=master)](https://travis-ci.org/Psychopoulet/check-version-modules)
-[![Coverage Status](https://coveralls.io/repos/github/Psychopoulet/check-version-modules/badge.svg?branch=master)](https://coveralls.io/github/Psychopoulet/check-version-modules)
-[![Dependency Status](https://david-dm.org/Psychopoulet/check-version-modules/status.svg)](https://david-dm.org/Psychopoulet/check-version-modules)
-[![Dev dependency Status](https://david-dm.org/Psychopoulet/check-version-modules/dev-status.svg)](https://david-dm.org/Psychopoulet/check-version-modules?type=dev)
+[![Build status](https://api.travis-ci.org/Psychopoulet/check-version-modules.svg?branch=master)](https://travis-ci.org/Psychopoulet/check-version-modules)
+[![Coverage status](https://coveralls.io/repos/github/Psychopoulet/check-version-modules/badge.svg?branch=master)](https://coveralls.io/github/Psychopoulet/check-version-modules)
+[![Dependency status](https://david-dm.org/Psychopoulet/check-version-modules/status.svg)](https://david-dm.org/Psychopoulet/check-version-modules)
+[![Dev dependency status](https://david-dm.org/Psychopoulet/check-version-modules/dev-status.svg)](https://david-dm.org/Psychopoulet/check-version-modules?type=dev)
+[![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
 
 ## Installation
 

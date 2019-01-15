@@ -1,6 +1,6 @@
 {
   "name": "check-version-modules",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Check modules's version for the package.",
   "main": "lib/main.js",
   "typings": "lib/index.d.ts",
@@ -25,7 +25,13 @@
     "url": "git://github.com/Psychopoulet/check-version-modules.git"
   },
   "keywords": [
-    "check", "update", "versions", "version", "package", "cmd", "command line"
+    "check",
+    "update",
+    "versions",
+    "version",
+    "package",
+    "cmd",
+    "command line"
   ],
   "author": "Sébastien VIDAL",
   "license": "ISC",
