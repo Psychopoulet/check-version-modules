@@ -28,6 +28,6 @@ describe("deps existance", () => {
 
 		});
 
-	});
+	}).timeout(10 * 1000);
 
 });
