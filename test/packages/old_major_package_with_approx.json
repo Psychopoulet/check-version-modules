@@ -8,7 +8,7 @@
   "author": "Sébastien VIDAL",
   "license": "ISC",
   "dependencies": {
-    "check-version-modules": "1.1.0"
+    "simplecontainer": "^0.0.1"
   },
   "devDependencies": {},
   "engines": {

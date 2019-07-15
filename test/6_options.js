@@ -18,7 +18,10 @@ describe("options", () => {
 		const file = join(__dirname, "packages", "old_major_package.json");
 
 		return checker(file, {
-			"failAtMajor": true
+			"failAtMajor": true,
+			"failAtMinor": false,
+			"failAtPatch": false,
+			"console": false
 		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
@@ -29,7 +32,8 @@ describe("options", () => {
 		}).then(() => {
 
 			return checker(file, {
-				"failAtMajor": false
+				"failAtMajor": false,
+				"console": false
 			});
 
 		}).then((valid) => {
@@ -48,7 +52,10 @@ describe("options", () => {
 		const file = join(__dirname, "packages", "old_minor_package.json");
 
 		return checker(file, {
-			"failAtMinor": true
+			"failAtMajor": true,
+			"failAtMinor": true,
+			"failAtPatch": false,
+			"console": false
 		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
@@ -59,7 +66,8 @@ describe("options", () => {
 		}).then(() => {
 
 			return checker(file, {
-				"failAtMinor": false
+				"failAtMinor": false,
+				"console": false
 			});
 
 		}).then((valid) => {
@@ -78,7 +86,10 @@ describe("options", () => {
 		const file = join(__dirname, "packages", "old_patch_package.json");
 
 		return checker(file, {
-			"failAtPatch": true
+			"failAtMajor": true,
+			"failAtMinor": true,
+			"failAtPatch": true,
+			"console": false
 		}).then((valid) => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
@@ -89,7 +100,8 @@ describe("options", () => {
 		}).then(() => {
 
 			return checker(file, {
-				"failAtPatch": false
+				"failAtPatch": false,
+				"console": false
 			});
 
 		}).then((valid) => {

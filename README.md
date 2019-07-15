@@ -8,6 +8,8 @@ Check modules's version for the package.
 [![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
 
+> /!\ Warning ! This package is designed to work only with strict version, without artefacts ("^", "~", etc...)
+
 ## Installation
 
 ```bash
