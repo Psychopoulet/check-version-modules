@@ -9,7 +9,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "simplessl": "2.4.0"
+    "check-version-modules": "1.0.1"
   },
   "engines": {
     "node": ">=6.0.0"
