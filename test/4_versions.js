@@ -38,7 +38,7 @@ describe("old versions", () => {
 			"failAtMinor": false,
 			"failAtPatch": false,
 			"console": true // for console tests
-		}).then((valid) => {
+		}).then(() => {
 			done(new Error("Not strict version does not generate an Error"));
 		}).catch((err) => {
 
