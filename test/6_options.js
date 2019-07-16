@@ -29,20 +29,6 @@ describe("options", () => {
 
 			return Promise.resolve();
 
-		}).then(() => {
-
-			return checker(file, {
-				"failAtMajor": false,
-				"console": false
-			});
-
-		}).then((valid) => {
-
-			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
-			assert.strictEqual(valid, true, "Error detected is not as expected");
-
-			return Promise.resolve();
-
 		});
 
 	});
@@ -63,20 +49,6 @@ describe("options", () => {
 
 			return Promise.resolve();
 
-		}).then(() => {
-
-			return checker(file, {
-				"failAtMinor": false,
-				"console": false
-			});
-
-		}).then((valid) => {
-
-			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
-			assert.strictEqual(valid, true, "Error detected is not as expected");
-
-			return Promise.resolve();
-
 		});
 
 	});
@@ -94,20 +66,6 @@ describe("options", () => {
 
 			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
 			assert.strictEqual(valid, false, "Error detected is not as expected");
-
-			return Promise.resolve();
-
-		}).then(() => {
-
-			return checker(file, {
-				"failAtPatch": false,
-				"console": false
-			});
-
-		}).then((valid) => {
-
-			assert.strictEqual(typeof valid, "boolean", "Returned data detected is not as expected");
-			assert.strictEqual(valid, true, "Error detected is not as expected");
 
 			return Promise.resolve();
 
