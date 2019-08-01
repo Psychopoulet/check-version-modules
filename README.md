@@ -8,8 +8,6 @@ Check modules's version for the package.
 [![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
 
-> /!\ Warning ! This package is designed to work only with strict version, without artefacts ("^", "~", etc...)
-
 ## Installation
 
 ```bash
@@ -24,6 +22,22 @@ $ npm install check-version-modules
 
 ## Doc
 
+### Supported patterns
+
+> does not support artifacts like "-beta"
+> each "*" character will be understood like a "x"'
+> here, "n" is a whatever number sample, like "1"
+
+Does support following patterns:
+
+  * x (=> x.x.x)
+  * x.n.n (=> x.x.x)
+  * n (=> n.x.x)
+  * n.n (=> n.n.x)
+  * n.n.n
+  * ^n.n.n (=> n.x.x)
+  * ~n.n.n (=> n.n.x)
+
 ### Methods
 
   * ``` (file: string, options?: iOptions) => Promise<boolean> ``` extract & compare data
@@ -32,9 +46,9 @@ $ npm install check-version-modules
 
 ```typescript
 interface iOptions {
-  "failAtMajor": boolean; // default: true => used for the returned boolean
-  "failAtMinor": boolean; // default: true => used for the returned boolean
-  "failAtPatch": boolean; // default: false => used for the returned boolean
+  "failAtMajor": boolean; // default: true => if no pattern, used for the returned boolean
+  "failAtMinor": boolean; // default: true => if no pattern, used for the returned boolean
+  "failAtPatch": boolean; // default: false => if no pattern, used for the returned boolean
   "dev": boolean; // default: true => analyse dev deps too
   "console": boolean; // default: true => print analyse's result in the terminal
 }
@@ -93,6 +107,10 @@ checker("./package.json").then((valid) => {
 ## Tests
 
 ```bash
+$ npm run-script tests
+$ git clone git://github.com/Psychopoulet/check-version-modules.git
+$ cd ./check-version-modules
+$ npm install
 $ npm run-script tests
 ```
 
