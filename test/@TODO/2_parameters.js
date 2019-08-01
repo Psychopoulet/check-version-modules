@@ -6,7 +6,7 @@
 	const assert = require("assert");
 
 	// internal
-	const checker = require(require("path").join(__dirname, "..", "lib", "main.js"));
+	const checker = require(require("path").join(__dirname, "..", "lib", "utils", "main.js"));
 
 // tests
 
