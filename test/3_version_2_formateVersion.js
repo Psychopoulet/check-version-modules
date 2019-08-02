@@ -72,4 +72,10 @@ describe("formateVersion", () => {
 
 	});
 
+	it("should test wrong patterns", () => {
+
+		strictEqual(formateVersion("1.1.1.1"), "1.1.1.1", "Formated version is not as expected");
+
+	});
+
 });
