@@ -31,8 +31,10 @@ $ npm install check-version-modules
 Does support following patterns:
 
   * x (=> x.x.x)
+  * x.x.n (=> x.x.x)
   * x.n.n (=> x.x.x)
   * n (=> n.x.x)
+  * n.x (=> n.x.x)
   * n.n (=> n.n.x)
   * n.n.n
   * ^n.n.n (=> n.x.x)

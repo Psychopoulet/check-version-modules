@@ -20,9 +20,13 @@ describe("checkVersionValidity", () => {
 
 	});
 
-	it("should test \"x.n.n\" pattern", () => {
+	it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
 
-		return checkVersionValidity("x.1.1");
+		return checkVersionValidity("x.1.1").then(() => {
+			return checkVersionValidity("x.x.1");
+		}).then(() => {
+			return checkVersionValidity("x.x.x");
+		});
 
 	});
 
