@@ -34,4 +34,12 @@ describe("downloadPackageData", () => {
 
 	});
 
+	it("should test mutliple module", () => {
+
+		return downloadPackageData("check-version-modules").then(() => {
+			return downloadPackageData("check-version-modules");
+		});
+
+	});
+
 });
