@@ -11,7 +11,7 @@
 
 	// locals
 	const checker = require(join(__dirname, "..", "lib", "main.js"));
-	const getFormatedTime = require(join(__dirname, "..", "lib", "getFormatedTime.js"));
+	const getFormatedTime = require(join(__dirname, "..", "lib", "utils", "getFormatedTime.js"));
 
 // consts
 
