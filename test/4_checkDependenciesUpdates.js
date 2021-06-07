@@ -163,7 +163,7 @@ describe("checkDependenciesUpdates", () => {
 		return Promise.resolve().then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "1.2";
+				modules[0].version = "1.3";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -175,7 +175,7 @@ describe("checkDependenciesUpdates", () => {
 		}).then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "1.2.x";
+				modules[0].version = "1.3.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -191,7 +191,7 @@ describe("checkDependenciesUpdates", () => {
 	it("should test \"n.n.n\" pattern", () => {
 
 		const modules = _getModules();
-			modules[0].version = "1.2.1";
+			modules[0].version = "1.3.0";
 		return checkDependenciesUpdates(modules, options).then((valid) => {
 
 			strictEqual(valid, true, "Generated validation is not as expected");
@@ -207,7 +207,7 @@ describe("checkDependenciesUpdates", () => {
 		return Promise.resolve().then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "^1.2.1";
+				modules[0].version = "^1.3.0";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -249,7 +249,7 @@ describe("checkDependenciesUpdates", () => {
 		return Promise.resolve().then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "~1.2.1";
+				modules[0].version = "~1.3.0";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -261,7 +261,7 @@ describe("checkDependenciesUpdates", () => {
 		}).then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "~1.2.x";
+				modules[0].version = "~1.3.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -286,35 +286,43 @@ describe("checkDependenciesUpdates", () => {
 
 	});
 
-	it("should test wrong patternss \"n.n.n.n\" & \"^~n.n.n\"", (done) => {
+	it("should test wrong pattern \"n.n.n.n\" & \"^~n.n.n\"", () => {
 
 		const modules = _getModules();
 			modules[0].version = "1.2.1.1";
-		checkDependenciesUpdates(modules, options).then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
+		checkDependenciesUpdates(modules, options).then((runnable) => {
 
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof Error, true, "Generated Error is not as expected");
-
-			done();
+			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
+			strictEqual(runnable, false, "Generated result is not as expected");
 
 		});
 
 	});
 
-	it("should test wrong pattern \"^~n.n.n\"", (done) => {
+	it("should test wrong pattern \"^~n.n.n\"", () => {
 
 		const modules = _getModules();
 			modules[0].version = "^~1.2.1.1";
-		checkDependenciesUpdates(modules, options).then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
+		checkDependenciesUpdates(modules, options).then((runnable) => {
 
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof Error, true, "Generated Error is not as expected");
+			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
+			strictEqual(runnable, false, "Generated result is not as expected");
 
-			done();
+		});
+
+	});
+
+	it("should test wrong pattern string", () => {
+
+		const modules = _getModules();
+			modules[0].version = "git+https://git@github.com/Psychopoulet/check-version-modules";
+		checkDependenciesUpdates(modules, {
+			...options,
+			"console": true
+		}).then((runnable) => {
+
+			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
+			strictEqual(runnable, false, "Generated result is not as expected");
 
 		});
 
@@ -332,7 +340,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.2.1";
+					modules[0].version = "1.3.1";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, true, "Generated validation is not as expected");
@@ -378,7 +386,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.1.1";
+					modules[0].version = "1.2.0";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, false, "Generated validation is not as expected");
@@ -401,7 +409,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.2.0";
+					modules[0].version = "1.3.0";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, false, "Generated validation is not as expected");

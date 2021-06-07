@@ -44,7 +44,7 @@ describe("formateDeps", () => {
 
 		strictEqual(typeof formated, "object", "Generated data is not as expected");
 		strictEqual(formated instanceof Array, true, "Generated data is not as expected");
-		strictEqual(formated.length, 7, "Generated data is not as expected");
+		strictEqual(formated.length, 8, "Generated data is not as expected");
 
 	});
 
