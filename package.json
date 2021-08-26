@@ -1,6 +1,6 @@
 {
   "name": "check-version-modules",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Check modules's version for the package.",
   "main": "lib/main.js",
   "typings": "lib/index.d.ts",
@@ -46,13 +46,13 @@
     "colors": "1.4.0"
   },
   "devDependencies": {
-    "@types/node": "15.12.1",
-    "coveralls": "3.1.0",
-    "eslint": "7.28.0",
-    "husky": "6.0.0",
-    "mocha": "9.0.0",
+    "@types/node": "16.7.2",
+    "coveralls": "3.1.1",
+    "eslint": "7.32.0",
+    "husky": "7.0.2",
+    "mocha": "9.1.0",
     "nyc": "15.1.0",
-    "typescript": "4.3.2"
+    "typescript": "4.3.5"
   },
   "homepage": "https://github.com/Psychopoulet/check-version-modules#readme",
   "engines": {
