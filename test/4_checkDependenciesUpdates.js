@@ -340,7 +340,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.3.2";
+					modules[0].version = "1.3.3";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, true, "Generated validation is not as expected");
