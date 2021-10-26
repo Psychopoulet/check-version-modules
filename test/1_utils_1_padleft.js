@@ -21,4 +21,8 @@ describe("padleft", () => {
 		strictEqual(padleft("1"), "01", "Padded data is not as expected");
 	});
 
+	it("should test number padleft not padded", () => {
+		strictEqual(padleft(1), "01", "Padded data is not as expected");
+	});
+
 });
