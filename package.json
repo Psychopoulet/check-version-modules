@@ -1,4 +1,5 @@
 {
+
   "name": "check-version-modules",
   "version": "1.3.6",
   "description": "Check modules's version for the package.",
@@ -29,6 +30,7 @@
     "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
 
   },
+
   "bin": {
     "check-version-modules": "./bin/cmd.js"
   },
@@ -37,16 +39,30 @@
     "/bin",
     "/lib"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "20.5.0",
+    "coveralls": "3.1.1",
+    "eslint": "8.47.0",
+    "husky": "8.0.3",
+    "mocha": "10.2.0",
+    "nyc": "15.1.0",
+    "typescript": "5.1.6",
+    "used-deps-analyzer": "0.1.2"
+  },
+  "optionalDependencies": {
+    "colors": "1.4.0"
+  },
 
   "husky": {
     "hooks": {
       "pre-commit": "npm run-script lint",
       "pre-push": "npm run-script tests"
     }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/Psychopoulet/check-version-modules.git"
   },
   "keywords": [
     "check",
@@ -59,26 +75,14 @@
   ],
   "author": "Sébastien VIDAL",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Psychopoulet/check-version-modules/issues"
-  },
-
-  "dependencies": {
-    "colors": "1.4.0"
-  },
-  "devDependencies": {
-    "@types/node": "20.5.0",
-    "coveralls": "3.1.1",
-    "eslint": "8.47.0",
-    "husky": "8.0.3",
-    "mocha": "10.2.0",
-    "nyc": "15.1.0",
-    "typescript": "5.1.6",
-    "used-deps-analyzer": "0.1.2"
-  },
 
   "homepage": "https://github.com/Psychopoulet/check-version-modules#readme",
-  "engines": {
-    "node": ">=16.0.0"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Psychopoulet/check-version-modules.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Psychopoulet/check-version-modules/issues"
   }
+
 }
