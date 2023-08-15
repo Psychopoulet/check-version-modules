@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "1.3.6",
+  "version": "1.4.0",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
@@ -52,7 +52,7 @@
     "mocha": "10.2.0",
     "nyc": "15.1.0",
     "typescript": "5.1.6",
-    "used-deps-analyzer": "0.1.2"
+    "used-deps-analyzer": "0.1.4"
   },
   "optionalDependencies": {
     "colors": "1.4.0"
