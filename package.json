@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
@@ -11,8 +11,8 @@
   "exports": {
     ".": {
       "require": {
-        "types": "./lib/cjs/main.d.cts",
-        "default": "./lib/cjs/main.cjs"
+        "types": "./lib/index.d.ts",
+        "default": "./lib/main.js"
       }
     }
   },
