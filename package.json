@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
@@ -11,8 +11,8 @@
   "exports": {
     ".": {
       "require": {
-        "types": "./lib/cjs/main.d.cts",
-        "default": "./lib/cjs/main.cjs"
+        "types": "./lib/index.d.ts",
+        "default": "./lib/main.js"
       }
     }
   },
@@ -50,7 +50,7 @@
     "mocha": "10.2.0",
     "nyc": "15.1.0",
     "typescript": "5.1.6",
-    "used-deps-analyzer": "0.1.4"
+    "used-deps-analyzer": "0.1.6"
   },
   "optionalDependencies": {
     "colors": "1.4.0"
