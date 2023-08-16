@@ -19,12 +19,10 @@
 
   "scripts": {
 
-    "build": "npx tsc --project \"./tsconfig.json\"",
-
     "lint": "npx eslint ./bin/*.js ./test/**/*.js",
     "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib\" --no-dev --overkill \"fs-extra\" \"node-promfs\" --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
     "check-updates": "node ./bin/cmd.js",
-    "unit-tests": "npm run build && npx nyc --reporter=html --reporter=text mocha",
+    "unit-tests": "npx nyc --reporter=html --reporter=text mocha",
 
     "tests": "npm run-script lint && npm run check-requires && npm run-script check-updates && npm run-script unit-tests",
     "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
@@ -51,7 +49,6 @@
     "husky": "8.0.3",
     "mocha": "10.2.0",
     "nyc": "15.1.0",
-    "typescript": "5.1.6",
     "used-deps-analyzer": "0.1.4"
   },
   "optionalDependencies": {
