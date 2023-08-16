@@ -50,7 +50,7 @@
     "mocha": "10.2.0",
     "nyc": "15.1.0",
     "typescript": "5.1.6",
-    "used-deps-analyzer": "0.1.4"
+    "used-deps-analyzer": "0.1.6"
   },
   "optionalDependencies": {
     "colors": "1.4.0"
