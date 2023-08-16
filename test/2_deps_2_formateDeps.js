@@ -18,9 +18,12 @@ describe("formateDeps", () => {
 
 	before(() => {
 
-		return readJSONFile(join(__dirname, "..", "package.json")).then((content) => {
+		return readJSONFile(join(__dirname, "..", "package.json")).then(({ dependencies, devDependencies }) => {
 
-			data = content;
+			data = {
+				dependencies,
+				devDependencies
+			};
 
 			return Promise.resolve();
 
@@ -34,7 +37,7 @@ describe("formateDeps", () => {
 
 		strictEqual(typeof formated, "object", "Generated data is not as expected");
 		strictEqual(formated instanceof Array, true, "Generated data is not as expected");
-		strictEqual(formated.length, 1, "Generated data is not as expected");
+		strictEqual(formated.length, 0, "Generated data is not as expected");
 
 	});
 

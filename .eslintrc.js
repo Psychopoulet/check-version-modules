@@ -1,7 +1,9 @@
 module.exports = {
     "extends": "eslint:recommended",
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
     },
     "env": {
         "es6": true,
@@ -142,7 +144,7 @@ module.exports = {
         "yoda": [ "error", "always" ],
 
 
-        "strict": [ "error", "global" ],
+        "strict": 0,
 
 
         "init-declarations": "error",
