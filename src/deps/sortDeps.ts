@@ -1,14 +1,14 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
+
+// types & interfaces
+
+	import { iDep } from "./formateDeps";
 
 // module
 
-module.exports = function sortDeps (dependencies) {
+export default function sortDeps (dependencies: Array<iDep>): Array<iDep> {
 
-	return dependencies.sort(function sort (compared, compareTo) {
+	return dependencies.sort((compared: iDep, compareTo: iDep) => {
 
 		if (compared.dev && !compareTo.dev) {
 			return 1;
