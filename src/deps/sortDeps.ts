@@ -2,13 +2,14 @@
 
 // types & interfaces
 
-	import { iDep } from "./formateDeps";
+	// locals
+	import { iDep, iResult } from "./formateDeps";
 
 // module
 
-export default function sortDeps (dependencies: Array<iDep>): Array<iDep> {
+export default function sortDeps (dependencies: Array<iDep|iResult>): Array<iDep|iResult> {
 
-	return dependencies.sort((compared: iDep, compareTo: iDep) => {
+	return dependencies.sort((compared: iDep|iResult, compareTo: iDep|iResult) => {
 
 		if (compared.dev && !compareTo.dev) {
 			return 1;

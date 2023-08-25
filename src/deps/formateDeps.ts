@@ -9,6 +9,11 @@
 		"path": string;
 	};
 
+	export interface iResult extends iDep {
+		"time": string;
+		"result": string;
+	};
+
 // module
 
 export default function formateDeps (packageData: { [key:string]: any }, dev: boolean): Array<iDep> {

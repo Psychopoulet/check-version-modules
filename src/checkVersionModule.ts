@@ -24,6 +24,8 @@
 		"console": boolean;
 	};
 
+	import { iResult } from "./deps/formateDeps";
+
 // module
 
 export default function checkVersionModule (file: string, opts?: iOptions): Promise<boolean> {
@@ -39,7 +41,7 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 
 	}).then((options: iOptions): Promise<boolean> => {
 
-		return extractAndFormateDeps(file, options.dev).then((dependencies): Promise<boolean> => {
+		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iResult>): Promise<boolean> => {
 
 			if (options.console) {
 				console.log(getFormatedTime(), file);
