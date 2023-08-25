@@ -1,12 +1,8 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // module
 
-module.exports = function checkBoolean (data) {
+export default function checkBoolean (data: boolean): Promise<void> {
 
 	if ("undefined" === typeof data) {
 

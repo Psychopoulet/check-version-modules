@@ -1,12 +1,8 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // module
 
-module.exports = function padleft (msg) {
+export default function padleft (msg: string | number): string {
 
 	if ("string" === typeof msg) {
 		return 2 > msg.length ? "0" + msg : msg;

@@ -1,21 +1,18 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // deps
 
-	// natives
-	const { join } = require("node:path");
-
 	// locals
-	const checkBoolean = require(join(__dirname, "checkBoolean.js"));
-	const checkNonNullPureObject = require(join(__dirname, "checkNonNullPureObject.js"));
+	import checkBoolean from "./checkBoolean";
+	import checkNonNullPureObject from "./checkNonNullPureObject";
+
+// types & interfaces
+
+	import { iOptions } from "../checkVersionModule";
 
 // consts
 
-	const DEFAULT_OPTIONS = {
+	const DEFAULT_OPTIONS: iOptions = {
 		"failAtMajor": true,
 		"failAtMinor": true,
 		"failAtPatch": false,
@@ -25,13 +22,9 @@
 
 // module
 
-module.exports = function checkAndFormateOptions (options = DEFAULT_OPTIONS) {
+export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTIONS): Promise<iOptions> {
 
-	return Promise.resolve().then(function checkOptions () {
-
-		return checkNonNullPureObject(options);
-
-	}).then(function autocomplete () {
+	return checkNonNullPureObject(options).then((): Promise<void> => {
 
 		options.failAtMajor = "undefined" === typeof options.failAtMajor ? DEFAULT_OPTIONS.failAtMajor : options.failAtMajor;
 		options.failAtMinor = "undefined" === typeof options.failAtMinor ? DEFAULT_OPTIONS.failAtMinor : options.failAtMinor;
@@ -39,29 +32,25 @@ module.exports = function checkAndFormateOptions (options = DEFAULT_OPTIONS) {
 		options.dev = "undefined" === typeof options.dev ? DEFAULT_OPTIONS.dev : options.dev;
 		options.console = "undefined" === typeof options.console ? DEFAULT_OPTIONS.console : options.console;
 
-		return Promise.resolve();
-
-	}).then(function checkFailAtMajor () {
-
 		return checkBoolean(options.failAtMajor);
 
-	}).then(function checkFailAtMinor () {
+	}).then((): Promise<void> => {
 
 		return checkBoolean(options.failAtMinor);
 
-	}).then(function checkFailAtPatch () {
+	}).then((): Promise<void> => {
 
 		return checkBoolean(options.failAtPatch);
 
-	}).then(function checkDev () {
+	}).then((): Promise<void> => {
 
 		return checkBoolean(options.dev);
 
-	}).then(function checkConsole () {
+	}).then((): Promise<void> => {
 
 		return checkBoolean(options.console);
 
-	}).then(function result () {
+	}).then((): Promise<iOptions> => {
 
 		return Promise.resolve(options);
 

@@ -1,12 +1,8 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // module
 
-module.exports = function checkNonEmptyString (data) {
+export default function checkNonEmptyString (data: string): Promise<void> {
 
 	if ("undefined" === typeof data) {
 

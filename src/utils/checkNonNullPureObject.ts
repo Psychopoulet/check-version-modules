@@ -1,12 +1,8 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // module
 
-module.exports = function checkNonNullPureObject (data) {
+export default function checkNonNullPureObject (data: object): Promise<void> {
 
 	if ("undefined" === typeof data) {
 
