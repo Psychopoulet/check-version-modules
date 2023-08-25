@@ -24,7 +24,7 @@
 		"console": boolean;
 	};
 
-	import { iResult } from "./deps/formateDeps";
+	import { iDep } from "./deps/formateDeps";
 
 // module
 
@@ -41,7 +41,7 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 
 	}).then((options: iOptions): Promise<boolean> => {
 
-		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iResult>): Promise<boolean> => {
+		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iDep>): Promise<boolean> => {
 
 			if (options.console) {
 				console.log(getFormatedTime(), file);
@@ -51,7 +51,8 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 				"failAtMajor": options.failAtMajor,
 				"failAtMinor": options.failAtMinor,
 				"failAtPatch": options.failAtPatch,
-				"console": options.console
+				"console": options.console,
+				"dev": options.dev
 			});
 
 		});

@@ -32,12 +32,12 @@
 
 // module
 
-export default function checkDependenciesUpdates (dependencies: Array<iResult>, options: iOptions): Promise<boolean> {
+export default function checkDependenciesUpdates (dependencies: Array<iDep>, options: iOptions): Promise<boolean> {
 
 	let valid: boolean = true;
 	const results: Array<iResult> = [];
 
-		function _execute (deps: Array<iResult>): Promise<void>  {
+		function _execute (deps: Array<iDep>): Promise<void>  {
 
 			if (!deps.length) {
 				return Promise.resolve();

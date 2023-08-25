@@ -3,7 +3,6 @@
 // deps
 
 	// externals
-	import checkNonEmptyString from "../utils/checkVersionValidity";
 	import checkNonEmptyString from "../utils/checkNonEmptyString";
 
 // consts
