@@ -23,13 +23,13 @@
 
 // module
 
-export default function downloadPackageData (packageName: string): Promise<string> | string {
+export default function downloadPackageData (packageName: string): Promise<string> {
 
 	const searchedModule: iModule | null = _alreadyDownloaded.filter((m: iModule): boolean => {
 		return m.name === packageName;
 	})[0] || null;
 
-	return searchedModule ? searchedModule.latestVersion : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
+	return searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
 		get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
 
