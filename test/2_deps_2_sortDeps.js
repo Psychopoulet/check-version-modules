@@ -3,11 +3,11 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const sortDeps = require(join(__dirname, "..", "lib", "deps", "sortDeps.js"));
+	const sortDeps = require(join(__dirname, "..", "lib", "cjs", "deps", "sortDeps.js")).default;
 
 // tests
 

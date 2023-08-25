@@ -3,11 +3,11 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const downloadPackageData = require(join(__dirname, "..", "lib", "deps", "downloadPackageData.js"));
+	const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
 
 // tests
 

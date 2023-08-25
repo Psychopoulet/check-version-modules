@@ -3,12 +3,12 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { readFile } = require("node:fs/promises");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const readJSONFile = require(join(__dirname, "..", "lib", "deps", "readJSONFile.js"));
-	const formateDeps = require(join(__dirname, "..", "lib", "deps", "formateDeps.js"));
+	const formateDeps = require(join(__dirname, "..", "lib", "cjs", "deps", "formateDeps.js")).default;
 
 // tests
 
@@ -18,7 +18,9 @@ describe("formateDeps", () => {
 
 	before(() => {
 
-		return readJSONFile(join(__dirname, "..", "package.json")).then(({ dependencies, devDependencies }) => {
+		return readFile(join(__dirname, "..", "package.json"), "utf-8").then((content) => {
+			return JSON.parse(content);
+		}).then(({ dependencies, devDependencies }) => {
 
 			data = {
 				dependencies,

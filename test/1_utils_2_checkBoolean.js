@@ -3,11 +3,11 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const checkBoolean = require(join(__dirname, "..", "lib", "utils", "checkBoolean.js"));
+	const checkBoolean = require(join(__dirname, "..", "lib", "cjs", "utils", "checkBoolean.js")).default;
 
 // tests
 
