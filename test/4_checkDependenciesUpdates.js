@@ -3,12 +3,12 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const checkAndFormateOptions = require(join(__dirname, "..", "lib", "utils", "checkAndFormateOptions.js"));
-	const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "deps", "checkDependenciesUpdates.js"));
+	const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
+	const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
 
 // private
 
@@ -340,7 +340,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.4.0";
+					modules[0].version = "1.4.1";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, true, "Generated validation is not as expected");

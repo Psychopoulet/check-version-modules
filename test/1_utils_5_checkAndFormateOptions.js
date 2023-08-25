@@ -3,11 +3,11 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const checkAndFormateOptions = require(join(__dirname, "..", "lib", "utils", "checkAndFormateOptions.js"));
+	const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
 
 // tests
 

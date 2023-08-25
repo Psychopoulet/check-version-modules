@@ -3,11 +3,11 @@
 // deps
 
 	// natives
-	const { join } = require("path");
-	const { strictEqual } = require("assert");
+	const { join } = require("node:path");
+	const { strictEqual } = require("node:assert");
 
 	// internal
-	const padleft = require(join(__dirname, "..", "lib", "utils", "padleft.js"));
+	const padleft = require(join(__dirname, "..", "lib", "cjs", "utils", "padleft.js")).default;
 
 // tests
 
