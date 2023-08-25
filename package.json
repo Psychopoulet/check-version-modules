@@ -5,26 +5,29 @@
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
-  "main": "lib/main.js",
-  "typings": "lib/index.d.ts",
+  "typings": "./lib/cjs/main.d.cts",
+  "main": "./lib/cjs/main.cjs",
 
   "exports": {
     ".": {
       "require": {
-        "types": "./lib/index.d.ts",
-        "default": "./lib/main.js"
+        "types": "./lib/cjs/main.d.cts",
+        "default": "./lib/cjs/main.cjs"
       }
     }
   },
 
+
   "scripts": {
 
+    "build": "node ./removeOldBuild.js && npx tsc --project \"./tsconfig.json\"",
+
     "lint": "npx eslint ./bin/*.js ./test/**/*.js",
-    "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib\" --no-dev --overkill \"fs-extra\" \"node-promfs\" --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
+    "check-requires": "npx used-deps-analyzer \"./package.json\" \"./src\" --no-dev --overkill \"fs-extra\" \"node-promfs\" --misscalled \"{ \"\"module\"\": \"\"colors\"\", \"\"call\"\": \"\"colors/safe\"\" }\"",
     "check-updates": "node ./bin/cmd.js",
     "unit-tests": "npx nyc --reporter=html --reporter=text mocha",
 
-    "tests": "npm run-script lint && npm run check-requires && npm run-script check-updates && npm run-script unit-tests",
+    "tests": "npm run-script lint && npm run check-requires && npm run-script build && npm run-script check-updates && npm run-script unit-tests",
     "ci": "npm run-script tests && npx nyc report --reporter=text-lcov | coveralls"
 
   },
@@ -43,13 +46,13 @@
 
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "20.5.0",
+    "@types/node": "20.5.6",
     "coveralls": "3.1.1",
     "eslint": "8.47.0",
     "husky": "8.0.3",
     "mocha": "10.2.0",
     "nyc": "15.1.0",
-    "typescript": "5.1.6",
+    "typescript": "5.2.2",
     "used-deps-analyzer": "0.1.6"
   },
   "optionalDependencies": {

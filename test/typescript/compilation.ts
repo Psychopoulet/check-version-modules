@@ -1,9 +1,16 @@
-/// <reference path="../../lib/index.d.ts" />
+/// <reference path="../../lib/cjs/main.d.cts" />
 
-import * as checker from '../../lib/main.js';
+"use strict";
 
-checker("./package.json").then((valid) => {
+// deps
+
+	// locals
+	import checker = require("../../lib/cjs/main.cjs");
+
+// test
+
+checker("./package.json").then((valid: boolean): void => {
   console.log(valid ? "ok": "old versions detected");
-}).catch((err) => {
+}).catch((err: Error): void => {
   console.error(err);
 });

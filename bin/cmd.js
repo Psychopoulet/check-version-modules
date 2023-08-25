@@ -8,7 +8,7 @@
 	const { EOL } = require("node:os");
 
 	// locals
-	const checker = require(join(__dirname, "..", "lib", "main.js"));
+	const checker = require(join(__dirname, "..", "lib", "cjs", "main.cjs"));
 
 // consts
 
