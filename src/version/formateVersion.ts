@@ -1,16 +1,12 @@
-/*
-	eslint-disable prefer-arrow-callback
-*/
-
 "use strict";
 
 // module
 
-module.exports = function formateVersion (_version) {
+export default function formateVersion (_version: string): string {
 
-	const version = _version.trim().toLowerCase().replace(/\*/gm, "x");
+	const version: string = _version.trim().toLowerCase().replace(/\*/gm, "x");
 
-	const versions = version.replace("^", "").replace("~", "").split(".").map(function parse (v) {
+	const versions: Array<string|number> = version.replace("^", "").replace("~", "").split(".").map((v: string): string | number => {
 		return "x" === v ? "x" : parseInt(v, 10);
 	});
 
