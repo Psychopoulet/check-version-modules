@@ -26,7 +26,7 @@ Promise.resolve().then(() => {
 
 			if ("--" !== arg && arg.startsWith("--")) {
 
-				switch (arg[i]) {
+				switch (arg) {
 
 					case "--fail-at-major":
 						options.failAtMajor = true;
