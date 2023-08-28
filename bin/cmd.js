@@ -26,7 +26,7 @@ Promise.resolve().then(() => {
 
 			if ("--" !== arg && arg.startsWith("--")) {
 
-				switch ((0, process).argv[i]) {
+				switch (arg[i]) {
 
 					case "--fail-at-major":
 						options.failAtMajor = true;
@@ -59,7 +59,7 @@ Promise.resolve().then(() => {
 					case "--file":
 
 						if (i + 1 < ARGS.length) {
-							file = String((0, process).argv[i + 1]);
+							file = String(ARGS[i + 1]);
 						}
 
 					break;

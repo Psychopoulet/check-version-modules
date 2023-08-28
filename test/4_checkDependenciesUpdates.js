@@ -163,7 +163,7 @@ describe("checkDependenciesUpdates", () => {
 		return Promise.resolve().then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "1.4";
+				modules[0].version = "1.5";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -175,7 +175,7 @@ describe("checkDependenciesUpdates", () => {
 		}).then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "1.4.x";
+				modules[0].version = "1.5.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -191,7 +191,7 @@ describe("checkDependenciesUpdates", () => {
 	it("should test \"n.n.n\" pattern", () => {
 
 		const modules = _getModules();
-			modules[0].version = "1.4.1";
+			modules[0].version = "1.5.0";
 		return checkDependenciesUpdates(modules, options).then((valid) => {
 
 			strictEqual(valid, true, "Generated validation is not as expected");
@@ -249,7 +249,7 @@ describe("checkDependenciesUpdates", () => {
 		return Promise.resolve().then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "~1.4.0";
+				modules[0].version = "~1.5.0";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -261,7 +261,7 @@ describe("checkDependenciesUpdates", () => {
 		}).then(() => {
 
 			const modules = _getModules();
-				modules[0].version = "~1.4.x";
+				modules[0].version = "~1.5.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
 				strictEqual(valid, true, "Generated validation is not as expected");
@@ -340,7 +340,7 @@ describe("checkDependenciesUpdates", () => {
 			}).then((opt) => {
 
 				const modules = _getModules();
-					modules[0].version = "1.4.1";
+					modules[0].version = "1.5.0";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
 					strictEqual(valid, true, "Generated validation is not as expected");
