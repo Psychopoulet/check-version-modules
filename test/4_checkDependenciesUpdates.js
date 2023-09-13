@@ -36,9 +36,7 @@ describe("checkDependenciesUpdates", () => {
 
 	before(() => {
 
-		return checkAndFormateOptions({
-			"console": false
-		}).then((opt) => {
+		return checkAndFormateOptions({}).then((opt) => {
 			options = opt;
 		});
 
@@ -317,8 +315,7 @@ describe("checkDependenciesUpdates", () => {
 		const modules = _getModules();
 			modules[0].version = "git+https://git@github.com/Psychopoulet/check-version-modules";
 		checkDependenciesUpdates(modules, {
-			...options,
-			"console": true
+			...options
 		}).then((runnable) => {
 
 			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
@@ -335,8 +332,7 @@ describe("checkDependenciesUpdates", () => {
 			return checkAndFormateOptions({
 				"failAtMajor": true,
 				"failAtMinor": true,
-				"failAtPatch": true,
-				"console": true
+				"failAtPatch": true
 			}).then((opt) => {
 
 				const modules = _getModules();
@@ -358,8 +354,7 @@ describe("checkDependenciesUpdates", () => {
 			return checkAndFormateOptions({
 				"failAtMajor": true,
 				"failAtMinor": true,
-				"failAtPatch": true,
-				"console": true
+				"failAtPatch": true
 			}).then((opt) => {
 
 				const modules = _getModules();
@@ -381,8 +376,7 @@ describe("checkDependenciesUpdates", () => {
 			return checkAndFormateOptions({
 				"failAtMajor": true,
 				"failAtMinor": true,
-				"failAtPatch": true,
-				"console": true
+				"failAtPatch": true
 			}).then((opt) => {
 
 				const modules = _getModules();
@@ -404,8 +398,7 @@ describe("checkDependenciesUpdates", () => {
 			return checkAndFormateOptions({
 				"failAtMajor": true,
 				"failAtMinor": true,
-				"failAtPatch": true,
-				"console": true
+				"failAtPatch": true
 			}).then((opt) => {
 
 				const modules = _getModules();

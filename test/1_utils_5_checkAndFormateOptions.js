@@ -22,7 +22,6 @@ describe("checkAndFormateOptions", () => {
 			strictEqual(options.failAtMinor, true, "Generated options is not as expected");
 			strictEqual(options.failAtPatch, false, "Generated options is not as expected");
 			strictEqual(options.dev, true, "Generated options is not as expected");
-			strictEqual(options.console, true, "Generated options is not as expected");
 
 			return Promise.resolve();
 
@@ -98,31 +97,13 @@ describe("checkAndFormateOptions", () => {
 
 	});
 
-	it("should test with wrong console", (done) => {
-
-		checkAndFormateOptions({
-			"console": "test"
-		}).then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
-
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof Error, true, "Generated Error is not as expected");
-
-			done();
-
-		});
-
-	});
-
 	it("should test valid file", () => {
 
 		return checkAndFormateOptions({
 			"failAtMajor": false,
 			"failAtMinor": false,
 			"failAtPatch": true,
-			"dev": false,
-			"console": false
+			"dev": false
 		}).then((options) => {
 
 			strictEqual(typeof options, "object", "Generated options is not as expected");
@@ -130,7 +111,6 @@ describe("checkAndFormateOptions", () => {
 			strictEqual(options.failAtMinor, false, "Generated options is not as expected");
 			strictEqual(options.failAtPatch, true, "Generated options is not as expected");
 			strictEqual(options.dev, false, "Generated options is not as expected");
-			strictEqual(options.console, false, "Generated options is not as expected");
 
 			return Promise.resolve();
 
