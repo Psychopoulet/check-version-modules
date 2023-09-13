@@ -51,7 +51,7 @@ interface iOptions {
   "failAtMajor": boolean; // default: true => if no pattern, used for the returned boolean
   "failAtMinor": boolean; // default: true => if no pattern, used for the returned boolean
   "failAtPatch": boolean; // default: false => if no pattern, used for the returned boolean
-  "dev": boolean; // default: true => analyse dev deps too
+  "dev": boolean; // default: true => analyze dev deps too
 }
 ```
 
@@ -65,7 +65,7 @@ interface iOptions {
   * ``` --no-fail-at-patch ``` => failAtPatch = false
   * ``` --dev ``` => dev = true
   * ``` --no-dev ``` => dev = false
-  * ``` --file ``` => specify analysed file with next argument, if not set analyse the "package.json" in the working directory
+  * ``` --file ``` => specify analyzed file with next argument, if not set analyze the "package.json" in the working directory
 
 ## Examples
 
@@ -84,8 +84,8 @@ const checker = require("check-version-modules");
 checker("/etc/tests/package.json", {
   "failAtPatch": true,
   "dev": false
-}).then((analyse) => {
-  console.log(analyse.result ? "ok": "old versions detected");
+}).then((analyze) => {
+  console.log(analyze.result ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);
 });
@@ -96,8 +96,8 @@ checker("/etc/tests/package.json", {
 ```typescript
 import checker = require("check-version-modules");
 
-checker("./package.json").then((analyse) => {
-  console.log(analyse.result ? "ok": "old versions detected");
+checker("./package.json").then((analyze) => {
+  console.log(analyze.result ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);
 });

@@ -23,8 +23,6 @@ describe("checkAndFormateOptions", () => {
 			strictEqual(options.failAtPatch, false);
 			strictEqual(options.dev, true);
 
-			return Promise.resolve();
-
 		});
 
 	});
@@ -111,8 +109,6 @@ describe("checkAndFormateOptions", () => {
 			strictEqual(options.failAtMinor, false);
 			strictEqual(options.failAtPatch, true);
 			strictEqual(options.dev, false);
-
-			return Promise.resolve();
 
 		});
 

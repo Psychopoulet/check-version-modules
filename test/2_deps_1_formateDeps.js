@@ -27,8 +27,6 @@ describe("formateDeps", () => {
 				devDependencies
 			};
 
-			return Promise.resolve();
-
 		});
 
 	});
