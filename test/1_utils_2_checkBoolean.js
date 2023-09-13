@@ -19,8 +19,8 @@ describe("checkBoolean", () => {
 			done(new Error("There is no generated Error"));
 		}).catch((err) => {
 
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof ReferenceError, true, "Generated Error is not as expected");
+			strictEqual(typeof err, "object");
+			strictEqual(err instanceof ReferenceError, true);
 
 			done();
 
@@ -34,8 +34,8 @@ describe("checkBoolean", () => {
 			done(new Error("There is no generated Error"));
 		}).catch((err) => {
 
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof TypeError, true, "Generated Error is not as expected");
+			strictEqual(typeof err, "object");
+			strictEqual(err instanceof TypeError, true);
 
 			done();
 

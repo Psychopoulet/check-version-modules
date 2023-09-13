@@ -19,8 +19,8 @@ describe("downloadPackageData", () => {
 			done(new Error("There is no generated Error"));
 		}).catch((err) => {
 
-			strictEqual(typeof err, "object", "Generated Error is not as expected");
-			strictEqual(err instanceof Error, true, "Generated Error is not as expected");
+			strictEqual(typeof err, "object");
+			strictEqual(err instanceof Error, true);
 
 			done();
 

@@ -14,15 +14,15 @@
 describe("padleft", () => {
 
 	it("should test padleft already padded", () => {
-		strictEqual(padleft("01"), "01", "Padded data is not as expected");
+		strictEqual(padleft("01"), "01");
 	});
 
 	it("should test padleft not padded", () => {
-		strictEqual(padleft("1"), "01", "Padded data is not as expected");
+		strictEqual(padleft("1"), "01");
 	});
 
 	it("should test number padleft not padded", () => {
-		strictEqual(padleft(1), "01", "Padded data is not as expected");
+		strictEqual(padleft(1), "01");
 	});
 
 });

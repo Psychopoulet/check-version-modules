@@ -50,7 +50,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -62,7 +62,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "*";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -80,7 +80,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "x.1.1";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -92,7 +92,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "x.x.1";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -104,7 +104,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "x.x.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -122,7 +122,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "1";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -134,7 +134,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "1.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -146,7 +146,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "1.x.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -164,7 +164,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "1.5";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -176,7 +176,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "1.5.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -192,7 +192,7 @@ describe("checkDependenciesUpdates", () => {
 			modules[0].version = "1.5.0";
 		return checkDependenciesUpdates(modules, options).then((valid) => {
 
-			strictEqual(valid, true, "Generated validation is not as expected");
+			strictEqual(valid, true);
 
 			return Promise.resolve();
 
@@ -208,7 +208,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "^1.4.0";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -220,7 +220,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "^1.2.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -232,7 +232,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "^1.x.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -250,7 +250,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "~1.5.0";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -262,7 +262,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "~1.5.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -274,7 +274,7 @@ describe("checkDependenciesUpdates", () => {
 				modules[0].version = "~1.x.x";
 			return checkDependenciesUpdates(modules, options).then((valid) => {
 
-				strictEqual(valid, true, "Generated validation is not as expected");
+				strictEqual(valid, true);
 
 				return Promise.resolve();
 
@@ -339,7 +339,7 @@ describe("checkDependenciesUpdates", () => {
 					modules[0].version = "1.5.2";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
-					strictEqual(valid, true, "Generated validation is not as expected");
+					strictEqual(valid, true);
 
 					return Promise.resolve();
 
@@ -361,7 +361,7 @@ describe("checkDependenciesUpdates", () => {
 					modules[0].version = "0.2.1";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
-					strictEqual(valid, false, "Generated validation is not as expected");
+					strictEqual(valid, false);
 
 					return Promise.resolve();
 
@@ -383,7 +383,7 @@ describe("checkDependenciesUpdates", () => {
 					modules[0].version = "1.2.0";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
-					strictEqual(valid, false, "Generated validation is not as expected");
+					strictEqual(valid, false);
 
 					return Promise.resolve();
 
@@ -405,7 +405,7 @@ describe("checkDependenciesUpdates", () => {
 					modules[0].version = "1.3.0";
 				return checkDependenciesUpdates(modules, opt).then((valid) => {
 
-					strictEqual(valid, false, "Generated validation is not as expected");
+					strictEqual(valid, false);
 
 					return Promise.resolve();
 
