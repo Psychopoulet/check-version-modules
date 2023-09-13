@@ -52,7 +52,6 @@ interface iOptions {
   "failAtMinor": boolean; // default: true => if no pattern, used for the returned boolean
   "failAtPatch": boolean; // default: false => if no pattern, used for the returned boolean
   "dev": boolean; // default: true => analyse dev deps too
-  "console": boolean; // default: true => print analyse's result in the terminal
 }
 ```
 
@@ -66,8 +65,6 @@ interface iOptions {
   * ``` --no-fail-at-patch ``` => failAtPatch = false
   * ``` --dev ``` => dev = true
   * ``` --no-dev ``` => dev = false
-  * ``` --console ``` => console = true
-  * ``` --no-console ``` => console = false
   * ``` --file ``` => specify analysed file with next argument, if not set analyse the "package.json" in the working directory
 
 ## Examples
@@ -76,7 +73,7 @@ interface iOptions {
 
 ```bash
 $ cd ./myProject/ && npx check-version-modules --file /etc/tests/package.json --fail-at-patch --no-dev
-$ cd ./myProject/ && npx check-version-modules --no-console --no-fail-at-minor
+$ cd ./myProject/ && npx check-version-modules --no-fail-at-minor
 ```
 
 ### Native
@@ -87,8 +84,8 @@ const checker = require("check-version-modules");
 checker("/etc/tests/package.json", {
   "failAtPatch": true,
   "dev": false
-}).then((valid) => {
-  console.log(valid ? "ok": "old versions detected");
+}).then((analyse) => {
+  console.log(analyse.result ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);
 });
@@ -99,8 +96,8 @@ checker("/etc/tests/package.json", {
 ```typescript
 import checker = require("check-version-modules");
 
-checker("./package.json").then((valid) => {
-  console.log(valid ? "ok": "old versions detected");
+checker("./package.json").then((analyse) => {
+  console.log(analyse.result ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);
 });
