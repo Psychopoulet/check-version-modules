@@ -1,3 +1,7 @@
+/*
+	eslint-disable max-lines
+*/
+
 "use strict";
 
 // deps
@@ -287,7 +291,7 @@ describe("checkDependenciesUpdates", () => {
 			const version = "^1.2.x";
 
 			const modules = _getModules();
-				modules[0].version = version
+				modules[0].version = version;
 			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
 				strictEqual(analyze.result, true);
