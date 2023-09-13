@@ -10,7 +10,6 @@
 
 	import checkFile from "./utils/checkFile";
 	import checkAndFormateOptions from "./utils/checkAndFormateOptions";
-	import getFormatedTime from "./utils/getFormatedTime";
 
 // types & interfaces
 
@@ -21,14 +20,14 @@
 		"failAtMinor": boolean;
 		"failAtPatch": boolean;
 		"dev": boolean;
-		"console": boolean;
 	};
 
 	import { iDep } from "./deps/formateDeps";
+	import { iAnalyze } from "./deps/checkDependenciesUpdates";
 
 // module
 
-export default function checkVersionModule (file: string, opts?: iOptions): Promise<boolean> {
+export default function checkVersionModule (file: string, opts?: iOptions): Promise<iAnalyze> {
 
 	// check params
 	return Promise.resolve().then((): Promise<void> => {
@@ -39,19 +38,14 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 
 		return checkAndFormateOptions(opts);
 
-	}).then((options: iOptions): Promise<boolean> => {
+	}).then((options: iOptions): Promise<iAnalyze> => {
 
-		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iDep>): Promise<boolean> => {
-
-			if (options.console) {
-				console.log(getFormatedTime(), file);
-			}
+		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iDep>): Promise<iAnalyze> => {
 
 			return checkDependenciesUpdates(dependencies, {
 				"failAtMajor": options.failAtMajor,
 				"failAtMinor": options.failAtMinor,
 				"failAtPatch": options.failAtPatch,
-				"console": options.console,
 				"dev": options.dev
 			});
 

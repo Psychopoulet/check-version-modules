@@ -2,16 +2,6 @@
 
 // deps
 
-	// externals
-
-	let colors: { [key:string]: (msg: string) => string } | null = null;
-	try { // test require optional deps
-		colors = require("colors/safe");
-	}
-	catch (e) {
-		// nothing to do here
-	}
-
 	// locals
 
 	import sortDeps from "./sortDeps";
@@ -27,12 +17,23 @@
 
 	// locals
 
-	import { iDep, iResult } from "./formateDeps";
+	import { iDep } from "./formateDeps";
 	import { iOptions } from "../checkVersionModule";
+
+	export interface iResult extends iDep {
+		"time": string;
+		"result": "success" | "warning" | "fail_patch" | "fail_minor" | "fail_major";
+		"message": string;
+	};
+
+	export interface iAnalyze {
+		"result": boolean;
+		"results": Array<iResult>;
+	};
 
 // module
 
-export default function checkDependenciesUpdates (dependencies: Array<iDep>, options: iOptions): Promise<boolean> {
+export default function checkDependenciesUpdates (dependencies: Array<iDep>, options: iOptions): Promise<iAnalyze> {
 
 	let valid: boolean = true;
 	const results: Array<iResult> = [];
@@ -47,12 +48,13 @@ export default function checkDependenciesUpdates (dependencies: Array<iDep>, opt
 
 			return checkVersionValidity(dependency.version, false).then((runnable: boolean): boolean => {
 
-				if (!runnable && options.console) {
+				if (!runnable) {
 
 					results.push({
 						...dependency,
 						"time": getFormatedTime(),
-						"result": "not managed " + (colors && colors.yellow ? colors.yellow(dependency.version) : dependency.version)
+						"result": "warning",
+						"message": "not managed " + dependency.version
 					});
 
 				}
@@ -84,15 +86,12 @@ export default function checkDependenciesUpdates (dependencies: Array<iDep>, opt
 									valid = false;
 								}
 
-								if (options.console) {
-
-									results.push({
-										...dependency,
-										"time": getFormatedTime(),
-										"result": colors && colors.bgRed ? colors.bgRed(dependency.version + " < " + latest) : dependency.version + " < " + latest
-									});
-
-								}
+								results.push({
+									...dependency,
+									"time": getFormatedTime(),
+									"result": "fail_major",
+									"message": dependency.version + " < " + latest
+								});
 
 							}
 
@@ -106,15 +105,12 @@ export default function checkDependenciesUpdates (dependencies: Array<iDep>, opt
 									valid = false;
 								}
 
-								if (options.console) {
-
-									results.push({
-										...dependency,
-										"time": getFormatedTime(),
-										"result": colors && colors.red ? colors.red(dependency.version + " < " + latest) : dependency.version + " < " + latest
-									});
-
-								}
+								results.push({
+									...dependency,
+									"time": getFormatedTime(),
+									"result": "fail_minor",
+									"message": dependency.version + " < " + latest
+								});
 
 							}
 
@@ -128,26 +124,24 @@ export default function checkDependenciesUpdates (dependencies: Array<iDep>, opt
 									valid = false;
 								}
 
-								if (options.console) {
-
-									results.push({
-										...dependency,
-										"time": getFormatedTime(),
-										"result": colors && colors.yellow ? colors.yellow(dependency.version + " < " + latest) : dependency.version + " < " + latest
-									});
-
-								}
+								results.push({
+									...dependency,
+									"time": getFormatedTime(),
+									"result": "fail_patch",
+									"message": dependency.version + " < " + latest
+								});
 
 							}
 
 						}).then((): void => {
 
-							if (!failed && options.console) {
+							if (!failed) {
 
 								results.push({
 									...dependency,
 									"time": getFormatedTime(),
-									"result": colors && colors.green ? colors.green("Ok") : "Ok"
+									"result": "success",
+									"message": "Ok"
 								});
 
 							}
@@ -166,13 +160,12 @@ export default function checkDependenciesUpdates (dependencies: Array<iDep>, opt
 
 		}
 
-	return _execute([ ...dependencies ]).then((): boolean => {
+	return _execute([ ...dependencies ]).then((): iAnalyze => {
 
-		sortDeps(results).forEach((r: iDep|iResult): void => {
-			console.log((r as iResult).time, r.path, "=>", (r as iResult).result);
-		});
-
-		return valid;
+		return {
+			"result": valid,
+			"results": sortDeps(results) as Array<iResult>
+		};
 
 	});
 

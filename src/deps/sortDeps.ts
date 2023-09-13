@@ -3,7 +3,8 @@
 // types & interfaces
 
 	// locals
-	import { iDep, iResult } from "./formateDeps";
+	import { iDep } from "./formateDeps";
+	import { iResult } from "./checkDependenciesUpdates";
 
 // module
 
