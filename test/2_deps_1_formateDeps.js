@@ -27,8 +27,6 @@ describe("formateDeps", () => {
 				devDependencies
 			};
 
-			return Promise.resolve();
-
 		});
 
 	});
@@ -37,9 +35,9 @@ describe("formateDeps", () => {
 
 		const formated = formateDeps(data);
 
-		strictEqual(typeof formated, "object", "Generated data is not as expected");
-		strictEqual(formated instanceof Array, true, "Generated data is not as expected");
-		strictEqual(formated.length, 0, "Generated data is not as expected");
+		strictEqual(typeof formated, "object");
+		strictEqual(formated instanceof Array, true);
+		strictEqual(formated.length, 0);
 
 	});
 
@@ -47,9 +45,9 @@ describe("formateDeps", () => {
 
 		const formated = formateDeps(data, true);
 
-		strictEqual(typeof formated, "object", "Generated data is not as expected");
-		strictEqual(formated instanceof Array, true, "Generated data is not as expected");
-		strictEqual(formated.length, 8, "Generated data is not as expected");
+		strictEqual(typeof formated, "object");
+		strictEqual(formated instanceof Array, true);
+		strictEqual(formated.length, 8);
 
 	});
 

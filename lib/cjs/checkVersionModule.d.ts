@@ -3,6 +3,6 @@ export interface iOptions {
     "failAtMinor": boolean;
     "failAtPatch": boolean;
     "dev": boolean;
-    "console": boolean;
 }
-export default function checkVersionModule(file: string, opts?: iOptions): Promise<boolean>;
+import { iAnalyze } from "./deps/checkDependenciesUpdates";
+export default function checkVersionModule(file: string, opts?: iOptions): Promise<iAnalyze>;

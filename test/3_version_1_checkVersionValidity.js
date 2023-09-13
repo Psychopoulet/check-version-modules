@@ -91,8 +91,8 @@ describe("checkVersionValidity", () => {
 				done(new Error("There is no generated Error"));
 			}).catch((err) => {
 
-				strictEqual(typeof err, "object", "Generated Error is not as expected");
-				strictEqual(err instanceof Error, true, "Generated Error is not as expected");
+				strictEqual(typeof err, "object");
+				strictEqual(err instanceof Error, true);
 
 				done();
 
@@ -106,8 +106,8 @@ describe("checkVersionValidity", () => {
 				done(new Error("There is no generated Error"));
 			}).catch((err) => {
 
-				strictEqual(typeof err, "object", "Generated Error is not as expected");
-				strictEqual(err instanceof Error, true, "Generated Error is not as expected");
+				strictEqual(typeof err, "object");
+				strictEqual(err instanceof Error, true);
 
 				done();
 
@@ -123,15 +123,15 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("x", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("*", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -141,50 +141,50 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("x.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("*.1.1", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("x.x.1", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("*.*.1", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("x.x.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("*.*.*", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("x.*.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -194,15 +194,15 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("1.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("1.x.x", false);
 
@@ -214,15 +214,15 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("1.1.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -232,8 +232,8 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("1.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -243,22 +243,22 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("^1.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("^1.1.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("^1.x.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -268,22 +268,22 @@ describe("checkVersionValidity", () => {
 
 			return checkVersionValidity("~1.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("~1.1.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 				return checkVersionValidity("~1.x.x", false);
 
 			}).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, true, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, true);
 
 			});
 
@@ -293,8 +293,8 @@ describe("checkVersionValidity", () => {
 
 			checkVersionValidity("1.1.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, false, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, false);
 
 			});
 
@@ -304,8 +304,8 @@ describe("checkVersionValidity", () => {
 
 			checkVersionValidity("^~1.1.1", false).then((valid) => {
 
-				strictEqual(typeof valid, "boolean", "Generated result type is not as expected");
-				strictEqual(valid, false, "Generated result is not as expected");
+				strictEqual(typeof valid, "boolean");
+				strictEqual(valid, false);
 
 			});
 
