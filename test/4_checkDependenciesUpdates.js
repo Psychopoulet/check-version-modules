@@ -46,25 +46,37 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
+			const version = "x";
+
 			const modules = _getModules();
-				modules[0].version = "x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "*";
+
 			const modules = _getModules();
-				modules[0].version = "*";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
 
-				return Promise.resolve();
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
@@ -76,37 +88,58 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
+			const version = "x.1.1";
+
 			const modules = _getModules();
-				modules[0].version = "x.1.1";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
 
-				return Promise.resolve();
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "x.x.1";
+
 			const modules = _getModules();
-				modules[0].version = "x.x.1";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
 
-				return Promise.resolve();
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "x.x.x";
+
 			const modules = _getModules();
-				modules[0].version = "x.x.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
 
-				return Promise.resolve();
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
@@ -118,37 +151,52 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
+			const version = "1";
+
 			const modules = _getModules();
-				modules[0].version = "1";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "1.x";
+
 			const modules = _getModules();
-				modules[0].version = "1.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "1.x.x";
+
 			const modules = _getModules();
-				modules[0].version = "1.x.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
@@ -160,25 +208,35 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
+			const version = "1.5";
+
 			const modules = _getModules();
-				modules[0].version = "1.5";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "1.5.x";
+
 			const modules = _getModules();
-				modules[0].version = "1.5.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
@@ -188,13 +246,18 @@ describe("checkDependenciesUpdates", () => {
 
 	it("should test \"n.n.n\" pattern", () => {
 
+		const version = "1.5.2";
+
 		const modules = _getModules();
-			modules[0].version = "1.5.0";
-		return checkDependenciesUpdates(modules, options).then((valid) => {
+			modules[0].version = version;
+		return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-			strictEqual(valid, true);
+			strictEqual(analyze.result, true);
+			strictEqual(analyze.results instanceof Array, true);
+			strictEqual(analyze.results.length, 1);
 
-			return Promise.resolve();
+				strictEqual(analyze.results[0].result, "success");
+				strictEqual(analyze.results[0].version, version);
 
 		});
 
@@ -204,37 +267,52 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
+			const version = "^1.4.0";
+
 			const modules = _getModules();
-				modules[0].version = "^1.4.0";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "^1.2.x";
+
 			const modules = _getModules();
-				modules[0].version = "^1.2.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
 		}).then(() => {
 
+			const version = "^1.x.x";
+
 			const modules = _getModules();
-				modules[0].version = "^1.x.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
 
-				return Promise.resolve();
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 			});
 
@@ -246,11 +324,35 @@ describe("checkDependenciesUpdates", () => {
 
 		return Promise.resolve().then(() => {
 
-			const modules = _getModules();
-				modules[0].version = "~1.5.0";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+			const version = "~1.5.0";
 
-				strictEqual(valid, true);
+			const modules = _getModules();
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
+
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
+
+			});
+
+		}).then(() => {
+
+			const version = "~1.5.x";
+
+			const modules = _getModules();
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
+
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 				return Promise.resolve();
 
@@ -258,23 +360,18 @@ describe("checkDependenciesUpdates", () => {
 
 		}).then(() => {
 
-			const modules = _getModules();
-				modules[0].version = "~1.5.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
-
-				strictEqual(valid, true);
-
-				return Promise.resolve();
-
-			});
-
-		}).then(() => {
+			const version = "~1.x.x";
 
 			const modules = _getModules();
-				modules[0].version = "~1.x.x";
-			return checkDependenciesUpdates(modules, options).then((valid) => {
+				modules[0].version = version;
+			return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(valid, true);
+				strictEqual(analyze.result, true);
+				strictEqual(analyze.results instanceof Array, true);
+				strictEqual(analyze.results.length, 1);
+
+					strictEqual(analyze.results[0].result, "success");
+					strictEqual(analyze.results[0].version, version);
 
 				return Promise.resolve();
 
@@ -286,12 +383,18 @@ describe("checkDependenciesUpdates", () => {
 
 	it("should test wrong pattern \"n.n.n.n\" & \"^~n.n.n\"", () => {
 
-		const modules = _getModules();
-			modules[0].version = "1.2.1.1";
-		checkDependenciesUpdates(modules, options).then((runnable) => {
+		const version = "1.2.1.1";
 
-			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
-			strictEqual(runnable, false, "Generated result is not as expected");
+		const modules = _getModules();
+			modules[0].version = version;
+		checkDependenciesUpdates(modules, options).then((analyze) => {
+
+			strictEqual(analyze.result, true);
+			strictEqual(analyze.results instanceof Array, true);
+			strictEqual(analyze.results.length, 1);
+
+				strictEqual(analyze.results[0].result, "warning");
+				strictEqual(analyze.results[0].version, version);
 
 		});
 
@@ -299,12 +402,18 @@ describe("checkDependenciesUpdates", () => {
 
 	it("should test wrong pattern \"^~n.n.n\"", () => {
 
-		const modules = _getModules();
-			modules[0].version = "^~1.2.1.1";
-		checkDependenciesUpdates(modules, options).then((runnable) => {
+		const version = "^~1.2.1.1";
 
-			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
-			strictEqual(runnable, false, "Generated result is not as expected");
+		const modules = _getModules();
+			modules[0].version = version;
+		checkDependenciesUpdates(modules, options).then((analyze) => {
+
+			strictEqual(analyze.result, true);
+			strictEqual(analyze.results instanceof Array, true);
+			strictEqual(analyze.results.length, 1);
+
+				strictEqual(analyze.results[0].result, "warning");
+				strictEqual(analyze.results[0].version, version);
 
 		});
 
@@ -312,14 +421,20 @@ describe("checkDependenciesUpdates", () => {
 
 	it("should test wrong pattern string", () => {
 
+		const version = "git+https://git@github.com/Psychopoulet/check-version-modules";
+
 		const modules = _getModules();
-			modules[0].version = "git+https://git@github.com/Psychopoulet/check-version-modules";
+			modules[0].version = version;
 		checkDependenciesUpdates(modules, {
 			...options
-		}).then((runnable) => {
+		}).then((analyze) => {
 
-			strictEqual(typeof runnable, "boolean", "Generated result is not as expected");
-			strictEqual(runnable, false, "Generated result is not as expected");
+			strictEqual(analyze.result, true);
+			strictEqual(analyze.results instanceof Array, true);
+			strictEqual(analyze.results.length, 1);
+
+				strictEqual(analyze.results[0].result, "warning");
+				strictEqual(analyze.results[0].version, version);
 
 		});
 
@@ -335,13 +450,18 @@ describe("checkDependenciesUpdates", () => {
 				"failAtPatch": true
 			}).then((opt) => {
 
+				const version = "1.5.2";
+
 				const modules = _getModules();
-					modules[0].version = "1.5.2";
-				return checkDependenciesUpdates(modules, opt).then((valid) => {
+					modules[0].version = version;
+				return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(valid, true);
+					strictEqual(analyze.result, true);
+					strictEqual(analyze.results instanceof Array, true);
+					strictEqual(analyze.results.length, 1);
 
-					return Promise.resolve();
+						strictEqual(analyze.results[0].result, "success");
+						strictEqual(analyze.results[0].version, version);
 
 				});
 
@@ -357,13 +477,18 @@ describe("checkDependenciesUpdates", () => {
 				"failAtPatch": true
 			}).then((opt) => {
 
+				const version = "0.2.1";
+
 				const modules = _getModules();
-					modules[0].version = "0.2.1";
-				return checkDependenciesUpdates(modules, opt).then((valid) => {
+					modules[0].version = version;
+				return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(valid, false);
+					strictEqual(analyze.result, false);
+					strictEqual(analyze.results instanceof Array, true);
+					strictEqual(analyze.results.length, 1);
 
-					return Promise.resolve();
+						strictEqual(analyze.results[0].result, "fail_major");
+						strictEqual(analyze.results[0].version, version);
 
 				});
 
@@ -379,13 +504,18 @@ describe("checkDependenciesUpdates", () => {
 				"failAtPatch": true
 			}).then((opt) => {
 
+				const version = "1.2.0";
+
 				const modules = _getModules();
-					modules[0].version = "1.2.0";
-				return checkDependenciesUpdates(modules, opt).then((valid) => {
+					modules[0].version = version;
+				return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(valid, false);
+					strictEqual(analyze.result, false);
+					strictEqual(analyze.results instanceof Array, true);
+					strictEqual(analyze.results.length, 1);
 
-					return Promise.resolve();
+						strictEqual(analyze.results[0].result, "fail_minor");
+						strictEqual(analyze.results[0].version, version);
 
 				});
 
@@ -401,13 +531,18 @@ describe("checkDependenciesUpdates", () => {
 				"failAtPatch": true
 			}).then((opt) => {
 
+				const version = "1.3.0";
+
 				const modules = _getModules();
-					modules[0].version = "1.3.0";
-				return checkDependenciesUpdates(modules, opt).then((valid) => {
+					modules[0].version = version;
+				return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(valid, false);
+					strictEqual(analyze.result, false);
+					strictEqual(analyze.results instanceof Array, true);
+					strictEqual(analyze.results.length, 1);
 
-					return Promise.resolve();
+						strictEqual(analyze.results[0].result, "fail_minor");
+						strictEqual(analyze.results[0].version, version);
 
 				});
 
