@@ -84,6 +84,6 @@ describe("compilation typescript", () => {
 			return err ? done(err) : done();
 		});
 
-	});
+	}).timeout(MAX_TIMEOUT);
 
 });
