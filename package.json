@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "1.5.2",
+  "version": "2.0.0",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
@@ -46,14 +46,14 @@
 
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "20.5.7",
+    "@types/node": "20.6.0",
     "coveralls": "3.1.1",
-    "eslint": "8.48.0",
+    "eslint": "8.49.0",
     "husky": "8.0.3",
     "mocha": "10.2.0",
     "nyc": "15.1.0",
     "typescript": "5.2.2",
-    "used-deps-analyzer": "0.1.6"
+    "used-deps-analyzer": "0.1.8"
   },
   "optionalDependencies": {
     "colors": "1.4.0"

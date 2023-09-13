@@ -7,8 +7,20 @@
 	const { join } = require("node:path");
 	const { EOL } = require("node:os");
 
+	// externals
+
+	let colors = null;
+	try { // test require optional deps
+		colors = require("colors/safe");
+	}
+	catch (e) {
+		// nothing to do here
+	}
+
 	// locals
+	const colorizeFormattedTime = require(join(__dirname, "colorizeFormattedTime.js"));
 	const checker = require(join(__dirname, "..", "lib", "cjs", "main.cjs"));
+	const getFormatedTime = require(join(__dirname, "..", "lib", "cjs", "utils", "getFormatedTime.js"));
 
 // consts
 
@@ -64,13 +76,6 @@ Promise.resolve().then(() => {
 
 					break;
 
-					case "--console":
-						options.console = true;
-					break;
-					case "--no-console":
-						options.console = false;
-					break;
-
 					default:
 						errors.push(new RangeError("Unknown \"" + String(arg) + "\" argument"));
 					break;
@@ -81,12 +86,77 @@ Promise.resolve().then(() => {
 
 		});
 
+		if ("" === file) {
+			file = join((0, process).cwd(), "package.json");
+		}
+
+	(0, console).log(getFormatedTime.default(), file);
+
 	return errors.length ?
 		Promise.reject(new Error(errors.join(EOL))) :
-		checker("" === file ? join((0, process).cwd(), "package.json") : file, options).then((valid) => {
+		checker(file, options).then((analyse) => {
 
-			(0, process).exitCode = valid ? 0 : 2;
-			(0, process).exit(valid ? 0 : 2);
+			analyse.results.forEach((result) => {
+
+				switch (result.result) {
+
+					case "fail_major":
+
+						(0, console).error(
+							colorizeFormattedTime(result.time), result.path, "=>",
+							colors && colors.bgRed ? colors.bgRed(result.message) : result.message
+						);
+
+					break;
+
+					case "fail_minor":
+
+						(0, console).error(
+							colorizeFormattedTime(result.time), result.path, "=>",
+							colors && colors.red ? colors.red(result.message) : result.message
+						);
+
+					break;
+
+					case "fail_patch":
+					case "warning":
+
+						(0, console).warn(
+							colorizeFormattedTime(result.time), result.path, "=>",
+							colors && colors.yellow ? colors.yellow(result.message) : result.message
+						);
+
+					break;
+
+					case "success":
+
+						(0, console).log(
+							colorizeFormattedTime(result.time), result.path, "=>",
+							colors && colors.green ? colors.green(result.message) : result.message
+						);
+
+					break;
+
+					default:
+						(0, console).log(result.message);
+					break;
+
+				}
+
+			});
+
+			if (analyse.result) {
+
+				(0, process).exitCode = 0;
+				(0, process).exit(0);
+
+			}
+			else {
+
+				(0, process).exitCode = 2;
+				(0, process).exit(2);
+
+			}
 
 		});
 

@@ -16,8 +16,7 @@
 		"failAtMajor": true,
 		"failAtMinor": true,
 		"failAtPatch": false,
-		"dev": true,
-		"console": true
+		"dev": true
 	};
 
 // module
@@ -30,7 +29,6 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
 		options.failAtMinor = "undefined" === typeof options.failAtMinor ? DEFAULT_OPTIONS.failAtMinor : options.failAtMinor;
 		options.failAtPatch = "undefined" === typeof options.failAtPatch ? DEFAULT_OPTIONS.failAtPatch : options.failAtPatch;
 		options.dev = "undefined" === typeof options.dev ? DEFAULT_OPTIONS.dev : options.dev;
-		options.console = "undefined" === typeof options.console ? DEFAULT_OPTIONS.console : options.console;
 
 		return checkBoolean(options.failAtMajor);
 
@@ -45,10 +43,6 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
 	}).then((): Promise<void> => {
 
 		return checkBoolean(options.dev);
-
-	}).then((): Promise<void> => {
-
-		return checkBoolean(options.console);
 
 	}).then((): Promise<iOptions> => {
 

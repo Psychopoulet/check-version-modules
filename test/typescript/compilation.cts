@@ -9,7 +9,9 @@
 
 // test
 
-checker("./package.json").then((valid: boolean): void => {
+checker("./package.json").then((valid: {
+	"result": boolean;
+}): void => {
 
   console.log(valid ? "ok": "old versions detected");
 

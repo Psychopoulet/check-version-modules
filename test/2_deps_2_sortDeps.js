@@ -30,12 +30,12 @@ describe("sortDeps", () => {
 
 		const sorted = sortDeps(data);
 
-		strictEqual(typeof sorted, "object", "Generated data is not as expected");
-		strictEqual(sorted instanceof Array, true, "Generated data is not as expected");
-		strictEqual(sorted.length, 2, "Generated data is not as expected");
+		strictEqual(typeof sorted, "object");
+		strictEqual(sorted instanceof Array, true);
+		strictEqual(sorted.length, 2);
 
-		strictEqual(sorted[0].name, "test1", "Generated data is not as expected");
-		strictEqual(sorted[1].name, "test2", "Generated data is not as expected");
+		strictEqual(sorted[0].name, "test1");
+		strictEqual(sorted[1].name, "test2");
 
 	});
 
@@ -56,12 +56,12 @@ describe("sortDeps", () => {
 
 		const sorted = sortDeps(data);
 
-		strictEqual(typeof sorted, "object", "Generated data is not as expected");
-		strictEqual(sorted instanceof Array, true, "Generated data is not as expected");
-		strictEqual(sorted.length, 2, "Generated data is not as expected");
+		strictEqual(typeof sorted, "object");
+		strictEqual(sorted instanceof Array, true);
+		strictEqual(sorted.length, 2);
 
-		strictEqual(sorted[0].name, "test1", "Generated data is not as expected");
-		strictEqual(sorted[1].name, "test2", "Generated data is not as expected");
+		strictEqual(sorted[0].name, "test1");
+		strictEqual(sorted[1].name, "test2");
 
 	});
 
@@ -82,12 +82,12 @@ describe("sortDeps", () => {
 
 		const sorted = sortDeps(data);
 
-		strictEqual(typeof sorted, "object", "Generated data is not as expected");
-		strictEqual(sorted instanceof Array, true, "Generated data is not as expected");
-		strictEqual(sorted.length, 2, "Generated data is not as expected");
+		strictEqual(typeof sorted, "object");
+		strictEqual(sorted instanceof Array, true);
+		strictEqual(sorted.length, 2);
 
-		strictEqual(sorted[0].name, "test1", "Generated data is not as expected");
-		strictEqual(sorted[1].name, "test2", "Generated data is not as expected");
+		strictEqual(sorted[0].name, "test1");
+		strictEqual(sorted[1].name, "test2");
 
 	});
 
@@ -108,12 +108,12 @@ describe("sortDeps", () => {
 
 		const sorted = sortDeps(data);
 
-		strictEqual(typeof sorted, "object", "Generated data is not as expected");
-		strictEqual(sorted instanceof Array, true, "Generated data is not as expected");
-		strictEqual(sorted.length, 2, "Generated data is not as expected");
+		strictEqual(typeof sorted, "object");
+		strictEqual(sorted instanceof Array, true);
+		strictEqual(sorted.length, 2);
 
-		strictEqual(sorted[0].name, "test1", "Generated data is not as expected");
-		strictEqual(sorted[1].name, "test2", "Generated data is not as expected");
+		strictEqual(sorted[0].name, "test1");
+		strictEqual(sorted[1].name, "test2");
 
 	});
 
@@ -134,12 +134,12 @@ describe("sortDeps", () => {
 
 		const sorted = sortDeps(data);
 
-		strictEqual(typeof sorted, "object", "Generated data is not as expected");
-		strictEqual(sorted instanceof Array, true, "Generated data is not as expected");
-		strictEqual(sorted.length, 2, "Generated data is not as expected");
+		strictEqual(typeof sorted, "object");
+		strictEqual(sorted instanceof Array, true);
+		strictEqual(sorted.length, 2);
 
-		strictEqual(sorted[0].name, "test1", "Generated data is not as expected");
-		strictEqual(sorted[1].name, "test1", "Generated data is not as expected");
+		strictEqual(sorted[0].name, "test1");
+		strictEqual(sorted[1].name, "test1");
 
 	});
 
