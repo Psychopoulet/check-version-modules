@@ -63,7 +63,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                 return !runCheck ? Promise.resolve() : checkAndFormateVersion(dependency.version).then((formatedVersion: string): Promise<void> => {
 
-                    return downloadPackageData(dependency.name).then((latest: string): Promise<void> => {
+                    return downloadPackageData(dependency.name).then((latest: string): void => {
 
                         const latestVersions: number[] = latest.split(".").map((v: string): number => {
                             return parseInt(v, 10);
@@ -74,77 +74,78 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                         let failed: boolean = false;
 
-                        return Promise.resolve().then((): void => {
+                        if ("x" !== currentVersions[0] && latestVersions[0] > currentVersions[0]) {
 
-                            if (!failed && "x" !== currentVersions[0] && latestVersions[0] > currentVersions[0]) {
+                            failed = true;
 
-                                failed = true;
-
-                                if (options.failAtMajor) {
-                                    valid = false;
-                                }
-
-                                results.push({
-                                    ...dependency,
-                                    "time": getFormatedTime(),
-                                    "result": "fail_major",
-                                    "message": dependency.version + " < " + latest
-                                });
-
+                            if (options.failAtMajor) {
+                                valid = false;
                             }
 
-                        }).then((): void => {
+                            results.push({
+                                ...dependency,
+                                "time": getFormatedTime(),
+                                "result": "fail_major",
+                                "message": dependency.version + " < " + latest
+                            });
 
-                            if (!failed && "x" !== currentVersions[1] && latestVersions[1] > currentVersions[1]) {
+                        }
 
-                                failed = true;
+                        if (!failed && "x" !== currentVersions[1] && latestVersions[1] > currentVersions[1]) {
 
-                                if (options.failAtMinor) {
-                                    valid = false;
-                                }
+                            failed = true;
 
-                                results.push({
-                                    ...dependency,
-                                    "time": getFormatedTime(),
-                                    "result": "fail_minor",
-                                    "message": dependency.version + " < " + latest
-                                });
-
+                            if (options.failAtMinor) {
+                                valid = false;
                             }
 
-                        }).then((): void => {
+                            results.push({
+                                ...dependency,
+                                "time": getFormatedTime(),
+                                "result": "fail_minor",
+                                "message": dependency.version + " < " + latest
+                            });
 
-                            if (!failed && "x" !== currentVersions[2] && latestVersions[2] > currentVersions[2]) {
+                        }
 
-                                failed = true;
+                        if (!failed && "x" !== currentVersions[2] && latestVersions[2] > currentVersions[2]) {
 
-                                if (options.failAtPatch) {
-                                    valid = false;
-                                }
+                            failed = true;
 
-                                results.push({
-                                    ...dependency,
-                                    "time": getFormatedTime(),
-                                    "result": "fail_patch",
-                                    "message": dependency.version + " < " + latest
-                                });
-
+                            if (options.failAtPatch) {
+                                valid = false;
                             }
 
-                        }).then((): void => {
+                            results.push({
+                                ...dependency,
+                                "time": getFormatedTime(),
+                                "result": "fail_patch",
+                                "message": dependency.version + " < " + latest
+                            });
 
-                            if (!failed) {
+                        }
 
-                                results.push({
-                                    ...dependency,
-                                    "time": getFormatedTime(),
-                                    "result": "success",
-                                    "message": "Ok"
-                                });
+                        if (!failed) {
 
-                            }
+                            results.push({
+                                ...dependency,
+                                "time": getFormatedTime(),
+                                "result": "success",
+                                "message": "Ok"
+                            });
 
+                        }
+
+                    }).catch((err: Error): Promise<void> => {
+
+                        results.push({
+                            ...dependency,
+                            "time": getFormatedTime(),
+                            "result": "warning",
+                            "message": err.message
                         });
+
+                        return Promise.resolve();
 
                     });
 
