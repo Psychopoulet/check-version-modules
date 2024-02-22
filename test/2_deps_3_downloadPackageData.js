@@ -1,45 +1,43 @@
-"use strict";
-
 // deps
 
-	// natives
-	const { join } = require("node:path");
-	const { strictEqual } = require("node:assert");
+    // natives
+    const { join } = require("node:path");
+    const { strictEqual } = require("node:assert");
 
-	// internal
-	const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
+    // internal
+    const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
 
 // tests
 
 describe("downloadPackageData", () => {
 
-	it("should test inexistant module", (done) => {
+    it("should test inexistant module", (done) => {
 
-		downloadPackageData("zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty").then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
+        downloadPackageData("zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty").then(() => {
+            done(new Error("There is no generated Error"));
+        }).catch((err) => {
 
-			strictEqual(typeof err, "object");
-			strictEqual(err instanceof Error, true);
+            strictEqual(typeof err, "object");
+            strictEqual(err instanceof Error, true);
 
-			done();
+            done();
 
-		});
+        });
 
-	});
+    });
 
-	it("should test current module", () => {
+    it("should test current module", () => {
 
-		return downloadPackageData("check-version-modules");
+        return downloadPackageData("check-version-modules");
 
-	});
+    });
 
-	it("should test mutliple module", () => {
+    it("should test mutliple module", () => {
 
-		return downloadPackageData("check-version-modules").then(() => {
-			return downloadPackageData("check-version-modules");
-		});
+        return downloadPackageData("check-version-modules").then(() => {
+            return downloadPackageData("check-version-modules");
+        });
 
-	});
+    });
 
 });

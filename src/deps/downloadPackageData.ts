@@ -1,78 +1,78 @@
-"use strict";
-
 // deps
 
-	// natives
-	import { get } from "node:https";
+    // natives
+    import { get } from "node:https";
 
 // types & interfaces
 
-	// natives
-	import { IncomingMessage } from "node:http";
+    // natives
+    import type { IncomingMessage } from "node:http";
 
-	interface iModule {
-		"name": string;
-		"latestVersion": string;
-	};
+    interface iModule {
+        "name": string;
+        "latestVersion": string;
+    }
 
 // private
 
-	// attributes
+    // attributes
 
-		const _alreadyDownloaded: Array<iModule> = [];
+        const _alreadyDownloaded: iModule[] = [];
 
 // module
 
 export default function downloadPackageData (packageName: string): Promise<string> {
 
-	const searchedModule: iModule | null = _alreadyDownloaded.filter((m: iModule): boolean => {
-		return m.name === packageName;
-	})[0] || null;
+    const searchedModule: iModule | undefined = _alreadyDownloaded.filter((m: iModule): boolean => {
+        return m.name === packageName;
+    }).shift();
 
-	return searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
+    return "undefined" !== typeof searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-		get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
+        get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
 
-			if (200 !== res.statusCode) {
-				res.resume();
-				reject(new Error("Impossible to join \"" + packageName + "\" registry"));
-			}
-			else {
+            if (200 !== res.statusCode) {
+                res.resume();
+                reject(new Error("Impossible to join \"" + packageName + "\" registry"));
+            }
+            else {
 
-				res.setEncoding("utf8");
+                res.setEncoding("utf8");
 
-				let rawData = "";
-				res.on("data", function requestData (chunk) {
-					rawData += chunk;
-				}).on("end", function requestEnd () {
-					resolve(rawData);
-				});
+                let rawData = "";
+                res.on("data", (chunk) => {
+                    rawData += chunk;
+                }).on("end", () => {
+                    resolve(rawData);
+                });
 
-			}
+            }
 
-		}).on("error", reject);
+        }).on("error", reject);
 
-	}).then((data: string): Promise<{ [key:string]: any }> => {
+    }).then((data: string): Promise<Record<string, any>> => {
 
-		return "" === data.trim() ?
-			Promise.reject(new Error("\"" + packageName + "\" registry does not return data")) :
-			Promise.resolve(JSON.parse(data));
+        return "" === data.trim()
+            ? Promise.reject(new Error("\"" + packageName + "\" registry does not return data"))
+            : Promise.resolve(JSON.parse(data));
 
-	}).then((data: { [key:string]: any }): Promise<string> => {
+    }).then((data: Record<string, any>): Promise<string> => {
 
-		return !data["dist-tags"] || !data["dist-tags"].latest ?
-			Promise.reject(new Error("\"" + packageName + "\" registry does not return latest version")) :
-			Promise.resolve(data["dist-tags"].latest);
+        const distTags: Record<string, any> | undefined = data["dist-tags"] as Record<string, any> | undefined;
 
-	}).then((latestVersion: string): string => {
+        return "string" !== typeof distTags?.latest
+            ? Promise.reject(new Error("\"" + packageName + "\" registry does not return latest version"))
+            : Promise.resolve(distTags.latest);
 
-		_alreadyDownloaded.push({
-			"name": packageName,
-			"latestVersion": latestVersion
-		});
+    }).then((latestVersion: string): string => {
 
-		return latestVersion;
+        _alreadyDownloaded.push({
+            "name": packageName,
+            "latestVersion": latestVersion
+        });
 
-	});
+        return latestVersion;
 
-};
+    });
+
+}

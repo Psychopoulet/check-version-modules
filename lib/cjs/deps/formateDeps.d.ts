@@ -4,6 +4,4 @@ export interface iDep {
     "version": string;
     "path": string;
 }
-export default function formateDeps(packageData: {
-    [key: string]: any;
-}, dev: boolean): Array<iDep>;
+export default function formateDeps(packageData: Record<string, any>, dev: boolean): iDep[];

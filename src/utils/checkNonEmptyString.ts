@@ -1,29 +1,25 @@
-"use strict";
-
-// module
-
 export default function checkNonEmptyString (data: string): Promise<void> {
 
-	if ("undefined" === typeof data) {
+    if ("undefined" === typeof data) {
 
-		return Promise.reject(new ReferenceError("Missing \"data\" parameter"));
+        return Promise.reject(new ReferenceError("Missing \"data\" parameter"));
 
-	}
-		else if ("string" !== typeof data) {
+    }
+        else if ("string" !== typeof data) {
 
-			return Promise.reject(new TypeError("\"data\" parameter is not a string"));
+            return Promise.reject(new TypeError("\"data\" parameter is not a string"));
 
-		}
-		else if ("" === data.trim()) {
+        }
+        else if ("" === data.trim()) {
 
-			return Promise.reject(new RangeError("\"data\" parameter is empty"));
+            return Promise.reject(new RangeError("\"data\" parameter is empty"));
 
-		}
+        }
 
-	else {
+    else {
 
-		return Promise.resolve();
+        return Promise.resolve();
 
-	}
+    }
 
-};
+}

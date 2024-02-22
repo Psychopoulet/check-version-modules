@@ -1,56 +1,51 @@
-
-"use strict";
-
 // deps
 
-	// locals
+    // locals
 
-	import extractAndFormateDeps from "./deps/extractAndFormateDeps";
-	import checkDependenciesUpdates from "./deps/checkDependenciesUpdates";
+    import extractAndFormateDeps from "./deps/extractAndFormateDeps";
+    import checkDependenciesUpdates, { type iAnalyze } from "./deps/checkDependenciesUpdates";
 
-	import checkFile from "./utils/checkFile";
-	import checkAndFormateOptions from "./utils/checkAndFormateOptions";
+    import checkFile from "./utils/checkFile";
+    import checkAndFormateOptions from "./utils/checkAndFormateOptions";
 
 // types & interfaces
 
-	// locals
+    // locals
+    import type { iDep } from "./deps/formateDeps";
 
-	export interface iOptions {
-		"failAtMajor": boolean;
-		"failAtMinor": boolean;
-		"failAtPatch": boolean;
-		"dev": boolean;
-	};
-
-	import { iDep } from "./deps/formateDeps";
-	import { iAnalyze } from "./deps/checkDependenciesUpdates";
+    export interface iOptions {
+        "failAtMajor": boolean;
+        "failAtMinor": boolean;
+        "failAtPatch": boolean;
+        "dev": boolean;
+    }
 
 // module
 
 export default function checkVersionModule (file: string, opts?: iOptions): Promise<iAnalyze> {
 
-	// check params
-	return Promise.resolve().then((): Promise<void> => {
+    // check params
+    return Promise.resolve().then((): Promise<void> => {
 
-		return checkFile(file);
+        return checkFile(file);
 
-	}).then((): Promise<iOptions> => {
+    }).then((): Promise<iOptions> => {
 
-		return checkAndFormateOptions(opts);
+        return checkAndFormateOptions(opts);
 
-	}).then((options: iOptions): Promise<iAnalyze> => {
+    }).then((options: iOptions): Promise<iAnalyze> => {
 
-		return extractAndFormateDeps(file, options.dev).then((dependencies: Array<iDep>): Promise<iAnalyze> => {
+        return extractAndFormateDeps(file, options.dev).then((dependencies: iDep[]): Promise<iAnalyze> => {
 
-			return checkDependenciesUpdates(dependencies, {
-				"failAtMajor": options.failAtMajor,
-				"failAtMinor": options.failAtMinor,
-				"failAtPatch": options.failAtPatch,
-				"dev": options.dev
-			});
+            return checkDependenciesUpdates(dependencies, {
+                "failAtMajor": options.failAtMajor,
+                "failAtMinor": options.failAtMinor,
+                "failAtPatch": options.failAtPatch,
+                "dev": options.dev
+            });
 
-		});
+        });
 
-	});
+    });
 
-};
+}

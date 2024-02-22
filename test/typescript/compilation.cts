@@ -4,13 +4,13 @@
 
 // deps
 
-	// locals
-	import checker = require("../../lib/cjs/main.cjs");
+    // locals
+    import checker = require("../../lib/cjs/main.cjs");
 
 // test
 
 checker("./package.json").then((valid: {
-	"result": boolean;
+    "result": boolean;
 }): void => {
 
   console.log(valid ? "ok": "old versions detected");
@@ -20,9 +20,9 @@ checker("./package.json").then((valid: {
 
 }).catch((err: Error): void => {
 
-	console.error(err);
+    console.error(err);
 
-	process.exitCode = 1;
-	process.exit(1);
+    process.exitCode = 1;
+    process.exit(1);
 
 });

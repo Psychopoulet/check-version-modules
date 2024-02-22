@@ -1,33 +1,26 @@
-"use strict";
-
 // deps
 
-	// natives
-	import { readFile } from "node:fs/promises";
+    // natives
+    import { readFile } from "node:fs/promises";
 
-	// locals
-	import formateDeps from "./formateDeps";
-	import sortDeps from "./sortDeps";
-
-// types & interfaces
-
-	// locals
-	import { iDep } from "./formateDeps";
+    // locals
+    import formateDeps, { type iDep } from "./formateDeps";
+    import sortDeps from "./sortDeps";
 
 // module
 
-export default function extractAndFormateDeps (file: string, dev: boolean): Promise<Array<iDep>> {
+export default function extractAndFormateDeps (file: string, dev: boolean): Promise<iDep[]> {
 
-	return readFile(file, "utf-8").then((content: string): { [key:string]: any } => {
-		return JSON.parse(content);
-	}).then((packageData: { [key:string]: any }): Array<iDep> => {
+    return readFile(file, "utf-8").then((content: string): Record<string, any> => {
+        return JSON.parse(content);
+    }).then((packageData: Record<string, any>): iDep[] => {
 
-		return formateDeps(packageData, dev);
+        return formateDeps(packageData, dev);
 
-	}).then((dependencies: Array<iDep>): Array<iDep> => {
+    }).then((dependencies: iDep[]): iDep[] => {
 
-		return sortDeps(dependencies);
+        return sortDeps(dependencies);
 
-	});
+    });
 
-};
+}

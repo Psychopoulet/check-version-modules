@@ -1,34 +1,30 @@
-"use strict";
+export default function checkNonNullPureObject (data: object | null): Promise<void> {
 
-// module
+    if ("undefined" === typeof data) {
 
-export default function checkNonNullPureObject (data: object): Promise<void> {
+        return Promise.reject(new ReferenceError("Missing \"data\" parameter"));
 
-	if ("undefined" === typeof data) {
+    }
+        else if ("object" !== typeof data) {
 
-		return Promise.reject(new ReferenceError("Missing \"data\" parameter"));
+            return Promise.reject(new TypeError("\"data\" parameter is not an object"));
 
-	}
-		else if ("object" !== typeof data) {
+        }
+        else if (null === data) {
 
-			return Promise.reject(new TypeError("\"data\" parameter is not an object"));
+            return Promise.reject(new TypeError("\"data\" parameter is null"));
 
-		}
-		else if (null === data) {
+        }
+        else if (data instanceof Array) {
 
-			return Promise.reject(new TypeError("\"data\" parameter is null"));
+            return Promise.reject(new TypeError("\"data\" parameter is an Array and not a pure object"));
 
-		}
-		else if (data instanceof Array) {
+        }
 
-			return Promise.reject(new TypeError("\"data\" parameter is an Array and not a pure object"));
+    else {
 
-		}
+        return Promise.resolve();
 
-	else {
+    }
 
-		return Promise.resolve();
-
-	}
-
-};
+}
