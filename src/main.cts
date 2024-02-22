@@ -1,9 +1,7 @@
-"use strict";
-
 // deps
 
-	// locals
-	import checkVersionModule from "./checkVersionModule";
+    // locals
+    import checkVersionModule from "./checkVersionModule";
 
 // module
 

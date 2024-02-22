@@ -1,48 +1,46 @@
-"use strict";
-
 // types & interfaces
 
-	export interface iDep {
-		"dev": boolean;
-		"name": string;
-		"version": string;
-		"path": string;
-	};
+    export interface iDep {
+        "dev": boolean;
+        "name": string;
+        "version": string;
+        "path": string;
+    }
 
 // module
 
-export default function formateDeps (packageData: { [key:string]: any }, dev: boolean): Array<iDep> {
+export default function formateDeps (packageData: Record<string, any>, dev: boolean): iDep[] {
 
-	const packageDependencies: { [key:string]: string } = packageData.dependencies;
+    const packageDependencies: Record<string, string> = packageData.dependencies as Record<string, string>;
 
-	let result: Array<iDep> = Object.keys(packageDependencies).map((dependency: string): iDep => {
+    let result: iDep[] = Object.keys(packageDependencies).map((dependency: string): iDep => {
 
-		return {
-			"dev": false,
-			"name": dependency,
-			"version": packageDependencies[dependency],
-			"path": dependency
-		};
+        return {
+            "dev": false,
+            "name": dependency,
+            "version": packageDependencies[dependency],
+            "path": dependency
+        };
 
-	});
+    });
 
-		if (dev && packageData.devDependencies) {
+        if (dev && "object" === typeof packageData.devDependencies) {
 
-			const packageDevDependencies: { [key:string]: string } = packageData.devDependencies;
+            const packageDevDependencies: Record<string, string> = packageData.devDependencies as Record<string, string>;
 
-			result = result.concat(Object.keys(packageDevDependencies).map((dependency: string): iDep => {
+            result = result.concat(Object.keys(packageDevDependencies).map((dependency: string): iDep => {
 
-				return {
-					"dev": true,
-					"name": dependency,
-					"version": packageDevDependencies[dependency],
-					"path": "dev/" + dependency
-				};
+                return {
+                    "dev": true,
+                    "name": dependency,
+                    "version": packageDevDependencies[dependency],
+                    "path": "dev/" + dependency
+                };
 
-			}));
+            }));
 
-		}
+        }
 
-	return result;
+    return result;
 
-};
+}

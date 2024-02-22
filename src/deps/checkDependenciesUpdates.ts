@@ -1,172 +1,170 @@
-"use strict";
-
 // deps
 
-	// locals
+    // locals
 
-	import sortDeps from "./sortDeps";
+    import sortDeps from "./sortDeps";
 
-	import downloadPackageData from "./downloadPackageData";
+    import downloadPackageData from "./downloadPackageData";
 
-	import getFormatedTime from "../utils/getFormatedTime";
+    import getFormatedTime from "../utils/getFormatedTime";
 
-	import checkVersionValidity from "../version/checkVersionValidity";
-	import checkAndFormateVersion from "../version/checkAndFormateVersion";
+    import checkVersionValidity from "../version/checkVersionValidity";
+    import checkAndFormateVersion from "../version/checkAndFormateVersion";
 
 // types & interfaces
 
-	// locals
+    // locals
 
-	import { iDep } from "./formateDeps";
-	import { iOptions } from "../checkVersionModule";
+    import type { iDep } from "./formateDeps";
+    import type { iOptions } from "../checkVersionModule";
 
-	export interface iResult extends iDep {
-		"time": string;
-		"result": "success" | "warning" | "fail_patch" | "fail_minor" | "fail_major";
-		"message": string;
-	};
+    export interface iResult extends iDep {
+        "time": string;
+        "result": "success" | "warning" | "fail_patch" | "fail_minor" | "fail_major";
+        "message": string;
+    }
 
-	export interface iAnalyze {
-		"result": boolean;
-		"results": Array<iResult>;
-	};
+    export interface iAnalyze {
+        "result": boolean;
+        "results": iResult[];
+    }
 
 // module
 
-export default function checkDependenciesUpdates (dependencies: Array<iDep>, options: iOptions): Promise<iAnalyze> {
+export default function checkDependenciesUpdates (dependencies: iDep[], options: iOptions): Promise<iAnalyze> {
 
-	let valid: boolean = true;
-	const results: Array<iResult> = [];
+    let valid: boolean = true;
+    const results: iResult[] = [];
 
-		function _execute (deps: Array<iDep>): Promise<void>  {
+        function _execute (deps: iDep[]): Promise<void> {
 
-			if (!deps.length) {
-				return Promise.resolve();
-			}
+            if (!deps.length) {
+                return Promise.resolve();
+            }
 
-			const dependency: iResult = deps.shift() as iResult;
+            const dependency: iResult = deps.shift() as iResult;
 
-			return checkVersionValidity(dependency.version, false).then((runnable: boolean): boolean => {
+            return checkVersionValidity(dependency.version, false).then((runnable: boolean): boolean => {
 
-				if (!runnable) {
+                if (!runnable) {
 
-					results.push({
-						...dependency,
-						"time": getFormatedTime(),
-						"result": "warning",
-						"message": "not managed " + dependency.version
-					});
+                    results.push({
+                        ...dependency,
+                        "time": getFormatedTime(),
+                        "result": "warning",
+                        "message": "not managed " + dependency.version
+                    });
 
-				}
+                }
 
-				return runnable;
+                return runnable;
 
-			}).then((runCheck: boolean): Promise<void> => {
+            }).then((runCheck: boolean): Promise<void> => {
 
-				return !runCheck ? Promise.resolve() : checkAndFormateVersion(dependency.version).then((formatedVersion: string): Promise<void> => {
+                return !runCheck ? Promise.resolve() : checkAndFormateVersion(dependency.version).then((formatedVersion: string): Promise<void> => {
 
-					return downloadPackageData(dependency.name).then((latest: string): Promise<void> => {
+                    return downloadPackageData(dependency.name).then((latest: string): Promise<void> => {
 
-						const latestVersions: Array<number> = latest.split(".").map((v: string): number => {
-							return parseInt(v, 10);
-						});
-						const currentVersions: Array<"x"|number> = formatedVersion.split(".").map((v: string): "x"|number => {
-							return "x" === v ? v : parseInt(v, 10);
-						});
+                        const latestVersions: number[] = latest.split(".").map((v: string): number => {
+                            return parseInt(v, 10);
+                        });
+                        const currentVersions: Array<"x" | number> = formatedVersion.split(".").map((v: string): "x" | number => {
+                            return "x" === v ? v : parseInt(v, 10);
+                        });
 
-						let failed: boolean = false;
+                        let failed: boolean = false;
 
-						return Promise.resolve().then((): void => {
+                        return Promise.resolve().then((): void => {
 
-							if (!failed && "x" !== currentVersions[0] && latestVersions[0] > currentVersions[0]) {
+                            if (!failed && "x" !== currentVersions[0] && latestVersions[0] > currentVersions[0]) {
 
-								failed = true;
+                                failed = true;
 
-								if (options.failAtMajor) {
-									valid = false;
-								}
+                                if (options.failAtMajor) {
+                                    valid = false;
+                                }
 
-								results.push({
-									...dependency,
-									"time": getFormatedTime(),
-									"result": "fail_major",
-									"message": dependency.version + " < " + latest
-								});
+                                results.push({
+                                    ...dependency,
+                                    "time": getFormatedTime(),
+                                    "result": "fail_major",
+                                    "message": dependency.version + " < " + latest
+                                });
 
-							}
+                            }
 
-						}).then((): void => {
+                        }).then((): void => {
 
-							if (!failed && "x" !== currentVersions[1] && latestVersions[1] > currentVersions[1]) {
+                            if (!failed && "x" !== currentVersions[1] && latestVersions[1] > currentVersions[1]) {
 
-								failed = true;
+                                failed = true;
 
-								if (options.failAtMinor) {
-									valid = false;
-								}
+                                if (options.failAtMinor) {
+                                    valid = false;
+                                }
 
-								results.push({
-									...dependency,
-									"time": getFormatedTime(),
-									"result": "fail_minor",
-									"message": dependency.version + " < " + latest
-								});
+                                results.push({
+                                    ...dependency,
+                                    "time": getFormatedTime(),
+                                    "result": "fail_minor",
+                                    "message": dependency.version + " < " + latest
+                                });
 
-							}
+                            }
 
-						}).then((): void => {
+                        }).then((): void => {
 
-							if (!failed && "x" !== currentVersions[2] && latestVersions[2] > currentVersions[2]) {
+                            if (!failed && "x" !== currentVersions[2] && latestVersions[2] > currentVersions[2]) {
 
-								failed = true;
+                                failed = true;
 
-								if (options.failAtPatch) {
-									valid = false;
-								}
+                                if (options.failAtPatch) {
+                                    valid = false;
+                                }
 
-								results.push({
-									...dependency,
-									"time": getFormatedTime(),
-									"result": "fail_patch",
-									"message": dependency.version + " < " + latest
-								});
+                                results.push({
+                                    ...dependency,
+                                    "time": getFormatedTime(),
+                                    "result": "fail_patch",
+                                    "message": dependency.version + " < " + latest
+                                });
 
-							}
+                            }
 
-						}).then((): void => {
+                        }).then((): void => {
 
-							if (!failed) {
+                            if (!failed) {
 
-								results.push({
-									...dependency,
-									"time": getFormatedTime(),
-									"result": "success",
-									"message": "Ok"
-								});
+                                results.push({
+                                    ...dependency,
+                                    "time": getFormatedTime(),
+                                    "result": "success",
+                                    "message": "Ok"
+                                });
 
-							}
+                            }
 
-						});
+                        });
 
-					});
+                    });
 
-				});
+                });
 
-			}).then((): Promise<void> => {
+            }).then((): Promise<void> => {
 
-				return _execute(deps);
+                return _execute(deps);
 
-			});
+            });
 
-		}
+        }
 
-	return _execute([ ...dependencies ]).then((): iAnalyze => {
+    return _execute([ ...dependencies ]).then((): iAnalyze => {
 
-		return {
-			"result": valid,
-			"results": sortDeps(results) as Array<iResult>
-		};
+        return {
+            "result": valid,
+            "results": sortDeps(results) as iResult[]
+        };
 
-	});
+    });
 
-};
+}
