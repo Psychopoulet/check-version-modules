@@ -448,7 +448,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "1.5.2";
+                const version = "2.0.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -475,7 +475,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "0.2.1";
+                const version = "1.3.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -529,7 +529,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "1.3.0";
+                const version = "2.0.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
