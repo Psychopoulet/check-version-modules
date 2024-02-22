@@ -1,559 +1,553 @@
-/*
-	eslint-disable max-lines
-*/
-
-"use strict";
-
 // deps
 
-	// natives
-	const { join } = require("node:path");
-	const { strictEqual } = require("node:assert");
+    // natives
+    const { join } = require("node:path");
+    const { strictEqual } = require("node:assert");
 
-	// internal
-	const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
-	const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
+    // internal
+    const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
+    const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
 
 // private
 
-	/**
-	* Return formated modules
-	* @returns {Array} : formated modules
-	*/
-	function _getModules () {
+    /**
+    * Return formated modules
+    * @returns {Array} : formated modules
+    */
+    function _getModules () {
 
-		return [
-			{
-				"version": "",
-				"name": "check-version-modules",
-				"path": "check-version-modules"
-			}
-		];
+        return [
+            {
+                "version": "",
+                "name": "check-version-modules",
+                "path": "check-version-modules"
+            }
+        ];
 
-	}
+    }
 
 // tests
 
 describe("checkDependenciesUpdates", () => {
 
-	let options = null;
+    let options = null;
 
-	before(() => {
+    before(() => {
 
-		return checkAndFormateOptions({}).then((opt) => {
-			options = opt;
-		});
+        return checkAndFormateOptions({}).then((opt) => {
+            options = opt;
+        });
 
-	});
+    });
 
-	it("should test \"x\" & \"*\" patterns", () => {
+    it("should test \"x\" & \"*\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "x";
+            const version = "x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "*";
+            const version = "*";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
+                strictEqual(analyze.result, true);
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
+    it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "x.1.1";
+            const version = "x.1.1";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
+                strictEqual(analyze.result, true);
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "x.x.1";
+            const version = "x.x.1";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
+                strictEqual(analyze.result, true);
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "x.x.x";
+            const version = "x.x.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
+                strictEqual(analyze.result, true);
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"n\" & \"n.x\" & \"n.x.x\" patterns", () => {
+    it("should test \"n\" & \"n.x\" & \"n.x.x\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "1";
+            const version = "1";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "1.x";
+            const version = "1.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "1.x.x";
+            const version = "1.x.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"n.n\" & \"n.n.x\" patterns", () => {
+    it("should test \"n.n\" & \"n.n.x\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "1.5";
+            const version = "1.5";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "1.5.x";
+            const version = "1.5.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"n.n.n\" pattern", () => {
+    it("should test \"n.n.n\" pattern", () => {
 
-		const version = "1.5.2";
+        const version = "1.5.2";
 
-		const modules = _getModules();
-			modules[0].version = version;
-		return checkDependenciesUpdates(modules, options).then((analyze) => {
+        const modules = _getModules();
+            modules[0].version = version;
+        return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-			strictEqual(analyze.result, true);
-			strictEqual(analyze.results instanceof Array, true);
-			strictEqual(analyze.results.length, 1);
+            strictEqual(analyze.result, true);
+            strictEqual(analyze.results instanceof Array, true);
+            strictEqual(analyze.results.length, 1);
 
-				strictEqual(analyze.results[0].result, "success");
-				strictEqual(analyze.results[0].version, version);
+                strictEqual(analyze.results[0].result, "success");
+                strictEqual(analyze.results[0].version, version);
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"^n.n.n\" & \"^n.n.x\" & \"^n.x.x\" patterns", () => {
+    it("should test \"^n.n.n\" & \"^n.n.x\" & \"^n.x.x\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "^1.4.0";
+            const version = "^1.4.0";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "^1.2.x";
+            const version = "^1.2.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "^1.x.x";
+            const version = "^1.x.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test \"~n.n.n\" & \"~n.n.x\" & \"~n.x.x\" patterns", () => {
+    it("should test \"~n.n.n\" & \"~n.n.x\" & \"~n.x.x\" patterns", () => {
 
-		return Promise.resolve().then(() => {
+        return Promise.resolve().then(() => {
 
-			const version = "~1.5.0";
+            const version = "~1.5.0";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "~1.5.x";
+            const version = "~1.5.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-				return Promise.resolve();
+                return Promise.resolve();
 
-			});
+            });
 
-		}).then(() => {
+        }).then(() => {
 
-			const version = "~1.x.x";
+            const version = "~1.x.x";
 
-			const modules = _getModules();
-				modules[0].version = version;
-			return checkDependenciesUpdates(modules, options).then((analyze) => {
+            const modules = _getModules();
+                modules[0].version = version;
+            return checkDependenciesUpdates(modules, options).then((analyze) => {
 
-				strictEqual(analyze.result, true);
-				strictEqual(analyze.results instanceof Array, true);
-				strictEqual(analyze.results.length, 1);
+                strictEqual(analyze.result, true);
+                strictEqual(analyze.results instanceof Array, true);
+                strictEqual(analyze.results.length, 1);
 
-					strictEqual(analyze.results[0].result, "success");
-					strictEqual(analyze.results[0].version, version);
+                    strictEqual(analyze.results[0].result, "success");
+                    strictEqual(analyze.results[0].version, version);
 
-				return Promise.resolve();
+                return Promise.resolve();
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
-	it("should test wrong pattern \"n.n.n.n\" & \"^~n.n.n\"", () => {
+    it("should test wrong pattern \"n.n.n.n\" & \"^~n.n.n\"", () => {
 
-		const version = "1.2.1.1";
+        const version = "1.2.1.1";
 
-		const modules = _getModules();
-			modules[0].version = version;
-		checkDependenciesUpdates(modules, options).then((analyze) => {
+        const modules = _getModules();
+            modules[0].version = version;
+        checkDependenciesUpdates(modules, options).then((analyze) => {
 
-			strictEqual(analyze.result, true);
-			strictEqual(analyze.results instanceof Array, true);
-			strictEqual(analyze.results.length, 1);
+            strictEqual(analyze.result, true);
+            strictEqual(analyze.results instanceof Array, true);
+            strictEqual(analyze.results.length, 1);
 
-				strictEqual(analyze.results[0].result, "warning");
-				strictEqual(analyze.results[0].version, version);
+                strictEqual(analyze.results[0].result, "warning");
+                strictEqual(analyze.results[0].version, version);
 
-		});
+        });
 
-	});
+    });
 
-	it("should test wrong pattern \"^~n.n.n\"", () => {
+    it("should test wrong pattern \"^~n.n.n\"", () => {
 
-		const version = "^~1.2.1.1";
+        const version = "^~1.2.1.1";
 
-		const modules = _getModules();
-			modules[0].version = version;
-		checkDependenciesUpdates(modules, options).then((analyze) => {
+        const modules = _getModules();
+            modules[0].version = version;
+        checkDependenciesUpdates(modules, options).then((analyze) => {
 
-			strictEqual(analyze.result, true);
-			strictEqual(analyze.results instanceof Array, true);
-			strictEqual(analyze.results.length, 1);
+            strictEqual(analyze.result, true);
+            strictEqual(analyze.results instanceof Array, true);
+            strictEqual(analyze.results.length, 1);
 
-				strictEqual(analyze.results[0].result, "warning");
-				strictEqual(analyze.results[0].version, version);
+                strictEqual(analyze.results[0].result, "warning");
+                strictEqual(analyze.results[0].version, version);
 
-		});
+        });
 
-	});
+    });
 
-	it("should test wrong pattern string", () => {
+    it("should test wrong pattern string", () => {
 
-		const version = "git+https://git@github.com/Psychopoulet/check-version-modules";
+        const version = "git+https://git@github.com/Psychopoulet/check-version-modules";
 
-		const modules = _getModules();
-			modules[0].version = version;
-		checkDependenciesUpdates(modules, {
-			...options
-		}).then((analyze) => {
+        const modules = _getModules();
+            modules[0].version = version;
+        checkDependenciesUpdates(modules, {
+            ...options
+        }).then((analyze) => {
 
-			strictEqual(analyze.result, true);
-			strictEqual(analyze.results instanceof Array, true);
-			strictEqual(analyze.results.length, 1);
+            strictEqual(analyze.result, true);
+            strictEqual(analyze.results instanceof Array, true);
+            strictEqual(analyze.results.length, 1);
 
-				strictEqual(analyze.results[0].result, "warning");
-				strictEqual(analyze.results[0].version, version);
+                strictEqual(analyze.results[0].result, "warning");
+                strictEqual(analyze.results[0].version, version);
 
-		});
+        });
 
-	});
+    });
 
-	describe("checkDependenciesUpdates", () => {
+    describe("checkDependenciesUpdates", () => {
 
-		it("should test good version", () => {
+        it("should test good version", () => {
 
-			return checkAndFormateOptions({
-				"failAtMajor": true,
-				"failAtMinor": true,
-				"failAtPatch": true
-			}).then((opt) => {
+            return checkAndFormateOptions({
+                "failAtMajor": true,
+                "failAtMinor": true,
+                "failAtPatch": true
+            }).then((opt) => {
 
-				const version = "1.5.2";
+                const version = "1.5.2";
 
-				const modules = _getModules();
-					modules[0].version = version;
-				return checkDependenciesUpdates(modules, opt).then((analyze) => {
+                const modules = _getModules();
+                    modules[0].version = version;
+                return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(analyze.result, true);
-					strictEqual(analyze.results instanceof Array, true);
-					strictEqual(analyze.results.length, 1);
+                    strictEqual(analyze.result, true);
+                    strictEqual(analyze.results instanceof Array, true);
+                    strictEqual(analyze.results.length, 1);
 
-						strictEqual(analyze.results[0].result, "success");
-						strictEqual(analyze.results[0].version, version);
+                        strictEqual(analyze.results[0].result, "success");
+                        strictEqual(analyze.results[0].version, version);
 
-				});
+                });
 
-			});
+            });
 
-		});
+        });
 
-		it("should test old major version", () => {
+        it("should test old major version", () => {
 
-			return checkAndFormateOptions({
-				"failAtMajor": true,
-				"failAtMinor": true,
-				"failAtPatch": true
-			}).then((opt) => {
+            return checkAndFormateOptions({
+                "failAtMajor": true,
+                "failAtMinor": true,
+                "failAtPatch": true
+            }).then((opt) => {
 
-				const version = "0.2.1";
+                const version = "0.2.1";
 
-				const modules = _getModules();
-					modules[0].version = version;
-				return checkDependenciesUpdates(modules, opt).then((analyze) => {
+                const modules = _getModules();
+                    modules[0].version = version;
+                return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(analyze.result, false);
-					strictEqual(analyze.results instanceof Array, true);
-					strictEqual(analyze.results.length, 1);
+                    strictEqual(analyze.result, false);
+                    strictEqual(analyze.results instanceof Array, true);
+                    strictEqual(analyze.results.length, 1);
 
-						strictEqual(analyze.results[0].result, "fail_major");
-						strictEqual(analyze.results[0].version, version);
+                        strictEqual(analyze.results[0].result, "fail_major");
+                        strictEqual(analyze.results[0].version, version);
 
-				});
+                });
 
-			});
+            });
 
-		});
+        });
 
-		it("should test old minor version", () => {
+        it("should test old minor version", () => {
 
-			return checkAndFormateOptions({
-				"failAtMajor": true,
-				"failAtMinor": true,
-				"failAtPatch": true
-			}).then((opt) => {
+            return checkAndFormateOptions({
+                "failAtMajor": true,
+                "failAtMinor": true,
+                "failAtPatch": true
+            }).then((opt) => {
 
-				const version = "1.2.0";
+                const version = "1.2.0";
 
-				const modules = _getModules();
-					modules[0].version = version;
-				return checkDependenciesUpdates(modules, opt).then((analyze) => {
+                const modules = _getModules();
+                    modules[0].version = version;
+                return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(analyze.result, false);
-					strictEqual(analyze.results instanceof Array, true);
-					strictEqual(analyze.results.length, 1);
+                    strictEqual(analyze.result, false);
+                    strictEqual(analyze.results instanceof Array, true);
+                    strictEqual(analyze.results.length, 1);
 
-						strictEqual(analyze.results[0].result, "fail_minor");
-						strictEqual(analyze.results[0].version, version);
+                        strictEqual(analyze.results[0].result, "fail_minor");
+                        strictEqual(analyze.results[0].version, version);
 
-				});
+                });
 
-			});
+            });
 
-		});
+        });
 
-		it("should test old patch version", () => {
+        it("should test old patch version", () => {
 
-			return checkAndFormateOptions({
-				"failAtMajor": true,
-				"failAtMinor": true,
-				"failAtPatch": true
-			}).then((opt) => {
+            return checkAndFormateOptions({
+                "failAtMajor": true,
+                "failAtMinor": true,
+                "failAtPatch": true
+            }).then((opt) => {
 
-				const version = "1.3.0";
+                const version = "1.3.0";
 
-				const modules = _getModules();
-					modules[0].version = version;
-				return checkDependenciesUpdates(modules, opt).then((analyze) => {
+                const modules = _getModules();
+                    modules[0].version = version;
+                return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
-					strictEqual(analyze.result, false);
-					strictEqual(analyze.results instanceof Array, true);
-					strictEqual(analyze.results.length, 1);
+                    strictEqual(analyze.result, false);
+                    strictEqual(analyze.results instanceof Array, true);
+                    strictEqual(analyze.results.length, 1);
 
-						strictEqual(analyze.results[0].result, "fail_minor");
-						strictEqual(analyze.results[0].version, version);
+                        strictEqual(analyze.results[0].result, "fail_minor");
+                        strictEqual(analyze.results[0].version, version);
 
-				});
+                });
 
-			});
+            });
 
-		});
+        });
 
-	});
+    });
 
 });

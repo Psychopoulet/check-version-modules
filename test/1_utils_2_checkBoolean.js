@@ -1,50 +1,48 @@
-"use strict";
-
 // deps
 
-	// natives
-	const { join } = require("node:path");
-	const { strictEqual } = require("node:assert");
+    // natives
+    const { join } = require("node:path");
+    const { strictEqual } = require("node:assert");
 
-	// internal
-	const checkBoolean = require(join(__dirname, "..", "lib", "cjs", "utils", "checkBoolean.js")).default;
+    // internal
+    const checkBoolean = require(join(__dirname, "..", "lib", "cjs", "utils", "checkBoolean.js")).default;
 
 // tests
 
 describe("checkBoolean", () => {
 
-	it("should test nothing", (done) => {
+    it("should test nothing", (done) => {
 
-		checkBoolean().then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
+        checkBoolean().then(() => {
+            done(new Error("There is no generated Error"));
+        }).catch((err) => {
 
-			strictEqual(typeof err, "object");
-			strictEqual(err instanceof ReferenceError, true);
+            strictEqual(typeof err, "object");
+            strictEqual(err instanceof ReferenceError, true);
 
-			done();
+            done();
 
-		});
+        });
 
-	});
+    });
 
-	it("should test not a string", (done) => {
+    it("should test not a string", (done) => {
 
-		checkBoolean("test").then(() => {
-			done(new Error("There is no generated Error"));
-		}).catch((err) => {
+        checkBoolean("test").then(() => {
+            done(new Error("There is no generated Error"));
+        }).catch((err) => {
 
-			strictEqual(typeof err, "object");
-			strictEqual(err instanceof TypeError, true);
+            strictEqual(typeof err, "object");
+            strictEqual(err instanceof TypeError, true);
 
-			done();
+            done();
 
-		});
+        });
 
-	});
+    });
 
-	it("should test non empty string", () => {
-		return checkBoolean(true);
-	});
+    it("should test non empty string", () => {
+        return checkBoolean(true);
+    });
 
 });
