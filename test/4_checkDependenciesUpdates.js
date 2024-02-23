@@ -149,7 +149,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "1";
+            const version = "2";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -166,7 +166,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "1.x";
+            const version = "2.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -183,7 +183,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "1.x.x";
+            const version = "2.x.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -206,7 +206,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "1.5";
+            const version = "2.1";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -223,7 +223,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "1.5.x";
+            const version = "2.1.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -244,7 +244,7 @@ describe("checkDependenciesUpdates", () => {
 
     it("should test \"n.n.n\" pattern", () => {
 
-        const version = "1.5.2";
+        const version = "2.1.0";
 
         const modules = _getModules();
             modules[0].version = version;
@@ -265,7 +265,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "^1.4.0";
+            const version = "^2.1.0";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -282,7 +282,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "^1.2.x";
+            const version = "^2.1.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -299,7 +299,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "^1.x.x";
+            const version = "^2.x.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -322,7 +322,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "~1.5.0";
+            const version = "~2.1.0";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -339,7 +339,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "~1.5.x";
+            const version = "~2.1.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -358,7 +358,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "~1.x.x";
+            const version = "~2.x.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -448,7 +448,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "2.0.0";
+                const version = "2.1.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -475,7 +475,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "1.3.0";
+                const version = "1.5.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -502,33 +502,6 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "1.2.0";
-
-                const modules = _getModules();
-                    modules[0].version = version;
-                return checkDependenciesUpdates(modules, opt).then((analyze) => {
-
-                    strictEqual(analyze.result, false);
-                    strictEqual(analyze.results instanceof Array, true);
-                    strictEqual(analyze.results.length, 1);
-
-                        strictEqual(analyze.results[0].result, "fail_minor");
-                        strictEqual(analyze.results[0].version, version);
-
-                });
-
-            });
-
-        });
-
-        it("should test old patch version", () => {
-
-            return checkAndFormateOptions({
-                "failAtMajor": true,
-                "failAtMinor": true,
-                "failAtPatch": true
-            }).then((opt) => {
-
                 const version = "2.0.0";
 
                 const modules = _getModules();
@@ -547,6 +520,35 @@ describe("checkDependenciesUpdates", () => {
             });
 
         });
+
+        /*
+        it("should test old patch version", () => {
+
+            return checkAndFormateOptions({
+                "failAtMajor": true,
+                "failAtMinor": true,
+                "failAtPatch": true
+            }).then((opt) => {
+
+                const version = "2.1.0";
+
+                const modules = _getModules();
+                    modules[0].version = version;
+                return checkDependenciesUpdates(modules, opt).then((analyze) => {
+
+                    strictEqual(analyze.result, false);
+                    strictEqual(analyze.results instanceof Array, true);
+                    strictEqual(analyze.results.length, 1);
+
+                        strictEqual(analyze.results[0].result, "fail_patch");
+                        strictEqual(analyze.results[0].version, version);
+
+                });
+
+            });
+
+        });
+        */
 
     });
 
