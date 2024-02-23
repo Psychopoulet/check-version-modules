@@ -48,7 +48,7 @@
 
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "20.11.19",
+    "@types/node": "20.11.20",
     "eslint-plugin-personnallinter": "git+ssh://git@github.com/Psychopoulet/eslint-plugin-personnallinter",
     "husky": "9.0.11",
     "mocha": "10.3.0",
