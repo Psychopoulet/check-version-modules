@@ -521,7 +521,6 @@ describe("checkDependenciesUpdates", () => {
 
         });
 
-        /*
         it("should test old patch version", () => {
 
             return checkAndFormateOptions({
@@ -548,7 +547,6 @@ describe("checkDependenciesUpdates", () => {
             });
 
         });
-        */
 
     });
 
