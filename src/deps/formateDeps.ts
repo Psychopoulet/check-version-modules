@@ -9,7 +9,7 @@
 
 // module
 
-export default function formateDeps (packageData: Record<string, any>, dev: boolean): iDep[] {
+export default function formateDeps (packageData: Record<string, object | string | number | boolean>, dev: boolean): iDep[] {
 
     const packageDependencies: Record<string, string> = packageData.dependencies as Record<string, string>;
 

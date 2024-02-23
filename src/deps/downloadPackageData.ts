@@ -50,15 +50,15 @@ export default function downloadPackageData (packageName: string): Promise<strin
 
         }).on("error", reject);
 
-    }).then((data: string): Promise<Record<string, any>> => {
+    }).then((data: string): Promise<Record<string, object | string | number | boolean>> => {
 
         return "" === data.trim()
             ? Promise.reject(new Error("\"" + packageName + "\" registry does not return data"))
             : Promise.resolve(JSON.parse(data));
 
-    }).then((data: Record<string, any>): Promise<string> => {
+    }).then((data: Record<string, object | string | number | boolean>): Promise<string> => {
 
-        const distTags: Record<string, any> | undefined = data["dist-tags"] as Record<string, any> | undefined;
+        const distTags: Record<string, object> | undefined = data["dist-tags"] as Record<string, object> | undefined;
 
         return "string" !== typeof distTags?.latest
             ? Promise.reject(new Error("\"" + packageName + "\" registry does not return latest version"))
