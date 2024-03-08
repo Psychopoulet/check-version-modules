@@ -8,6 +8,10 @@
     const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
     const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
 
+// consts
+
+    const MAX_TIMEOUT = 10000;
+
 // private
 
     /**
@@ -80,7 +84,7 @@ describe("checkDependenciesUpdates", () => {
 
         });
 
-    });
+    }).timeout(MAX_TIMEOUT);
 
     it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
 

@@ -1,1 +1,1 @@
-export default function downloadPackageData(packageName: string): Promise<string>;
+export default function downloadPackageData(packageName: string, npmrcFile: string): Promise<string>;

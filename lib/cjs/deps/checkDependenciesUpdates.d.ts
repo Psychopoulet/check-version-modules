@@ -1,5 +1,5 @@
 import type { iDep } from "./formateDeps";
-import type { iOptions } from "../checkVersionModule";
+import type { iFormattedOptions } from "../checkVersionModule";
 export interface iResult extends iDep {
     "time": string;
     "result": "success" | "warning" | "fail_patch" | "fail_minor" | "fail_major";
@@ -9,4 +9,4 @@ export interface iAnalyze {
     "result": boolean;
     "results": iResult[];
 }
-export default function checkDependenciesUpdates(dependencies: iDep[], options: iOptions): Promise<iAnalyze>;
+export default function checkDependenciesUpdates(dependencies: iDep[], options: iFormattedOptions): Promise<iAnalyze>;
