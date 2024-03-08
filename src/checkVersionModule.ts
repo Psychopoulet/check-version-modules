@@ -14,10 +14,19 @@
     import type { iDep } from "./deps/formateDeps";
 
     export interface iOptions {
+        "failAtMajor"?: boolean;
+        "failAtMinor"?: boolean;
+        "failAtPatch"?: boolean;
+        "dev"?: boolean;
+        "npmrcFile"?: string;
+    }
+
+    export interface iFormattedOptions {
         "failAtMajor": boolean;
         "failAtMinor": boolean;
         "failAtPatch": boolean;
         "dev": boolean;
+        "npmrcFile": string;
     }
 
 // module
@@ -29,21 +38,14 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 
         return checkFile(file);
 
-    }).then((): Promise<iOptions> => {
+    }).then((): Promise<iFormattedOptions> => {
 
         return checkAndFormateOptions(opts);
 
-    }).then((options: iOptions): Promise<iAnalyze> => {
+    }).then((options: iFormattedOptions): Promise<iAnalyze> => {
 
         return extractAndFormateDeps(file, options.dev).then((dependencies: iDep[]): Promise<iAnalyze> => {
-
-            return checkDependenciesUpdates(dependencies, {
-                "failAtMajor": options.failAtMajor,
-                "failAtMinor": options.failAtMinor,
-                "failAtPatch": options.failAtPatch,
-                "dev": options.dev
-            });
-
+            return checkDependenciesUpdates(dependencies, options);
         });
 
     });

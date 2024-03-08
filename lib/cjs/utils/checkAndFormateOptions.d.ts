@@ -1,2 +1,2 @@
-import type { iOptions } from "../checkVersionModule";
-export default function checkAndFormateOptions(options?: iOptions): Promise<iOptions>;
+import type { iOptions, iFormattedOptions } from "../checkVersionModule";
+export default function checkAndFormateOptions(options?: iOptions): Promise<iFormattedOptions>;

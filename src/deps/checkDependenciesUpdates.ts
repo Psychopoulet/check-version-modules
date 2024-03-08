@@ -16,7 +16,7 @@
     // locals
 
     import type { iDep } from "./formateDeps";
-    import type { iOptions } from "../checkVersionModule";
+    import type { iFormattedOptions } from "../checkVersionModule";
 
     export interface iResult extends iDep {
         "time": string;
@@ -31,7 +31,7 @@
 
 // module
 
-export default function checkDependenciesUpdates (dependencies: iDep[], options: iOptions): Promise<iAnalyze> {
+export default function checkDependenciesUpdates (dependencies: iDep[], options: iFormattedOptions): Promise<iAnalyze> {
 
     let valid: boolean = true;
     const results: iResult[] = [];
@@ -63,7 +63,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                 return !runCheck ? Promise.resolve() : checkAndFormateVersion(dependency.version).then((formatedVersion: string): Promise<void> => {
 
-                    return downloadPackageData(dependency.name).then((latest: string): void => {
+                    return downloadPackageData(dependency.name, options.npmrcFile).then((latest: string): void => {
 
                         const latestVersions: number[] = latest.split(".").map((v: string): number => {
                             return parseInt(v, 10);

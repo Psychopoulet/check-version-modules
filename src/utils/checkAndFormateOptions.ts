@@ -7,20 +7,21 @@
 // types & interfaces
 
     // locals
-    import type { iOptions } from "../checkVersionModule";
+    import type { iOptions, iFormattedOptions } from "../checkVersionModule";
 
 // consts
 
-    const DEFAULT_OPTIONS: iOptions = {
+    const DEFAULT_OPTIONS: iFormattedOptions = {
         "failAtMajor": true,
         "failAtMinor": true,
         "failAtPatch": false,
-        "dev": true
+        "dev": true,
+        "npmrcFile": ""
     };
 
 // module
 
-export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTIONS): Promise<iOptions> {
+export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTIONS): Promise<iFormattedOptions> {
 
     return checkNonNullPureObject(options).then((): Promise<void> => {
 
@@ -28,6 +29,7 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
         options.failAtMinor = "undefined" === typeof options.failAtMinor ? DEFAULT_OPTIONS.failAtMinor : options.failAtMinor;
         options.failAtPatch = "undefined" === typeof options.failAtPatch ? DEFAULT_OPTIONS.failAtPatch : options.failAtPatch;
         options.dev = "undefined" === typeof options.dev ? DEFAULT_OPTIONS.dev : options.dev;
+        options.npmrcFile = "undefined" === typeof options.npmrcFile ? DEFAULT_OPTIONS.npmrcFile : options.npmrcFile;
 
         return checkBoolean(options.failAtMajor);
 
@@ -43,9 +45,9 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
 
         return checkBoolean(options.dev);
 
-    }).then((): Promise<iOptions> => {
+    }).then((): Promise<iFormattedOptions> => {
 
-        return Promise.resolve(options);
+        return Promise.resolve(options as iFormattedOptions);
 
     });
 

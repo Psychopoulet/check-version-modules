@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
@@ -48,13 +48,13 @@
 
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "20.11.19",
+    "@types/node": "20.11.25",
     "eslint-plugin-personnallinter": "git+ssh://git@github.com/Psychopoulet/eslint-plugin-personnallinter",
     "husky": "9.0.11",
     "mocha": "10.3.0",
     "nyc": "15.1.0",
     "rimraf": "5.0.5",
-    "typescript": "5.3.3",
+    "typescript": "5.4.2",
     "used-deps-analyzer": "0.1.8"
   },
   "optionalDependencies": {

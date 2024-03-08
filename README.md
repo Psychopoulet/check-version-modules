@@ -48,10 +48,11 @@ Does support following patterns:
 
 ```typescript
 interface iOptions {
-  "failAtMajor": boolean; // default: true => if no pattern, used for the returned boolean
-  "failAtMinor": boolean; // default: true => if no pattern, used for the returned boolean
-  "failAtPatch": boolean; // default: false => if no pattern, used for the returned boolean
-  "dev": boolean; // default: true => analyze dev deps too
+  "failAtMajor"?: boolean; // default: true => if no pattern, used for the returned boolean
+  "failAtMinor"?: boolean; // default: true => if no pattern, used for the returned boolean
+  "failAtPatch"?: boolean; // default: false => if no pattern, used for the returned boolean
+  "dev"?: boolean; // default: true => analyze dev deps too
+  "npmrcFile"?: string; // default: true => specify a npm configuration file (for private repositories)
 }
 ```
 
@@ -65,6 +66,7 @@ interface iOptions {
   * ``` --no-fail-at-patch ``` => failAtPatch = false
   * ``` --dev ``` => dev = true
   * ``` --no-dev ``` => dev = false
+  * ``` --npmrcFile ``` => npmrcFile = next arg
   * ``` --file ``` => specify analyzed file with next argument, if not set analyze the "package.json" in the working directory
 
 ## Examples

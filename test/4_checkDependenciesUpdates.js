@@ -8,6 +8,10 @@
     const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
     const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
 
+// consts
+
+    const MAX_TIMEOUT = 10000;
+
 // private
 
     /**
@@ -80,7 +84,7 @@ describe("checkDependenciesUpdates", () => {
 
         });
 
-    });
+    }).timeout(MAX_TIMEOUT);
 
     it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
 
@@ -244,7 +248,7 @@ describe("checkDependenciesUpdates", () => {
 
     it("should test \"n.n.n\" pattern", () => {
 
-        const version = "2.1.0";
+        const version = "2.1.1";
 
         const modules = _getModules();
             modules[0].version = version;
@@ -448,7 +452,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "2.1.0";
+                const version = "2.1.1";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -521,7 +525,6 @@ describe("checkDependenciesUpdates", () => {
 
         });
 
-        /*
         it("should test old patch version", () => {
 
             return checkAndFormateOptions({
@@ -548,7 +551,6 @@ describe("checkDependenciesUpdates", () => {
             });
 
         });
-        */
 
     });
 

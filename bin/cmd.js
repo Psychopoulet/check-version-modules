@@ -67,6 +67,14 @@ Promise.resolve().then(() => {
                         options.dev = false;
                     break;
 
+                    case "--npmrcFile":
+
+                        if (i + 1 < ARGS.length) {
+                            options.npmrcFile = String(ARGS[i + 1]);
+                        }
+
+                    break;
+
                     case "--file":
 
                         if (i + 1 < ARGS.length) {
