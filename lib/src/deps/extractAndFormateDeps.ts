@@ -4,10 +4,13 @@
     import { readFile } from "node:fs/promises";
 
     // locals
-    import formateDeps, { type iDep } from "./formateDeps";
+    import formateDeps from "./formateDeps";
     import sortDeps from "./sortDeps";
 
 // types & interfaces
+
+    // locals
+    import type { iDep } from "./formateDeps";
 
     type tPackageType = Record<string, object | string | number | boolean>;
 

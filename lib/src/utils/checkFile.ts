@@ -1,10 +1,15 @@
 // deps
 
     // natives
-    import { lstat, type Stats } from "node:fs";
+    import { lstat } from "node:fs";
 
     // locals
     import checkNonEmptyString from "./checkNonEmptyString";
+
+// types & interfaces
+
+    // natives
+    import type { Stats } from "node:fs";
 
 // module
 
