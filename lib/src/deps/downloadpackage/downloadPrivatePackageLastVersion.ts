@@ -16,7 +16,8 @@
 
 export default function downloadPrivatePackageLastVersion (packageName: string, npmrcFile: string): Promise<string> {
 
-    const packageDir: string = join(homedir(), "check-version-modules-" + (Math.random() + 1).toString(36).substring(2));
+    const baseDir: string = join(homedir(), "check-version-modules");
+    const packageDir: string = join(baseDir, (Math.random() + 1).toString(36).substring(2));
 
     return mkdir(packageDir, {
         "recursive": true
