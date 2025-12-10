@@ -25,7 +25,7 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
         return "" !== npmrcFile ? copyFile(npmrcFile, join(packageDir, basename(npmrcFile))) : Promise.resolve();
     }).then((): Promise<void> => {
 
-        return new Promise((resolve: () => void, reject: (err: Error) => void): undefined => {
+        return new Promise((resolve: () => void, reject: (err: Error) => void): void => {
 
             exec("npm init --yes", {
                 "cwd": packageDir,
@@ -48,7 +48,7 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
 
     }).then((): Promise<void> => {
 
-        return new Promise((resolve: () => void, reject: (err: Error) => void): undefined => {
+        return new Promise((resolve: () => void, reject: (err: Error) => void): void => {
 
             exec("npm install " + packageName, {
                 "cwd": packageDir,

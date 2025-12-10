@@ -16,9 +16,9 @@
 
 export default function downloadPublicPackageLastVersion (packageName: string): Promise<string> {
 
-    return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): undefined => {
+    return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-        get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): undefined => {
+        get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
 
             if (200 !== res.statusCode) {
 
@@ -32,9 +32,9 @@ export default function downloadPublicPackageLastVersion (packageName: string): 
                 res.setEncoding("utf8");
 
                 let rawData: string = "";
-                res.on("data", (chunk: string): undefined => {
+                res.on("data", (chunk: string): void => {
                     rawData += chunk;
-                }).on("end", (): undefined => {
+                }).on("end", (): void => {
                     resolve(rawData);
                 });
 
