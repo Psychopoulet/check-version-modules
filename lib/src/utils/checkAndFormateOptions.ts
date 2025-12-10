@@ -16,6 +16,7 @@
         "failAtMinor": true,
         "failAtPatch": false,
         "dev": true,
+        "optional": true,
         "npmrcFile": ""
     };
 
@@ -29,6 +30,7 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
         options.failAtMinor = "undefined" === typeof options.failAtMinor ? DEFAULT_OPTIONS.failAtMinor : options.failAtMinor;
         options.failAtPatch = "undefined" === typeof options.failAtPatch ? DEFAULT_OPTIONS.failAtPatch : options.failAtPatch;
         options.dev = "undefined" === typeof options.dev ? DEFAULT_OPTIONS.dev : options.dev;
+        options.optional = "undefined" === typeof options.optional ? DEFAULT_OPTIONS.optional : options.optional;
         options.npmrcFile = "undefined" === typeof options.npmrcFile ? DEFAULT_OPTIONS.npmrcFile : options.npmrcFile;
 
         return checkBoolean(options.failAtMajor);
@@ -44,6 +46,10 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
     }).then((): Promise<void> => {
 
         return checkBoolean(options.dev);
+
+    }).then((): Promise<void> => {
+
+        return checkBoolean(options.optional);
 
     }).then((): Promise<iFormattedOptions> => {
 

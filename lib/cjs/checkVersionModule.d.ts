@@ -4,6 +4,7 @@ export interface iOptions {
     "failAtMinor"?: boolean;
     "failAtPatch"?: boolean;
     "dev"?: boolean;
+    "optional"?: boolean;
     "npmrcFile"?: string;
 }
 export interface iFormattedOptions {
@@ -11,6 +12,7 @@ export interface iFormattedOptions {
     "failAtMinor": boolean;
     "failAtPatch": boolean;
     "dev": boolean;
+    "optional": boolean;
     "npmrcFile": string;
 }
 export default function checkVersionModule(file: string, opts?: iOptions): Promise<iAnalyze>;

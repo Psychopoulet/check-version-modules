@@ -16,7 +16,7 @@ $ npm install check-version-modules
 
 ## Features
 
-  * Extract package's dependencies & dev dependencies
+  * Extract package's dependencies / dev dependencies / optional dependencies
   * Extract there versions
   * Compare them to the latest package's version
 
@@ -52,6 +52,7 @@ interface iOptions {
   "failAtMinor"?: boolean; // default: true => if no pattern, used for the returned boolean
   "failAtPatch"?: boolean; // default: false => if no pattern, used for the returned boolean
   "dev"?: boolean; // default: true => analyze dev deps too
+  "optional"?: boolean; // default: true => analyze optional deps too
   "npmrcFile"?: string; // default: true => specify a npm configuration file (for private repositories)
 }
 ```
@@ -66,6 +67,8 @@ interface iOptions {
   * ``` --no-fail-at-patch ``` => failAtPatch = false
   * ``` --dev ``` => dev = true
   * ``` --no-dev ``` => dev = false
+  * ``` --optional ``` => optional = true
+  * ``` --no-optional ``` => optional = false
   * ``` --npmrcFile ``` => npmrcFile = next arg
   * ``` --file ``` => specify analyzed file with next argument, if not set analyze the "package.json" in the working directory
 
@@ -85,7 +88,8 @@ const checker = require("check-version-modules");
 
 checker("/etc/tests/package.json", {
   "failAtPatch": true,
-  "dev": false
+  "dev": false,
+  "optional": false
 }).then((analyze) => {
   console.log(analyze.result ? "ok": "old versions detected");
 }).catch((err) => {

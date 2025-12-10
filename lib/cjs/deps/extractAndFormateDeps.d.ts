@@ -1,2 +1,2 @@
 import type { iDep } from "./formateDeps";
-export default function extractAndFormateDeps(file: string, dev: boolean): Promise<iDep[]>;
+export default function extractAndFormateDeps(file: string, dev: boolean, optional: boolean): Promise<iDep[]>;

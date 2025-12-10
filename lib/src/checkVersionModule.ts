@@ -18,6 +18,7 @@
         "failAtMinor"?: boolean;
         "failAtPatch"?: boolean;
         "dev"?: boolean;
+        "optional"?: boolean;
         "npmrcFile"?: string;
     }
 
@@ -26,6 +27,7 @@
         "failAtMinor": boolean;
         "failAtPatch": boolean;
         "dev": boolean;
+        "optional": boolean;
         "npmrcFile": string;
     }
 
@@ -44,7 +46,7 @@ export default function checkVersionModule (file: string, opts?: iOptions): Prom
 
     }).then((options: iFormattedOptions): Promise<iAnalyze> => {
 
-        return extractAndFormateDeps(file, options.dev).then((dependencies: iDep[]): Promise<iAnalyze> => {
+        return extractAndFormateDeps(file, options.dev, options.optional).then((dependencies: iDep[]): Promise<iAnalyze> => {
             return checkDependenciesUpdates(dependencies, options);
         });
 
