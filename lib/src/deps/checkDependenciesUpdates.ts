@@ -44,9 +44,9 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
             const dependency: iResult = deps.shift() as iResult;
 
-            return checkVersionValidity(dependency.version, false).then((runnable: boolean): boolean => {
+            return checkVersionValidity(dependency.version, false).then((runnable: "RUNNABLE" | "ALWAYS_UP_TO_UPDATE" | "NOT_RUNNABLE"): boolean => {
 
-                if (!runnable) {
+                if ("NOT_RUNNABLE" === runnable) {
 
                     results.push({
                         ...dependency,
@@ -56,8 +56,18 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
                     });
 
                 }
+                else if ("ALWAYS_UP_TO_UPDATE" === runnable) {
 
-                return runnable;
+                    results.push({
+                        ...dependency,
+                        "time": getFormatedTime(),
+                        "result": "success",
+                        "message": dependency.version
+                    });
+
+                }
+
+                return "RUNNABLE" === runnable;
 
             }).then((runCheck: boolean): Promise<void> => {
 
