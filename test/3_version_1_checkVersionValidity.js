@@ -117,19 +117,30 @@ describe("checkVersionValidity", () => {
 
     describe("non-strict", () => {
 
+        it("should test git", () => {
+
+            return checkVersionValidity("git+ssh://git@github.com/Psychopoulet/eslint-plugin-personnallinter", false).then((valid) => {
+
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "ALWAYS_UP_TO_UPDATE");
+
+            });
+
+        });
+
         it("should test \"x\" & \"*\" patterns", () => {
 
             return checkVersionValidity("x", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("*", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -139,50 +150,50 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("x.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("*.1.1", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("x.x.1", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("*.*.1", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("x.x.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("*.*.*", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("x.*.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -192,15 +203,15 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("1.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("1.x.x", false);
 
@@ -212,15 +223,15 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("1.1.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -230,8 +241,8 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("1.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -241,22 +252,22 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("^1.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("^1.1.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("^1.x.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -266,22 +277,22 @@ describe("checkVersionValidity", () => {
 
             return checkVersionValidity("~1.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("~1.1.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
                 return checkVersionValidity("~1.x.x", false);
 
             }).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
-                strictEqual(valid, true);
+                strictEqual(typeof valid, "string");
+                strictEqual(valid, "RUNNABLE");
 
             });
 
@@ -291,7 +302,7 @@ describe("checkVersionValidity", () => {
 
             checkVersionValidity("1.1.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
+                strictEqual(typeof valid, "string");
                 strictEqual(valid, false);
 
             });
@@ -302,7 +313,7 @@ describe("checkVersionValidity", () => {
 
             checkVersionValidity("^~1.1.1", false).then((valid) => {
 
-                strictEqual(typeof valid, "boolean");
+                strictEqual(typeof valid, "string");
                 strictEqual(valid, false);
 
             });

@@ -67,6 +67,13 @@ Promise.resolve().then(() => {
                         options.dev = false;
                     break;
 
+                    case "--optional":
+                        options.optional = true;
+                    break;
+                    case "--no-optional":
+                        options.optional = false;
+                    break;
+
                     case "--npmrcFile":
 
                         if (i + 1 < ARGS.length) {

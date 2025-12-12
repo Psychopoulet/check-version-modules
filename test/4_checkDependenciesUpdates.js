@@ -11,6 +11,7 @@
 // consts
 
     const MAX_TIMEOUT = 10000;
+    const CURRENT_PUBLISHED_VERSION = "2.1.3";
 
 // private
 
@@ -248,10 +249,8 @@ describe("checkDependenciesUpdates", () => {
 
     it("should test \"n.n.n\" pattern", () => {
 
-        const version = "2.1.2";
-
         const modules = _getModules();
-            modules[0].version = version;
+            modules[0].version = CURRENT_PUBLISHED_VERSION;
         return checkDependenciesUpdates(modules, options).then((analyze) => {
 
             strictEqual(analyze.result, true);
@@ -259,7 +258,7 @@ describe("checkDependenciesUpdates", () => {
             strictEqual(analyze.results.length, 1);
 
                 strictEqual(analyze.results[0].result, "success");
-                strictEqual(analyze.results[0].version, version);
+                strictEqual(analyze.results[0].version, CURRENT_PUBLISHED_VERSION);
 
         });
 
@@ -452,10 +451,8 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "2.1.2";
-
                 const modules = _getModules();
-                    modules[0].version = version;
+                    modules[0].version = CURRENT_PUBLISHED_VERSION;
                 return checkDependenciesUpdates(modules, opt).then((analyze) => {
 
                     strictEqual(analyze.result, true);
@@ -463,7 +460,7 @@ describe("checkDependenciesUpdates", () => {
                     strictEqual(analyze.results.length, 1);
 
                         strictEqual(analyze.results[0].result, "success");
-                        strictEqual(analyze.results[0].version, version);
+                        strictEqual(analyze.results[0].version, CURRENT_PUBLISHED_VERSION);
 
                 });
 

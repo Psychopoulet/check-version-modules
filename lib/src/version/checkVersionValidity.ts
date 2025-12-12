@@ -10,20 +10,25 @@
 
 // module
 
-export default function checkVersionValidity (version: string, strict: boolean = true): Promise<boolean> {
+export default function checkVersionValidity (version: string, strict: boolean = true): Promise<"RUNNABLE" | "ALWAYS_UP_TO_UPDATE" | "NOT_RUNNABLE"> {
 
-    return checkNonEmptyString(version).then((): Promise<boolean> | boolean => {
+    return checkNonEmptyString(version).then((): Promise<"RUNNABLE" | "ALWAYS_UP_TO_UPDATE" | "NOT_RUNNABLE"> => {
 
         if (strict) {
 
-            return REGEX.test(version) ? Promise.resolve(true) : Promise.reject(new Error(
+            return REGEX.test(version) ? Promise.resolve("RUNNABLE") : Promise.reject(new Error(
                 "\"version\" parameter (\"" + version + "\") does not follow the allowed patterns (\"" + REGEX_LITTERAL + "\")"
             ));
 
         }
+        else if (version.includes("git")) {
+
+            return Promise.resolve("ALWAYS_UP_TO_UPDATE");
+
+        }
         else {
 
-            return REGEX.test(version);
+            return REGEX.test(version) ? Promise.resolve("RUNNABLE") : Promise.resolve("NOT_RUNNABLE");
 
         }
 

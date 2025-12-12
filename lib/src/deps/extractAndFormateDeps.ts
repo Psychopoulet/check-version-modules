@@ -16,13 +16,13 @@
 
 // module
 
-export default function extractAndFormateDeps (file: string, dev: boolean): Promise<iDep[]> {
+export default function extractAndFormateDeps (file: string, dev: boolean, optional: boolean): Promise<iDep[]> {
 
     return readFile(file, "utf-8").then((content: string): tPackageType => {
         return JSON.parse(content) as tPackageType;
     }).then((packageData: tPackageType): iDep[] => {
 
-        return formateDeps(packageData, dev);
+        return formateDeps(packageData, dev, optional);
 
     }).then((dependencies: iDep[]): iDep[] => {
 

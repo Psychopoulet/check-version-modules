@@ -25,12 +25,12 @@ export default function downloadPackageData (packageName: string, npmrcFile: str
         return m.name === packageName;
     }).shift();
 
-    return "undefined" !== typeof searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): undefined => {
+    return "undefined" !== typeof searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-        downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): undefined => {
+        downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
 
-            downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): undefined => {
-                reject(err);
+            downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): void => {
+                return reject(err);
             });
 
         });
