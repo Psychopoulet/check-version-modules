@@ -10,5 +10,8 @@ module.exports = defineConfig({
     "plugins": {
         personnallinter
     },
-    "extends": [ personnallinter.configs["ts-back"] ]
+    "extends": [ personnallinter.configs["js-back"] ],
+    "rules": {
+        "no-unused-vars": "warn"
+    }
 });
