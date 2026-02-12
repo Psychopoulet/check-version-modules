@@ -1,58 +1,58 @@
 export default function formateVersion (_version: string): string {
 
-    const version: string = _version.trim().toLowerCase().replace(/\*/gm, "x");
+    const normalizedVersion: string = _version.trim().toLowerCase().replace(/\*/gm, "x");
 
-    const versions: Array<string | number> = version.replace("^", "").replace("~", "").split(".").map((v: string): string | number => {
+    const segments: Array<string | number> = normalizedVersion.replace("^", "").replace("~", "").split(".").map((v: string): string | number => {
         return "x" === v ? "x" : parseInt(v, 10);
     });
 
     // "x", "x.n", "x.n.n"
-    if ("x" === versions[0]) {
+    if ("x" === segments[0]) {
         return "x.x.x";
     }
 
     // "n"
-    else if (1 === versions.length) {
-        return version + ".x.x";
+    else if (1 === segments.length) {
+        return normalizedVersion + ".x.x";
     }
 
     // "n.n"
-    else if (2 === versions.length) {
-        return version + ".x";
+    else if (2 === segments.length) {
+        return normalizedVersion + ".x";
     }
 
     // "n.n.n"
-    else if (3 === versions.length) {
+    else if (3 === segments.length) {
 
         // "^"
-        if ("^" === version[0]) {
+        if ("^" === normalizedVersion[0]) {
 
-            versions[1] = "x";
-            versions[2] = "x";
+            segments[1] = "x";
+            segments[2] = "x";
 
-            return versions.join(".");
+            return segments.join(".");
 
         }
 
         // artifact
-        else if ("~" === version[0]) {
+        else if ("~" === normalizedVersion[0]) {
 
-            versions[2] = "x";
+            segments[2] = "x";
 
-            return versions.join(".");
+            return segments.join(".");
 
         }
 
         // "n.n.n"
         else {
-            return version;
+            return normalizedVersion;
         }
 
     }
 
     // wtf ?
     else {
-        return version;
+        return normalizedVersion;
     }
 
 }

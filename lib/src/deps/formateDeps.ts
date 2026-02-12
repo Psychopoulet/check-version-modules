@@ -12,19 +12,25 @@
 
 export default function formateDeps (packageData: Record<string, object | string | number | boolean>, dev: boolean, optional: boolean): iDep[] {
 
-    const packageDependencies: Record<string, string> = packageData.dependencies as Record<string, string>;
+    let result: iDep[] = [];
 
-    let result: iDep[] = Object.keys(packageDependencies).map((dependency: string): iDep => {
+        if ("object" === typeof packageData.devDependencies) {
 
-        return {
-            "dev": false,
-            "optional": false,
-            "name": dependency,
-            "version": packageDependencies[dependency],
-            "path": dependency
-        };
+            const packageDependencies: Record<string, string> = packageData.dependencies as Record<string, string>;
 
-    });
+            result = Object.keys(packageDependencies).map((dependency: string): iDep => {
+
+                return {
+                    "dev": false,
+                    "optional": false,
+                    "name": dependency,
+                    "version": packageDependencies[dependency],
+                    "path": dependency
+                };
+
+            });
+
+        }
 
         if (dev && "object" === typeof packageData.devDependencies) {
 

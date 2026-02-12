@@ -11,7 +11,7 @@
 // consts
 
     const MAX_TIMEOUT = 10000;
-    const CURRENT_PUBLISHED_VERSION = "2.1.3";
+    const CURRENT_PUBLISHED_VERSION = "2.2.0";
 
 // private
 
@@ -211,7 +211,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "2.1";
+            const version = "2.2";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -228,7 +228,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "2.1.x";
+            const version = "2.2.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -325,7 +325,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "~2.1.0";
+            const version = "~2.2.0";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -342,7 +342,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "~2.1.x";
+            const version = "~2.2.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -503,7 +503,7 @@ describe("checkDependenciesUpdates", () => {
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "2.0.0";
+                const version = "2.1.0";
 
                 const modules = _getModules();
                     modules[0].version = version;
@@ -524,13 +524,19 @@ describe("checkDependenciesUpdates", () => {
 
         it("should test old patch version", () => {
 
+            const versionSplitted = CURRENT_PUBLISHED_VERSION.split(".");
+
+            if ("0" === versionSplitted[2]) {
+                return Promise.resolve();
+            }
+
             return checkAndFormateOptions({
                 "failAtMajor": true,
                 "failAtMinor": true,
                 "failAtPatch": true
             }).then((opt) => {
 
-                const version = "2.1.0";
+                const version = "2.2.0";
 
                 const modules = _getModules();
                     modules[0].version = version;

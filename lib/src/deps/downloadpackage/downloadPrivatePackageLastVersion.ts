@@ -4,7 +4,7 @@
     import { basename, join } from "node:path";
     import { mkdir, copyFile, readFile, rm } from "node:fs/promises";
     import { homedir } from "node:os";
-    import { exec } from "node:child_process";
+    import { exec, execFile } from "node:child_process";
 
 // types & interfaces
 
@@ -50,7 +50,7 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
 
         return new Promise((resolve: () => void, reject: (err: Error) => void): void => {
 
-            exec("npm install " + packageName, {
+            execFile("npm", [ "install", packageName ], {
                 "cwd": packageDir,
                 "windowsHide": true
             }, (err: Error | null, stdout: string, stderr: string): void => {
