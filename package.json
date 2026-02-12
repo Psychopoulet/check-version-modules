@@ -21,15 +21,21 @@
 
     "prepare": "npx husky || true",
 
-    "clean": "npx rimraf ./lib/cjs",
-    "build": "npm run-script clean && npx tsc --project \"./tsconfig.json\"",
+    "lint-back": "npx eslint --config .eslintrc-back.js --ext .ts,.cts,.mts ./lib/src/**/*",
+    "lint-tests": "npx eslint --config .eslintrc-tests.js --ext .js,.cjs,.mjs ./test/**/*",
+    "lint": "npm run lint-back && npm run lint-tests",
 
-    "lint": "npx eslint --config .eslintrc-src.js --ext .cts,.ts ./lib/src/**/* && npx eslint --config .eslintrc-tests.js ./bin/*.js ./test/**/*.js",
-    "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib/src\" --no-dev --overkill \"fs-extra\" \"node-promfs\" --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
+    "clean-back": "npx rimraf ./lib/cjs",
+    "clean": "npm run clean-back",
+
+    "build-back": "npm run clean-back && npx tsc --project ./tsconfig.json",
+    "build": "npm run build-back",
+
+    "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib/src\" --no-dev --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
     "check-updates": "node ./bin/cmd.js",
     "unit-tests": "npm run build && npx nyc --reporter=html --reporter=text mocha",
 
-    "tests": "npm run-script lint && npm run check-requires && npm run-script check-updates && npm run-script unit-tests"
+    "tests": "npm run lint && npm run check-requires && npm run check-updates && npm run unit-tests"
 
   },
 
@@ -38,16 +44,15 @@
   },
   "files": [
     "/bin",
-    "/lib/cjs",
-    "/public"
+    "/lib/cjs"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.22.0"
   },
 
   "dependencies": {},
   "devDependencies": {
-    "@types/node": "25.0.0",
+    "@types/node": "25.2.3",
     "eslint-plugin-personnallinter": "git+ssh://git@github.com/Psychopoulet/eslint-plugin-personnallinter",
     "husky": "9.1.7",
     "mocha": "11.7.5",
@@ -71,6 +76,13 @@
   ],
   "author": "Sébastien VIDAL",
   "license": "ISC",
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run unit-tests"
+    }
+  },
 
   "homepage": "https://github.com/Psychopoulet/check-version-modules#readme",
   "repository": {
