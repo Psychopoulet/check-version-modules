@@ -8,7 +8,7 @@
 
 export default function sortDeps (dependencies: Array<iDep | iResult>): Array<iDep | iResult> {
 
-    return dependencies.sort((compared: iDep | iResult, compareTo: iDep | iResult) => {
+    return [ ...dependencies ].sort((compared: iDep | iResult, compareTo: iDep | iResult) => {
 
         // 1 - not dev, not optionnal
         // 2 - dev
