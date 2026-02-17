@@ -15,17 +15,17 @@
 
     // attributes
 
-        const _alreadyDownloaded: iModule[] = [];
+        const _alreadyDownloaded: Map<string, iModule> = new Map<string, iModule>();
 
 // module
 
 export default function downloadPackageData (packageName: string, npmrcFile: string): Promise<string> {
 
-    const searchedModule: iModule | undefined = _alreadyDownloaded.filter((m: iModule): boolean => {
-        return m.name === packageName;
-    }).shift();
+    if (_alreadyDownloaded.has(packageName)) {
+        return Promise.resolve((_alreadyDownloaded.get(packageName) as iModule).latestVersion);
+    }
 
-    return "undefined" !== typeof searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
+    return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
         downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
 
@@ -37,7 +37,7 @@ export default function downloadPackageData (packageName: string, npmrcFile: str
 
     }).then((latestVersion: string): string => {
 
-        _alreadyDownloaded.push({
+        _alreadyDownloaded.set(packageName, {
             "name": packageName,
             "latestVersion": latestVersion
         });
