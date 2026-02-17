@@ -388,7 +388,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, options).then((analyze) => {
+        return checkDependenciesUpdates(modules, options).then((analyze) => {
 
             strictEqual(analyze.result, true);
             strictEqual(analyze.results instanceof Array, true);
@@ -407,7 +407,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, options).then((analyze) => {
+        return checkDependenciesUpdates(modules, options).then((analyze) => {
 
             strictEqual(analyze.result, true);
             strictEqual(analyze.results instanceof Array, true);
@@ -426,7 +426,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, {
+        return checkDependenciesUpdates(modules, {
             ...options
         }).then((analyze) => {
 
