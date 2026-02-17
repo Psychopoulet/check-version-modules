@@ -1,5 +1,11 @@
 // types & interfaces
 
+    interface iPackageDeps {
+        "dependencies"?: Record<string, string>,
+        "devDependencies"?: Record<string, string>,
+        "optionalDependencies"?: Record<string, string>
+    }
+
     export interface iDep {
         "dev": boolean;
         "optional": boolean;
@@ -10,21 +16,25 @@
 
 // module
 
-export default function formateDeps (packageData: Record<string, object | string | number | boolean>, dev: boolean, optional: boolean): iDep[] {
+export default function formateDeps (packageData: Record<string, unknown>, dev: boolean, optional: boolean): iDep[] {
 
     let result: iDep[] = [];
 
-        if ("object" === typeof packageData.devDependencies) {
+        const {
+            dependencies,
+            devDependencies,
+            optionalDependencies
+        }: iPackageDeps = packageData as unknown as iPackageDeps;
 
-            const packageDependencies: Record<string, string> = packageData.dependencies as Record<string, string>;
+        if ("object" === typeof dependencies) {
 
-            result = Object.keys(packageDependencies).map((dependency: string): iDep => {
+            result = Object.keys(dependencies).map((dependency: string): iDep => {
 
                 return {
                     "dev": false,
                     "optional": false,
                     "name": dependency,
-                    "version": packageDependencies[dependency],
+                    "version": dependencies[dependency],
                     "path": dependency
                 };
 
@@ -32,17 +42,15 @@ export default function formateDeps (packageData: Record<string, object | string
 
         }
 
-        if (dev && "object" === typeof packageData.devDependencies) {
+        if (dev && "object" === typeof devDependencies) {
 
-            const packageDevDependencies: Record<string, string> = packageData.devDependencies as Record<string, string>;
-
-            result = result.concat(Object.keys(packageDevDependencies).map((dependency: string): iDep => {
+            result = result.concat(Object.keys(devDependencies).map((dependency: string): iDep => {
 
                 return {
                     "dev": true,
                     "optional": false,
                     "name": dependency,
-                    "version": packageDevDependencies[dependency],
+                    "version": devDependencies[dependency],
                     "path": "dev/" + dependency
                 };
 
@@ -50,17 +58,15 @@ export default function formateDeps (packageData: Record<string, object | string
 
         }
 
-        if (optional && "object" === typeof packageData.optionalDependencies) {
+        if (optional && optionalDependencies) {
 
-            const packageOptionalDependencies: Record<string, string> = packageData.optionalDependencies as Record<string, string>;
-
-            result = result.concat(Object.keys(packageOptionalDependencies).map((dependency: string): iDep => {
+            result = result.concat(Object.keys(optionalDependencies).map((dependency: string): iDep => {
 
                 return {
                     "dev": false,
                     "optional": true,
                     "name": dependency,
-                    "version": packageOptionalDependencies[dependency],
+                    "version": optionalDependencies[dependency],
                     "path": "optional/" + dependency
                 };
 
