@@ -1,1 +1,1 @@
-export default function checkBoolean(data: boolean | undefined): Promise<void>;
+export default function checkBoolean(data: unknown): Promise<void>;

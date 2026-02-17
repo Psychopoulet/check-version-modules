@@ -1,4 +1,4 @@
-export default function checkNonEmptyString (data: string): Promise<void> {
+export default function checkNonEmptyString (data: unknown): Promise<void> {
 
     if ("undefined" === typeof data) {
 
