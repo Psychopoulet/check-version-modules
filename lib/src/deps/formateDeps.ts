@@ -58,7 +58,7 @@ export default function formateDeps (packageData: Record<string, unknown>, dev: 
 
         }
 
-        if (optional && optionalDependencies) {
+        if (optional && "object" === typeof optionalDependencies) {
 
             result = result.concat(Object.keys(optionalDependencies).map((dependency: string): iDep => {
 
