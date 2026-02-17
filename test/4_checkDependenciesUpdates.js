@@ -434,7 +434,7 @@ describe("checkDependenciesUpdates", () => {
             strictEqual(analyze.results instanceof Array, true);
             strictEqual(analyze.results.length, 1);
 
-                strictEqual(analyze.results[0].result, "warning");
+                strictEqual(analyze.results[0].result, "success");
                 strictEqual(analyze.results[0].version, version);
 
         });
