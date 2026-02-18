@@ -11,7 +11,7 @@
 // consts
 
     const MAX_TIMEOUT = 10000;
-    const CURRENT_PUBLISHED_VERSION = "2.2.0";
+    const CURRENT_PUBLISHED_VERSION = "2.2.1";
 
 // private
 
@@ -388,7 +388,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, options).then((analyze) => {
+        return checkDependenciesUpdates(modules, options).then((analyze) => {
 
             strictEqual(analyze.result, true);
             strictEqual(analyze.results instanceof Array, true);
@@ -407,7 +407,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, options).then((analyze) => {
+        return checkDependenciesUpdates(modules, options).then((analyze) => {
 
             strictEqual(analyze.result, true);
             strictEqual(analyze.results instanceof Array, true);
@@ -426,7 +426,7 @@ describe("checkDependenciesUpdates", () => {
 
         const modules = _getModules();
             modules[0].version = version;
-        checkDependenciesUpdates(modules, {
+        return checkDependenciesUpdates(modules, {
             ...options
         }).then((analyze) => {
 
@@ -434,7 +434,7 @@ describe("checkDependenciesUpdates", () => {
             strictEqual(analyze.results instanceof Array, true);
             strictEqual(analyze.results.length, 1);
 
-                strictEqual(analyze.results[0].result, "warning");
+                strictEqual(analyze.results[0].result, "success");
                 strictEqual(analyze.results[0].version, version);
 
         });

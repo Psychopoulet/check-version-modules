@@ -6,11 +6,15 @@
 // types & interfaces
 
     // natives
-    import type { IncomingMessage } from "node:http";
+    import type { IncomingMessage, ClientRequest } from "node:http";
 
     // locals
     type iPackageData = Record<string, object | string | number | boolean>;
     type iDependencies = Record<string, string>;
+
+// consts
+
+    const DEFAULT_REGISTRY_TIMEOUT_MS: number = 30000;
 
 // module
 
@@ -18,7 +22,9 @@ export default function downloadPublicPackageLastVersion (packageName: string): 
 
     return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-        get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
+        const req: ClientRequest = get("https://registry.npmjs.org/" + packageName, (res: IncomingMessage): void => {
+
+            clearTimeout(timeoutId);
 
             if (200 !== res.statusCode) {
 
@@ -35,12 +41,22 @@ export default function downloadPublicPackageLastVersion (packageName: string): 
                 res.on("data", (chunk: string): void => {
                     rawData += chunk;
                 }).on("end", (): void => {
+                    clearTimeout(timeoutId);
                     resolve(rawData);
                 });
 
             }
 
-        }).on("error", reject);
+        });
+
+        const timeoutId: ReturnType<typeof setTimeout> = setTimeout((): void => {
+            req.destroy(new Error("Registry request timeout"));
+        }, DEFAULT_REGISTRY_TIMEOUT_MS);
+
+        req.on("error", (err: Error): void => {
+            clearTimeout(timeoutId);
+            reject(err);
+        });
 
     }).then((content: string) : Promise<iPackageData> => {
 

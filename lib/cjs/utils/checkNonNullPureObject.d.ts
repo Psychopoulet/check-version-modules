@@ -1,1 +1,1 @@
-export default function checkNonNullPureObject(data: object | null | undefined): Promise<void>;
+export default function checkNonNullPureObject(data: unknown): Promise<void>;

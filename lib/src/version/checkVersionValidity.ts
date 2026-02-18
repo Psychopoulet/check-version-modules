@@ -5,8 +5,8 @@
 
 // consts
 
-    const REGEX_LITTERAL: string = "^[~^]{0,1}([*x0-9]+){1}(.[*x0-9]+){0,1}(.[*x0-9]+){0,1}$";
-    const REGEX: RegExp = RegExp(REGEX_LITTERAL);
+    const REGEX_LITERAL: string = "^[~^]{0,1}([*x0-9]+){1}(.[*x0-9]+){0,1}(.[*x0-9]+){0,1}$";
+    const REGEX: RegExp = RegExp(REGEX_LITERAL);
 
 // module
 
@@ -17,7 +17,7 @@ export default function checkVersionValidity (version: string, strict: boolean =
         if (strict) {
 
             return REGEX.test(version) ? Promise.resolve("RUNNABLE") : Promise.reject(new Error(
-                "\"version\" parameter (\"" + version + "\") does not follow the allowed patterns (\"" + REGEX_LITTERAL + "\")"
+                "\"version\" parameter (\"" + version + "\") does not follow the allowed patterns (\"" + REGEX_LITERAL + "\")"
             ));
 
         }

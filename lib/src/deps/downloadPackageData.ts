@@ -1,6 +1,7 @@
 // deps
 
     // locals
+    import checkPackageName from "./downloadpackage/checkPackageName";
     import downloadPublicPackageLastVersion from "./downloadpackage/downloadPublicPackageLastVersion";
     import downloadPrivatePackageLastVersion from "./downloadpackage/downloadPrivatePackageLastVersion";
 
@@ -15,34 +16,38 @@
 
     // attributes
 
-        const _alreadyDownloaded: iModule[] = [];
+        const _alreadyDownloaded: Map<string, iModule> = new Map<string, iModule>();
 
 // module
 
 export default function downloadPackageData (packageName: string, npmrcFile: string): Promise<string> {
 
-    const searchedModule: iModule | undefined = _alreadyDownloaded.filter((m: iModule): boolean => {
-        return m.name === packageName;
-    }).shift();
+    if (_alreadyDownloaded.has(packageName)) {
+        return Promise.resolve((_alreadyDownloaded.get(packageName) as iModule).latestVersion);
+    }
 
-    return "undefined" !== typeof searchedModule ? Promise.resolve(searchedModule.latestVersion) : new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
+    return checkPackageName(packageName).then(() => {
 
-        downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
+        return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-            downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): void => {
-                return reject(err);
+            downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
+
+                downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): void => {
+                    return reject(err);
+                });
+
             });
 
+        }).then((latestVersion: string): string => {
+
+            _alreadyDownloaded.set(packageName, {
+                "name": packageName,
+                "latestVersion": latestVersion
+            });
+
+            return latestVersion;
+
         });
-
-    }).then((latestVersion: string): string => {
-
-        _alreadyDownloaded.push({
-            "name": packageName,
-            "latestVersion": latestVersion
-        });
-
-        return latestVersion;
 
     });
 
