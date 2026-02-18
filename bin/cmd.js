@@ -76,7 +76,7 @@ Promise.resolve().then(() => {
 
                     case "--npmrcFile":
 
-                        if (i + 1 < ARGS.length) {
+                        if (i + 1 < ARGS.length && !String(ARGS[i + 1]).startsWith("--")) {
                             options.npmrcFile = String(ARGS[i + 1]);
                         }
 
@@ -84,7 +84,7 @@ Promise.resolve().then(() => {
 
                     case "--file":
 
-                        if (i + 1 < ARGS.length) {
+                        if (i + 1 < ARGS.length && !String(ARGS[i + 1]).startsWith("--")) {
                             file = String(ARGS[i + 1]);
                         }
 
