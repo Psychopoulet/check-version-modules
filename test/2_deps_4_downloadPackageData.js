@@ -2,7 +2,7 @@
 
     // natives
     const { join } = require("node:path");
-    const { strictEqual } = require("node:assert");
+    const { strictEqual, ok } = require("node:assert");
 
     // internal
     const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
@@ -22,7 +22,7 @@ describe("downloadPackageData", () => {
         }).catch((err) => {
 
             strictEqual(typeof err, "object");
-            strictEqual(err instanceof Error, true);
+            ok(err instanceof Error);
 
             done();
 
@@ -33,6 +33,14 @@ describe("downloadPackageData", () => {
     it("should test current module", () => {
 
         return downloadPackageData("check-version-modules", "");
+
+    }).timeout(MAX_TIMEOUT);
+
+    it("should test private module", () => {
+
+        return downloadPackageData("check-version-modules", ".npmrc").then(() => {
+            return downloadPackageData("check-version-modules", ".npmrc");
+        });
 
     }).timeout(MAX_TIMEOUT);
 
