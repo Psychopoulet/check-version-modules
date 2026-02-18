@@ -12,30 +12,9 @@
     type iPackageData = Record<string, object | string | number | boolean>;
     type iDependencies = Record<string, string>;
 
-// private
-
-    function _isValidPackageName (name: string): boolean {
-
-        const s: string = name.trim();
-        return -1 === s.indexOf("..")
-            && -1 === s.indexOf("\\")
-            && !/\r|\n/.test(s);
-
-    }
-
 // module
 
 export default function downloadPublicPackageLastVersion (packageName: string): Promise<string> {
-
-    if ("string" !== typeof packageName) {
-        return Promise.reject(new Error("Package name is not a string"));
-    }
-    else if ("" === packageName.trim()) {
-        return Promise.reject(new Error("Package name is empty"));
-    }
-    else if (!_isValidPackageName(packageName)) {
-        return Promise.reject(new Error("Invalid package name \"" + packageName + "\" (forbidden: empty, \"..\", \"/\", \"\\\\\", newlines)"));
-    }
 
     return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 

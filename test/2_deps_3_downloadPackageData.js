@@ -5,7 +5,7 @@
     const { strictEqual, ok } = require("node:assert");
 
     // internal
-    const downloadPublicPackageLastVersion = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadpackage", "downloadPublicPackageLastVersion.js")).default;
+    const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
 
 // consts
 
@@ -13,11 +13,11 @@
 
 // tests
 
-describe("downloadPublicPackageLastVersion", () => {
+describe("downloadPackageData", () => {
 
     it("should reject invalid package name type", (done) => {
 
-        downloadPublicPackageLastVersion(false).then(() => {
+        downloadPackageData(false).then(() => {
             done(new Error("There is no generated Error"));
         }, (err) => {
 
@@ -33,7 +33,7 @@ describe("downloadPublicPackageLastVersion", () => {
 
     it("should reject empty package name", (done) => {
 
-        downloadPublicPackageLastVersion("").then(() => {
+        downloadPackageData("").then(() => {
             done(new Error("There is no generated Error"));
         }, (err) => {
 
@@ -49,7 +49,7 @@ describe("downloadPublicPackageLastVersion", () => {
 
     it("should reject invalid package name with \"..\"", (done) => {
 
-        downloadPublicPackageLastVersion("some..pkg").then(() => {
+        downloadPackageData("some..pkg").then(() => {
             done(new Error("There is no generated Error"));
         }, (err) => {
 
@@ -65,7 +65,7 @@ describe("downloadPublicPackageLastVersion", () => {
 
     it("should reject invalid package name with backslash", (done) => {
 
-        downloadPublicPackageLastVersion("pkg\\name").then(() => {
+        downloadPackageData("pkg\\name").then(() => {
             done(new Error("There is no generated Error"));
         }, (err) => {
 
@@ -81,7 +81,7 @@ describe("downloadPublicPackageLastVersion", () => {
 
     it("should reject invalid package name with newline", (done) => {
 
-        downloadPublicPackageLastVersion("pkg\nname").then(() => {
+        downloadPackageData("pkg\nname").then(() => {
             done(new Error("There is no generated Error"));
         }, (err) => {
 
@@ -97,7 +97,7 @@ describe("downloadPublicPackageLastVersion", () => {
 
     it("should test inexistant module", (done) => {
 
-        downloadPublicPackageLastVersion("zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty").then(() => {
+        downloadPackageData("zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty", "").then(() => {
             done(new Error("There is no generated Error"));
         }).catch((err) => {
 
@@ -106,6 +106,28 @@ describe("downloadPublicPackageLastVersion", () => {
 
             done();
 
+        });
+
+    }).timeout(MAX_TIMEOUT);
+
+    it("should test current module", () => {
+
+        return downloadPackageData("check-version-modules", "");
+
+    }).timeout(MAX_TIMEOUT);
+
+    it("should test private module", () => {
+
+        return downloadPackageData("check-version-modules", ".npmrc").then(() => {
+            return downloadPackageData("check-version-modules", ".npmrc");
+        });
+
+    }).timeout(MAX_TIMEOUT);
+
+    it("should test mutliple module", () => {
+
+        return downloadPackageData("check-version-modules", "").then(() => {
+            return downloadPackageData("check-version-modules", "");
         });
 
     }).timeout(MAX_TIMEOUT);

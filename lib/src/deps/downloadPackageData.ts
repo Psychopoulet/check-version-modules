@@ -1,6 +1,7 @@
 // deps
 
     // locals
+    import checkPackageName from "./downloadpackage/checkPackageName";
     import downloadPublicPackageLastVersion from "./downloadpackage/downloadPublicPackageLastVersion";
     import downloadPrivatePackageLastVersion from "./downloadpackage/downloadPrivatePackageLastVersion";
 
@@ -25,24 +26,28 @@ export default function downloadPackageData (packageName: string, npmrcFile: str
         return Promise.resolve((_alreadyDownloaded.get(packageName) as iModule).latestVersion);
     }
 
-    return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
+    return checkPackageName(packageName).then(() => {
 
-        downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
+        return new Promise((resolve: (content: string) => void, reject: (err: Error) => void): void => {
 
-            downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): void => {
-                return reject(err);
+            downloadPublicPackageLastVersion(packageName).then(resolve).catch((err: Error): void => {
+
+                downloadPrivatePackageLastVersion(packageName, npmrcFile).then(resolve).catch((): void => {
+                    return reject(err);
+                });
+
             });
 
+        }).then((latestVersion: string): string => {
+
+            _alreadyDownloaded.set(packageName, {
+                "name": packageName,
+                "latestVersion": latestVersion
+            });
+
+            return latestVersion;
+
         });
-
-    }).then((latestVersion: string): string => {
-
-        _alreadyDownloaded.set(packageName, {
-            "name": packageName,
-            "latestVersion": latestVersion
-        });
-
-        return latestVersion;
 
     });
 
