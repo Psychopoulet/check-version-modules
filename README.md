@@ -109,11 +109,7 @@ checker("./package.json").then((analyze) => {
 ## Tests
 
 ```bash
-$ npm run-script tests
-$ git clone git://github.com/Psychopoulet/check-version-modules.git
-$ cd ./check-version-modules
-$ npm install
-$ npm run-script tests
+$ npm run tests
 ```
 
 ## License
