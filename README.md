@@ -2,7 +2,6 @@
 Check modules's version for the package.
 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
-
 [![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
 [![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
 
