@@ -3,16 +3,16 @@ Check modules's version for the package.
 
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 
+[![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
+[![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
+
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
-
-[![Issues](https://img.shields.io/github/issues/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/issues)
-[![Pull requests](https://img.shields.io/github/issues-pr/Psychopoulet/check-version-modules.svg)](https://github.com/Psychopoulet/check-version-modules/pulls)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 
 [![Known Vulnerabilities](https://snyk.io/test/github/Psychopoulet/check-version-modules/badge.svg)](https://snyk.io/test/github/Psychopoulet/check-version-modules)
-[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Psychopoulet_check-version-modules&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Psychopoulet_check-version-modules)
 
 ## Installation
 
