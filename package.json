@@ -33,7 +33,7 @@
     "build": "npm run build-back",
 
     "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib/src\" --no-dev --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
-    "check-updates": "node ./bin/cmd.js",
+    "check-updates": "node ./bin/cmd.js --no-fail-at-major --fail-at-minor --fail-at-patch",
     "unit-tests": "npx mocha",
     "unit-tests-local": "npm run build && npx nyc --reporter=html --reporter=text mocha",
 
