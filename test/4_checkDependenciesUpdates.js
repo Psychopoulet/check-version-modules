@@ -11,7 +11,7 @@
 // consts
 
     const MAX_TIMEOUT = 10000;
-    const CURRENT_PUBLISHED_VERSION = "2.2.1";
+    const CURRENT_PUBLISHED_VERSION = "2.2.2";
 
 // private
 
