@@ -46,7 +46,7 @@ export default function checkVersionModule (source: string | tPackageType, opts?
 
     return checkAndFormateOptions(opts).then((options: iFormattedOptions): Promise<iAnalyze> => {
 
-        return Promise.resolve().then(() => {
+        return Promise.resolve().then((): Promise<tPackageType> | tPackageType => {
 
             if ("string" === typeof source) {
 
@@ -61,12 +61,12 @@ export default function checkVersionModule (source: string | tPackageType, opts?
             }
             else if (isPlainObject(source)) {
 
-                return Promise.resolve(source);
+                return source;
 
             }
             else {
 
-                return Promise.reject(new TypeError("\"source\" parameter is not a string or a package type"));
+                throw new TypeError("\"source\" parameter is not a string or a package type");
 
             }
 

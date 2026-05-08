@@ -76,10 +76,10 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
                     return downloadPackageData(dependency.name, options.npmrcFile).then((latest: string): void => {
 
                         const latestVersions: number[] = latest.split(".").map((v: string): number => {
-                            return parseInt(v, 10);
+                            return Number.parseInt(v, 10);
                         });
                         const currentVersions: Array<"x" | number> = formatedVersion.split(".").map((v: string): "x" | number => {
-                            return "x" === v ? v : parseInt(v, 10);
+                            return "x" === v ? v : Number.parseInt(v, 10);
                         });
 
                         let failed: boolean = false;

@@ -3,7 +3,7 @@ export default function formateVersion (_version: string): string {
     const normalizedVersion: string = _version.trim().toLowerCase().replace(/\*/gm, "x");
 
     const segments: Array<string | number> = normalizedVersion.replace("^", "").replace("~", "").split(".").map((v: string): string | number => {
-        return "x" === v ? "x" : parseInt(v, 10);
+        return "x" === v ? "x" : Number.parseInt(v, 10);
     });
 
     // "x", "x.n", "x.n.n"

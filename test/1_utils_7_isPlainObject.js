@@ -23,7 +23,7 @@ describe("isPlainObject", () => {
 
         it("should return false for a number", () => {
             strictEqual(isPlainObject(0), false);
-            strictEqual(isPlainObject(NaN), false);
+            strictEqual(isPlainObject(Number.NaN), false);
         });
 
         it("should return false for a string", () => {
@@ -45,7 +45,7 @@ describe("isPlainObject", () => {
         });
 
         it("should return false for a function", () => {
-            strictEqual(isPlainObject(parseInt), false);
+            strictEqual(isPlainObject(Number.parseInt), false);
             strictEqual(isPlainObject(() => {
                 return 1;
             }), false);
