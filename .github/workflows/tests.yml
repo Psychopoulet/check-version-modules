@@ -73,16 +73,14 @@ jobs:
       - name: Run linters
         run: npm run lint
 
-      - name: Check requires (used-deps-analyzer)
-        run: npm run check-requires
-
-      # -- inversion for this package --
       - name: Run build
         run: npm run build
 
+      - name: Check requires (used-deps-analyzer)
+        run: npm run check-requires
+
       - name: Check updates (check-version-modules)
         run: npm run check-updates
-      # -- inversion for this package --
 
       - name: Run unit tests
         run: npm run unit-tests
