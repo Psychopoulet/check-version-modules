@@ -51,11 +51,9 @@ export default function checkVersionModule (source: string | tPackageType, opts?
             if ("string" === typeof source) {
 
                 return checkFile(source).then(() => {
-
-                    return readFile(source, "utf-8").then((content: string): tPackageType => {
-                        return JSON.parse(content) as tPackageType;
-                    });
-
+                    return readFile(source, "utf-8");
+                }).then((content: string): tPackageType => {
+                    return JSON.parse(content) as tPackageType;
                 });
 
             }
