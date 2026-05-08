@@ -5,15 +5,21 @@
 // deps
 
     // locals
-    import checker = require("../../lib/cjs/main.cjs");
+    import checker from "../../lib/cjs/main.cjs";
 
 // test
 
-checker("./package.json").then((valid: {
-    "result": boolean;
-}): void => {
+checker("./package.json").then((result) => {
 
-  console.log(valid ? "ok": "old versions detected");
+  console.log(result.result ? "ok": "old versions detected");
+
+  return checker("./package.json");
+
+}).then((result): void => {
+
+  console.log(result.result ? "ok": "old versions detected");
+
+}).then((): void => {
 
   process.exitCode = 0;
   process.exit(0);

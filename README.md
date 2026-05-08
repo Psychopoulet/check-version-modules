@@ -22,7 +22,8 @@ $ npm install check-version-modules
 ## Features
 
   * Extract package's dependencies / dev dependencies / optional dependencies
-  * Extract there versions
+  * source can be a package.json file (with any name) or directly a package content
+  * Extract their versions
   * Compare them to the latest package's version
 
 ## Doc
@@ -47,7 +48,7 @@ Does support following patterns:
 
 ### Methods
 
-  * ``` (file: string, options?: iOptions) => Promise<boolean> ``` extract & compare data
+  * ``` (source: string | Record<string, object | string | number | boolean>, options?: iOptions) => Promise<boolean> ``` extract & compare data
 
 ### Interfaces
 
@@ -100,6 +101,20 @@ checker("/etc/tests/package.json", {
 }).catch((err) => {
   console.error(err);
 });
+
+checker({
+  "dependencies": {
+    "test": "1.0.0"
+  }
+}, {
+  "failAtPatch": true,
+  "dev": false,
+  "optional": false
+}).then((analyze) => {
+  console.log(analyze.result ? "ok": "old versions detected");
+}).catch((err) => {
+  console.error(err);
+});
 ```
 
 ### Typescript
@@ -108,6 +123,16 @@ checker("/etc/tests/package.json", {
 import checker = require("check-version-modules");
 
 checker("./package.json").then((analyze) => {
+  console.log(analyze.result ? "ok": "old versions detected");
+}).catch((err) => {
+  console.error(err);
+});
+
+checker({
+  "dependencies": {
+    "test": "1.0.0"
+  }
+}).then((analyze) => {
   console.log(analyze.result ? "ok": "old versions detected");
 }).catch((err) => {
   console.error(err);
