@@ -176,8 +176,9 @@ Promise.resolve().then(() => {
 
 }).catch((err) => {
 
-    (0, console).log("");
-    (0, console).error(err.message ? err.message : err);
+    const message = err.message ? err.message : err;
+
+    (0, console).error(colors && colors.red ? colors.red(message) : message);
 
     (0, process).exitCode = 1;
     (0, process).exit(1);
