@@ -32,12 +32,13 @@
     "build-back": "npm run clean-back && npx tsc --project ./tsconfig.json",
     "build": "npm run build-back",
 
+    "check-node-engine": "npx check-node-engine",
     "check-requires": "npx used-deps-analyzer \"./package.json\" \"./lib/src\" --no-dev --misscalled \"{ \\\"module\\\": \\\"colors\\\", \\\"call\\\": \\\"colors/safe\\\" }\"",
     "check-updates": "node ./bin/cmd.js --no-fail-at-major --fail-at-minor --fail-at-patch",
     "unit-tests": "npx mocha",
     "unit-tests-local": "npm run build && npx nyc --reporter=html --reporter=text mocha",
 
-    "tests": "npm run lint && npm run check-requires && npm run check-updates && npm run build && npm run unit-tests-local"
+    "tests": "npm run lint && npm run check-node-engine && npm run check-requires && npm run check-updates && npm run build && npm run unit-tests-local"
 
   },
 
@@ -49,12 +50,13 @@
     "/lib/cjs"
   ],
   "engines": {
-    "node": ">=22.22.0"
+    "node": ">=22.22.3"
   },
 
   "dependencies": {},
   "devDependencies": {
     "@types/node": "25.6.2",
+    "check-node-engine": "1.0.0",
     "eslint-plugin-personnallinter": "git+ssh://git@github.com/Psychopoulet/eslint-plugin-personnallinter",
     "husky": "9.1.7",
     "mocha": "11.7.5",
