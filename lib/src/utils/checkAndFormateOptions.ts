@@ -2,6 +2,7 @@
 
     // locals
     import checkBoolean from "./checkBoolean";
+    import checkNpmrcFile from "./checkNpmrcFile";
     import checkNonNullPureObject from "./checkNonNullPureObject";
 
 // types & interfaces
@@ -50,6 +51,10 @@ export default function checkAndFormateOptions (options: iOptions = DEFAULT_OPTI
     }).then((): Promise<void> => {
 
         return checkBoolean(options.optional);
+
+    }).then((): Promise<void> => {
+
+        return checkNpmrcFile(options.npmrcFile);
 
     }).then((): Promise<iFormattedOptions> => {
 

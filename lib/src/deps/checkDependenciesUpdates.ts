@@ -1,15 +1,19 @@
 // deps
 
+    // externals
+    import semver from "semver";
+
     // locals
 
     import sortDeps from "./sortDeps";
 
     import downloadPackageData from "./downloadPackageData";
 
-    import getFormatedTime from "../utils/getFormatedTime";
+    import getFormattedTime from "../utils/getFormattedTime";
 
     import checkVersionValidity from "../version/checkVersionValidity";
-    import checkAndFormateVersion from "../version/checkAndFormateVersion";
+    import toSemverRange from "../version/toSemverRange";
+    import getUpdateFailureLevel from "../version/getUpdateFailureLevel";
 
 // types & interfaces
 
@@ -50,7 +54,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                     results.push({
                         ...dependency,
-                        "time": getFormatedTime(),
+                        "time": getFormattedTime(),
                         "result": "warning",
                         "message": "not managed " + dependency.version
                     });
@@ -60,7 +64,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                     results.push({
                         ...dependency,
-                        "time": getFormatedTime(),
+                        "time": getFormattedTime(),
                         "result": "success",
                         "message": dependency.version
                     });
@@ -71,77 +75,41 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
             }).then((runCheck: boolean): Promise<void> => {
 
-                return !runCheck ? Promise.resolve() : checkAndFormateVersion(dependency.version).then((formatedVersion: string): Promise<void> => {
+                return !runCheck ? Promise.resolve() : checkVersionValidity(dependency.version).then((): Promise<void> => {
 
                     return downloadPackageData(dependency.name, options.npmrcFile).then((latest: string): void => {
 
-                        const latestVersions: number[] = latest.split(".").map((v: string): number => {
-                            return Number.parseInt(v, 10);
-                        });
-                        const currentVersions: Array<"x" | number> = formatedVersion.split(".").map((v: string): "x" | number => {
-                            return "x" === v ? v : Number.parseInt(v, 10);
-                        });
+                        const range: string = toSemverRange(dependency.version);
 
-                        let failed: boolean = false;
-
-                        if ("x" !== currentVersions[0] && latestVersions[0] > currentVersions[0]) {
-
-                            failed = true;
-
-                            if (options.failAtMajor) {
-                                valid = false;
-                            }
+                        if (semver.satisfies(latest, range)) {
 
                             results.push({
                                 ...dependency,
-                                "time": getFormatedTime(),
-                                "result": "fail_major",
-                                "message": dependency.version + " < " + latest
-                            });
-
-                        }
-
-                        if (!failed && "x" !== currentVersions[1] && latestVersions[1] > currentVersions[1]) {
-
-                            failed = true;
-
-                            if (options.failAtMinor) {
-                                valid = false;
-                            }
-
-                            results.push({
-                                ...dependency,
-                                "time": getFormatedTime(),
-                                "result": "fail_minor",
-                                "message": dependency.version + " < " + latest
-                            });
-
-                        }
-
-                        if (!failed && "x" !== currentVersions[2] && latestVersions[2] > currentVersions[2]) {
-
-                            failed = true;
-
-                            if (options.failAtPatch) {
-                                valid = false;
-                            }
-
-                            results.push({
-                                ...dependency,
-                                "time": getFormatedTime(),
-                                "result": "fail_patch",
-                                "message": dependency.version + " < " + latest
-                            });
-
-                        }
-
-                        if (!failed) {
-
-                            results.push({
-                                ...dependency,
-                                "time": getFormatedTime(),
+                                "time": getFormattedTime(),
                                 "result": "success",
                                 "message": "Ok"
+                            });
+
+                        }
+                        else {
+
+                            const failureLevel: "fail_major" | "fail_minor" | "fail_patch" = getUpdateFailureLevel(dependency.version, latest);
+
+                            if ("fail_major" === failureLevel && options.failAtMajor) {
+                                valid = false;
+                            }
+                            else if ("fail_minor" === failureLevel && options.failAtMinor) {
+                                valid = false;
+                            }
+                            else if ("fail_patch" === failureLevel && options.failAtPatch) {
+                                valid = false;
+                            }
+
+                            results.push({
+                                ...dependency,
+                                "time": getFormattedTime(),
+                                "result": failureLevel,
+                                "message": dependency.version + " < " + latest
                             });
 
                         }
@@ -150,7 +118,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                         results.push({
                             ...dependency,
-                            "time": getFormatedTime(),
+                            "time": getFormattedTime(),
                             "result": "warning",
                             "message": err.message
                         });
