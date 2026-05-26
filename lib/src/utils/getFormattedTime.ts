@@ -5,7 +5,7 @@
 
 // module
 
-export default function getFormatedTime (): string {
+export default function getFormattedTime (): string {
 
     const date: Date = new Date();
 

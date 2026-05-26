@@ -9,7 +9,7 @@
 
     import downloadPackageData from "./downloadPackageData";
 
-    import getFormatedTime from "../utils/getFormatedTime";
+    import getFormattedTime from "../utils/getFormattedTime";
 
     import checkVersionValidity from "../version/checkVersionValidity";
     import toSemverRange from "../version/toSemverRange";
@@ -54,7 +54,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                     results.push({
                         ...dependency,
-                        "time": getFormatedTime(),
+                        "time": getFormattedTime(),
                         "result": "warning",
                         "message": "not managed " + dependency.version
                     });
@@ -64,7 +64,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                     results.push({
                         ...dependency,
-                        "time": getFormatedTime(),
+                        "time": getFormattedTime(),
                         "result": "success",
                         "message": dependency.version
                     });
@@ -85,7 +85,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                             results.push({
                                 ...dependency,
-                                "time": getFormatedTime(),
+                                "time": getFormattedTime(),
                                 "result": "success",
                                 "message": "Ok"
                             });
@@ -107,7 +107,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                             results.push({
                                 ...dependency,
-                                "time": getFormatedTime(),
+                                "time": getFormattedTime(),
                                 "result": failureLevel,
                                 "message": dependency.version + " < " + latest
                             });
@@ -118,7 +118,7 @@ export default function checkDependenciesUpdates (dependencies: iDep[], options:
 
                         results.push({
                             ...dependency,
-                            "time": getFormatedTime(),
+                            "time": getFormattedTime(),
                             "result": "warning",
                             "message": err.message
                         });

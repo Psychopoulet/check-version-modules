@@ -48,7 +48,7 @@ Does support following patterns:
 
 ### Methods
 
-  * ``` (source: string | Record<string, object | string | number | boolean>, options?: iOptions) => Promise<boolean> ``` extract & compare data
+  * ``` (source: string | Record<string, object | string | number | boolean>, options?: iOptions) => Promise<iAnalyze> ``` extract & compare data
 
 ### Interfaces
 
@@ -59,7 +59,26 @@ interface iOptions {
   "failAtPatch"?: boolean; // default: false => if no pattern, used for the returned boolean
   "dev"?: boolean; // default: true => analyze dev deps too
   "optional"?: boolean; // default: true => analyze optional deps too
-  "npmrcFile"?: string; // default: true => specify a npm configuration file (for private repositories)
+  "npmrcFile"?: string; // default: "" => specify a npm configuration file (for private repositories)
+}
+
+interface interface iAnalyze {
+    "result": boolean;
+    "results": iResult[];
+}
+
+interface iResult extends iDep {
+    "time": string;
+    "result": "success" | "warning" | "fail_patch" | "fail_minor" | "fail_major";
+    "message": string;
+}
+
+interface iDep {
+    "dev": boolean;
+    "optional": boolean;
+    "name": string;
+    "version": string;
+    "path": string;
 }
 ```
 
