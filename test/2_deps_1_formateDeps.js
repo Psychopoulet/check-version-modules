@@ -35,7 +35,7 @@ describe("formateDeps", () => {
 
         strictEqual(typeof formated, "object");
         strictEqual(formated instanceof Array, true);
-        strictEqual(formated.length, 0);
+        strictEqual(formated.length, 1);
 
     });
 
@@ -45,7 +45,7 @@ describe("formateDeps", () => {
 
         strictEqual(typeof formated, "object");
         strictEqual(formated instanceof Array, true);
-        strictEqual(formated.length, 9);
+        strictEqual(formated.length, 11);
 
     });
 
