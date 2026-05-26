@@ -11,7 +11,7 @@
 // consts
 
     const MAX_TIMEOUT = 10000;
-    const CURRENT_PUBLISHED_VERSION = "2.3.0";
+    const CURRENT_PUBLISHED_VERSION = "2.4.0";
 
 // private
 
@@ -211,7 +211,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "2.3";
+            const version = "2.4";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -228,7 +228,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "2.3.x";
+            const version = "2.4.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -325,7 +325,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "~2.3.0";
+            const version = "~2.4.0";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -342,7 +342,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "~2.3.x";
+            const version = "~2.4.x";
 
             const modules = _getModules();
                 modules[0].version = version;

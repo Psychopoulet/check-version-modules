@@ -19,7 +19,7 @@
     // locals
     const colorizeFormattedTime = require(join(__dirname, "colorizeFormattedTime.js"));
     const checker = require(join(__dirname, "..", "lib", "cjs", "main.cjs"));
-    const getFormatedTime = require(join(__dirname, "..", "lib", "cjs", "utils", "getFormatedTime.js"));
+    const getFormattedTime = require(join(__dirname, "..", "lib", "cjs", "utils", "getFormattedTime.js"));
 
 // consts
 
@@ -104,7 +104,7 @@ Promise.resolve().then(() => {
             file = join((0, process).cwd(), "package.json");
         }
 
-    (0, console).log(getFormatedTime.default(), file);
+    (0, console).log(getFormattedTime.default(), file);
 
     return errors.length
         ? Promise.reject(new Error(errors.join(EOL)))
@@ -176,8 +176,9 @@ Promise.resolve().then(() => {
 
 }).catch((err) => {
 
-    (0, console).log("");
-    (0, console).error(err.message ? err.message : err);
+    const message = err.message ? err.message : err;
+
+    (0, console).error(colors && colors.red ? colors.red(message) : message);
 
     (0, process).exitCode = 1;
     (0, process).exit(1);
