@@ -4,30 +4,40 @@
     import semver from "semver";
 
     // locals
-    import formateVersion from "./formateVersion";
+    import toSemverRange from "./toSemverRange";
 
 // module
 
 export default function getUpdateFailureLevel (version: string, latest: string): "fail_major" | "fail_minor" | "fail_patch" {
 
-    const currentVersions: Array<"x" | number> = formateVersion(version).split(".").map((v: string): "x" | number => {
-        return "x" === v ? v : Number.parseInt(v, 10);
-    });
+    const range: string = toSemverRange(version);
+    const latestSemver: semver.SemVer | null = semver.parse(latest) ?? semver.coerce(latest);
 
-    const latestVersion: semver.SemVer | null = semver.parse(latest);
-
-    if (null === latestVersion) {
+    if (null === latestSemver) {
         return "fail_patch";
     }
 
-    if ("x" !== currentVersions[0] && latestVersion.major > currentVersions[0]) {
-        return "fail_major";
+    const minVersion: semver.SemVer | null = semver.minVersion(range);
+
+    if (null === minVersion) {
+        return "fail_patch";
     }
 
-    if ("x" !== currentVersions[1] && latestVersion.minor > currentVersions[1]) {
-        return "fail_minor";
-    }
+    const diff: string | null = semver.diff(minVersion, latestSemver);
 
-    return "fail_patch";
+    switch (diff) {
+
+        case "major":
+        case "premajor":
+            return "fail_major";
+
+        case "minor":
+        case "preminor":
+            return "fail_minor";
+
+        default:
+            return "fail_patch";
+
+    }
 
 }

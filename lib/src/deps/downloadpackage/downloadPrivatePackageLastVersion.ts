@@ -33,10 +33,13 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
             exec("npm init --yes", {
                 "cwd": packageDir,
                 "windowsHide": true
-            }, (err: Error | null): void => {
+            }, (err: Error | null, stdout: string, stderr: string): void => {
 
                 if (err) {
                     reject(err);
+                }
+                else if (stderr) {
+                    reject(new Error(stderr));
                 }
                 else {
                     resolve();
@@ -53,13 +56,10 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
             execFile("npm", [ "install", packageName ], {
                 "cwd": packageDir,
                 "windowsHide": true
-            }, (err: Error | null, stdout: string, stderr: string): void => {
+            }, (err: Error | null): void => {
 
                 if (err) {
                     reject(err);
-                }
-                else if (stderr) {
-                    reject(new Error(stderr));
                 }
                 else {
                     resolve();
