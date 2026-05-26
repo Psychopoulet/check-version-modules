@@ -62,7 +62,7 @@ interface iOptions {
   "npmrcFile"?: string; // default: "" => specify a npm configuration file (for private repositories)
 }
 
-interface interface iAnalyze {
+interface iAnalyze {
     "result": boolean;
     "results": iResult[];
 }
