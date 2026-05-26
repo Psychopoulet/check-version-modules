@@ -20,6 +20,8 @@ describe("checkAndFormateOptions", () => {
             strictEqual(options.failAtMinor, true);
             strictEqual(options.failAtPatch, false);
             strictEqual(options.dev, true);
+            strictEqual(options.optional, true);
+            strictEqual(options.npmrcFile, "");
 
         });
 
@@ -93,7 +95,7 @@ describe("checkAndFormateOptions", () => {
 
     });
 
-    it("should test valid file", () => {
+    it("should test valid options", () => {
 
         return checkAndFormateOptions({
             "failAtMajor": false,
@@ -107,6 +109,53 @@ describe("checkAndFormateOptions", () => {
             strictEqual(options.failAtMinor, false);
             strictEqual(options.failAtPatch, true);
             strictEqual(options.dev, false);
+
+        });
+
+    });
+
+    it("should test with wrong npmrcFile type", (done) => {
+
+        checkAndFormateOptions({
+            "npmrcFile": false
+        }).then(() => {
+            done(new Error("There is no generated Error"));
+        }).catch((err) => {
+
+            strictEqual(typeof err, "object");
+            strictEqual(err instanceof TypeError, true);
+            strictEqual(err.message, "\"npmrcFile\" parameter is not a string");
+
+            done();
+
+        });
+
+    });
+
+    it("should test with invalid npmrcFile path", (done) => {
+
+        checkAndFormateOptions({
+            "npmrcFile": "not-a-valid-npmrc-file"
+        }).then(() => {
+            done(new Error("There is no generated Error"));
+        }).catch((err) => {
+
+            strictEqual(typeof err, "object");
+            strictEqual(err instanceof Error, true);
+
+            done();
+
+        });
+
+    });
+
+    it("should test with valid npmrcFile", () => {
+
+        return checkAndFormateOptions({
+            "npmrcFile": __filename
+        }).then((options) => {
+
+            strictEqual(options.npmrcFile, __filename);
 
         });
 
