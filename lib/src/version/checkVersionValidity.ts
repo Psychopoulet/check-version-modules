@@ -3,10 +3,12 @@
     // externals
     import checkNonEmptyString from "../utils/checkNonEmptyString";
 
+    // locals
+    import { isSupportedVersionSyntax } from "./toSemverRange";
+
 // consts
 
-    const REGEX_LITERAL: string = "^[~^]{0,1}([*x0-9]+){1}(.[*x0-9]+){0,1}(.[*x0-9]+){0,1}$";
-    const REGEX: RegExp = RegExp(REGEX_LITERAL);
+    const ALLOWED_VERSIONS_LITERAL: string = "valid semver range (^, ~, x, *, n, n.n, n.n.n, ...)";
 
 // module
 
@@ -16,8 +18,8 @@ export default function checkVersionValidity (version: string, strict: boolean =
 
         if (strict) {
 
-            return REGEX.test(version) ? Promise.resolve("RUNNABLE") : Promise.reject(new Error(
-                "\"version\" parameter (\"" + version + "\") does not follow the allowed patterns (\"" + REGEX_LITERAL + "\")"
+            return isSupportedVersionSyntax(version) ? Promise.resolve("RUNNABLE") : Promise.reject(new Error(
+                "\"version\" parameter (\"" + version + "\") does not follow the allowed patterns (\"" + ALLOWED_VERSIONS_LITERAL + "\")"
             ));
 
         }
@@ -28,7 +30,7 @@ export default function checkVersionValidity (version: string, strict: boolean =
         }
         else {
 
-            return REGEX.test(version) ? Promise.resolve("RUNNABLE") : Promise.resolve("NOT_RUNNABLE");
+            return isSupportedVersionSyntax(version) ? Promise.resolve("RUNNABLE") : Promise.resolve("NOT_RUNNABLE");
 
         }
 

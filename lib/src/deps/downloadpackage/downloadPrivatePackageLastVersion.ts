@@ -1,5 +1,8 @@
 // deps
 
+    // externals
+    import semver from "semver";
+
     // natives
     import { basename, join } from "node:path";
     import { mkdir, copyFile, readFile, rm } from "node:fs/promises";
@@ -87,9 +90,15 @@ export default function downloadPrivatePackageLastVersion (packageName: string, 
 
     }).then((deps: iDependencies): Promise<string> => {
 
-        return !deps[packageName]
-            ? Promise.reject(new Error("\"" + packageName + "\" installation does not get \"" + packageName + "\" dependency"))
-            : Promise.resolve(deps[packageName].replace("^", "").replace("~", ""));
+        if (!deps[packageName]) {
+            return Promise.reject(new Error("\"" + packageName + "\" installation does not get \"" + packageName + "\" dependency"));
+        }
+
+        const coercedVersion: semver.SemVer | null = semver.coerce(deps[packageName]);
+
+        return null === coercedVersion
+            ? Promise.reject(new Error("\"" + packageName + "\" installation does not return a valid version for \"" + packageName + "\""))
+            : Promise.resolve(coercedVersion.version);
 
     }).then((data: string): Promise<string> => {
 
