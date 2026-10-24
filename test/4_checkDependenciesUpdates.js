@@ -5,13 +5,14 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
-    const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "cjs", "deps", "checkDependenciesUpdates.js")).default;
+    const checkAndFormateOptions = require(join(__dirname, "..", "lib", "src", "utils", "checkAndFormateOptions.ts")).default;
+    const checkDependenciesUpdates = require(join(__dirname, "..", "lib", "src", "deps", "checkDependenciesUpdates.ts")).default;
+    const downloadPackageData = require(join(__dirname, "..", "lib", "src", "deps", "downloadPackageData.ts")).default;
 
 // consts
 
     const MAX_TIMEOUT = 10000;
-    const CURRENT_PUBLISHED_VERSION = "2.4.0";
+    const CURRENT_PUBLISHED_VERSION = "2.5.0";
 
 // private
 
@@ -211,7 +212,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "2.4";
+            const version = "2.5";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -228,7 +229,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "2.4.x";
+            const version = "2.5.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -325,7 +326,7 @@ describe("checkDependenciesUpdates", () => {
 
         return Promise.resolve().then(() => {
 
-            const version = "~2.4.0";
+            const version = "~2.5.0";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -342,7 +343,7 @@ describe("checkDependenciesUpdates", () => {
 
         }).then(() => {
 
-            const version = "~2.4.x";
+            const version = "~2.5.x";
 
             const modules = _getModules();
                 modules[0].version = version;
@@ -554,6 +555,71 @@ describe("checkDependenciesUpdates", () => {
             });
 
         });
+
+        it("should fail at patch when latest is only a patch ahead", () => {
+
+            return downloadPackageData("semver", "").then((latest) => {
+
+                const parts = latest.split(".");
+
+                if ("0" === parts[2]) {
+                    return Promise.resolve();
+                }
+
+                parts[2] = String(Number(parts[2]) - 1);
+
+                const version = parts.join(".");
+
+                return checkAndFormateOptions({
+                    "failAtMajor": true,
+                    "failAtMinor": true,
+                    "failAtPatch": true
+                }).then((opt) => {
+
+                    return checkDependenciesUpdates([
+                        {
+                            "dev": false,
+                            "optional": false,
+                            "name": "semver",
+                            "version": version,
+                            "path": "semver"
+                        }
+                    ], opt).then((analyze) => {
+
+                        strictEqual(analyze.result, false);
+                        strictEqual(analyze.results[0].result, "fail_patch");
+                        strictEqual(analyze.results[0].version, version);
+
+                    });
+
+                });
+
+            });
+
+        }).timeout(MAX_TIMEOUT);
+
+        it("should warn when the registry has no such package", () => {
+
+            return checkAndFormateOptions({}).then((opt) => {
+
+                return checkDependenciesUpdates([
+                    {
+                        "dev": false,
+                        "optional": false,
+                        "name": "zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty",
+                        "version": "1.0.0",
+                        "path": "missing"
+                    }
+                ], opt).then((analyze) => {
+
+                    strictEqual(analyze.results.length, 1);
+                    strictEqual(analyze.results[0].result, "warning");
+
+                });
+
+            });
+
+        }).timeout(MAX_TIMEOUT);
 
     });
 

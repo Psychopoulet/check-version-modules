@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const sortDeps = require(join(__dirname, "..", "lib", "cjs", "deps", "sortDeps.js")).default;
+    const sortDeps = require(join(__dirname, "..", "lib", "src", "deps", "sortDeps.ts")).default;
 
 // tests
 
@@ -112,6 +112,30 @@ describe("sortDeps", () => {
 
         strictEqual(sorted[0].name, "test1");
         strictEqual(sorted[1].name, "test2");
+
+    });
+
+    it("should sort a dev dependency before an optional dependency", () => {
+
+        const data = [
+            {
+                "dev": false,
+                "optional": true,
+                "name": "optional-dep",
+                "version": "1.0.0"
+            },
+            {
+                "dev": true,
+                "optional": false,
+                "name": "dev-dep",
+                "version": "1.0.0"
+            }
+        ];
+
+        const sorted = sortDeps(data);
+
+        strictEqual(sorted[0].name, "dev-dep");
+        strictEqual(sorted[1].name, "optional-dep");
 
     });
 

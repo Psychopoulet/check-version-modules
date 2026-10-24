@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkNpmrcFile = require(join(__dirname, "..", "lib", "cjs", "utils", "checkNpmrcFile.js")).default;
+    const checkNpmrcFile = require(join(__dirname, "..", "lib", "src", "utils", "checkNpmrcFile.ts")).default;
 
 // tests
 

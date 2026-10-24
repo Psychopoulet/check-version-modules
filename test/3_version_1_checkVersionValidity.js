@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkVersionValidity = require(join(__dirname, "..", "lib", "cjs", "version", "checkVersionValidity.js")).default;
+    const checkVersionValidity = require(join(__dirname, "..", "lib", "src", "version", "checkVersionValidity.ts")).default;
 
 // tests
 

@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const padleft = require(join(__dirname, "..", "lib", "cjs", "utils", "padleft.js")).default;
+    const padleft = require(join(__dirname, "..", "lib", "src", "utils", "padleft.ts")).default;
 
 // tests
 

@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkNonNullPureObject = require(join(__dirname, "..", "lib", "cjs", "utils", "checkNonNullPureObject.js")).default;
+    const checkNonNullPureObject = require(join(__dirname, "..", "lib", "src", "utils", "checkNonNullPureObject.ts")).default;
 
 // tests
 

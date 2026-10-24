@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkBoolean = require(join(__dirname, "..", "lib", "cjs", "utils", "checkBoolean.js")).default;
+    const checkBoolean = require(join(__dirname, "..", "lib", "src", "utils", "checkBoolean.ts")).default;
 
 // tests
 

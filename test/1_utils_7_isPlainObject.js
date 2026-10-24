@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const isPlainObject = require(join(__dirname, "..", "lib", "cjs", "utils", "isPlainObject.js")).default;
+    const isPlainObject = require(join(__dirname, "..", "lib", "src", "utils", "isPlainObject.ts")).default;
 
 // tests
 

@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkNonEmptyString = require(join(__dirname, "..", "lib", "cjs", "utils", "checkNonEmptyString.js")).default;
+    const checkNonEmptyString = require(join(__dirname, "..", "lib", "src", "utils", "checkNonEmptyString.ts")).default;
 
 // tests
 

@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkFile = require(join(__dirname, "..", "lib", "cjs", "utils", "checkFile.js")).default;
+    const checkFile = require(join(__dirname, "..", "lib", "src", "utils", "checkFile.ts")).default;
 
 // tests
 

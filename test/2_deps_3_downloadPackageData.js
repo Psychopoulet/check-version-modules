@@ -5,7 +5,7 @@
     const { strictEqual, ok } = require("node:assert");
 
     // internal
-    const downloadPackageData = require(join(__dirname, "..", "lib", "cjs", "deps", "downloadPackageData.js")).default;
+    const downloadPackageData = require(join(__dirname, "..", "lib", "src", "deps", "downloadPackageData.ts")).default;
 
 // consts
 
