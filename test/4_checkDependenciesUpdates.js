@@ -576,13 +576,15 @@ describe("checkDependenciesUpdates", () => {
                     "failAtPatch": true
                 }).then((opt) => {
 
-                    return checkDependenciesUpdates([ {
-                        "dev": false,
-                        "optional": false,
-                        "name": "semver",
-                        "version": version,
-                        "path": "semver"
-                    } ], opt).then((analyze) => {
+                    return checkDependenciesUpdates([
+                        {
+                            "dev": false,
+                            "optional": false,
+                            "name": "semver",
+                            "version": version,
+                            "path": "semver"
+                        }
+                    ], opt).then((analyze) => {
 
                         strictEqual(analyze.result, false);
                         strictEqual(analyze.results[0].result, "fail_patch");
@@ -600,13 +602,15 @@ describe("checkDependenciesUpdates", () => {
 
             return checkAndFormateOptions({}).then((opt) => {
 
-                return checkDependenciesUpdates([ {
-                    "dev": false,
-                    "optional": false,
-                    "name": "zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty",
-                    "version": "1.0.0",
-                    "path": "missing"
-                } ], opt).then((analyze) => {
+                return checkDependenciesUpdates([
+                    {
+                        "dev": false,
+                        "optional": false,
+                        "name": "zdc1az6d1a6qz15d6azd156qzd1a3zd1a33zae5cz3dfb21rfthrf3j1t3t3j13gty",
+                        "version": "1.0.0",
+                        "path": "missing"
+                    }
+                ], opt).then((analyze) => {
 
                     strictEqual(analyze.results.length, 1);
                     strictEqual(analyze.results[0].result, "warning");
