@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const getUpdateFailureLevel = require(join(__dirname, "..", "lib", "cjs", "version", "getUpdateFailureLevel.js")).default;
+    const getUpdateFailureLevel = require(join(__dirname, "..", "lib", "src", "version", "getUpdateFailureLevel.ts")).default;
 
 // tests
 

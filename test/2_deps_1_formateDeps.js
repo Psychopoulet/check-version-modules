@@ -6,7 +6,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const formateDeps = require(join(__dirname, "..", "lib", "cjs", "deps", "formateDeps.js")).default;
+    const formateDeps = require(join(__dirname, "..", "lib", "src", "deps", "formateDeps.ts")).default;
 
 // tests
 

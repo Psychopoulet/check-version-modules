@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const sortDeps = require(join(__dirname, "..", "lib", "cjs", "deps", "sortDeps.js")).default;
+    const sortDeps = require(join(__dirname, "..", "lib", "src", "deps", "sortDeps.ts")).default;
 
 // tests
 

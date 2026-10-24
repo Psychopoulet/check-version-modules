@@ -5,7 +5,7 @@
     const { strictEqual } = require("node:assert");
 
     // internal
-    const checkAndFormateOptions = require(join(__dirname, "..", "lib", "cjs", "utils", "checkAndFormateOptions.js")).default;
+    const checkAndFormateOptions = require(join(__dirname, "..", "lib", "src", "utils", "checkAndFormateOptions.ts")).default;
 
 // tests
 
