@@ -46,13 +46,13 @@ describe("formateDeps", () => {
             const formated = formateDeps(data, true, false);
 
             strictEqual(formated instanceof Array, true);
-            strictEqual(formated.length, 11);
+            strictEqual(formated.length, 9);
 
             const devDeps = formated.filter((dep) => {
                 return dep.dev;
             });
 
-            strictEqual(devDeps.length, 10);
+            strictEqual(devDeps.length, 8);
 
             devDeps.forEach((dep) => {
 
@@ -88,7 +88,7 @@ describe("formateDeps", () => {
             const formated = formateDeps(data, true, true);
 
             strictEqual(formated instanceof Array, true);
-            strictEqual(formated.length, 12);
+            strictEqual(formated.length, 10);
 
             strictEqual(formated.filter((dep) => {
                 return !dep.dev && !dep.optional;
@@ -96,7 +96,7 @@ describe("formateDeps", () => {
 
             strictEqual(formated.filter((dep) => {
                 return dep.dev;
-            }).length, 10);
+            }).length, 8);
 
             strictEqual(formated.filter((dep) => {
                 return dep.optional;

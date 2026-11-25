@@ -16,7 +16,7 @@ Check modules's version for the package.
 ## Installation
 
 ```bash
-$ npm install check-version-modules
+$ bun add check-version-modules
 ```
 
 ## Features
@@ -102,8 +102,8 @@ interface iDep {
 ### Command line
 
 ```bash
-$ cd ./myProject/ && npx check-version-modules --file /etc/tests/package.json --fail-at-patch --no-dev
-$ cd ./myProject/ && npx check-version-modules --no-fail-at-minor
+$ cd ./myProject/ && bunx check-version-modules --file /etc/tests/package.json --fail-at-patch --no-dev
+$ cd ./myProject/ && bunx check-version-modules --no-fail-at-minor
 ```
 
 ### Native
@@ -161,7 +161,7 @@ checker({
 ## Tests
 
 ```bash
-$ npm run tests
+$ bun run tests
 ```
 
 ## License

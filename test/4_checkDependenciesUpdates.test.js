@@ -11,7 +11,6 @@
 
 // consts
 
-    const MAX_TIMEOUT = 10000;
     const CURRENT_PUBLISHED_VERSION = "2.5.2";
 
 // private
@@ -86,7 +85,7 @@ describe("checkDependenciesUpdates", () => {
 
         });
 
-    }).timeout(MAX_TIMEOUT);
+    });
 
     it("should test \"x.n.n\" & \"x.x.n\" & \"x.x.x\" patterns", () => {
 
@@ -596,7 +595,7 @@ describe("checkDependenciesUpdates", () => {
 
             });
 
-        }).timeout(MAX_TIMEOUT);
+        });
 
         it("should warn when the registry has no such package", () => {
 
@@ -619,7 +618,7 @@ describe("checkDependenciesUpdates", () => {
 
             });
 
-        }).timeout(MAX_TIMEOUT);
+        });
 
     });
 

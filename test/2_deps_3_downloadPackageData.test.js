@@ -7,10 +7,6 @@
     // internal
     const downloadPackageData = require(join(__dirname, "..", "lib", "src", "deps", "downloadPackageData.ts")).default;
 
-// consts
-
-    const MAX_TIMEOUT = 10000;
-
 // tests
 
 describe("downloadPackageData", () => {
@@ -108,13 +104,13 @@ describe("downloadPackageData", () => {
 
         });
 
-    }).timeout(MAX_TIMEOUT);
+    });
 
     it("should test current module", () => {
 
         return downloadPackageData("check-version-modules", "");
 
-    }).timeout(MAX_TIMEOUT);
+    });
 
     it("should test private module", () => {
 
@@ -122,7 +118,7 @@ describe("downloadPackageData", () => {
             return downloadPackageData("check-version-modules", ".npmrc");
         });
 
-    }).timeout(MAX_TIMEOUT);
+    });
 
     it("should test mutliple module", () => {
 
@@ -130,6 +126,6 @@ describe("downloadPackageData", () => {
             return downloadPackageData("check-version-modules", "");
         });
 
-    }).timeout(MAX_TIMEOUT);
+    });
 
 });

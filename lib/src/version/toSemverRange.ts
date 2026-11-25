@@ -27,12 +27,6 @@ export default function toSemverRange (version: string): string {
         return validRange;
     }
 
-    const validVersion: string | null = semver.valid(normalizedVersion);
-
-    if (null !== validVersion) {
-        return validVersion;
-    }
-
     return normalizedVersion;
 
 }

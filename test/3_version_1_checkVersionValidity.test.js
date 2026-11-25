@@ -300,10 +300,10 @@ describe("checkVersionValidity", () => {
 
         it("should test wrong pattern \"n.n.n.n\"", () => {
 
-            checkVersionValidity("1.1.1.1", false).then((valid) => {
+            return checkVersionValidity("1.1.1.1", false).then((valid) => {
 
                 strictEqual(typeof valid, "string");
-                strictEqual(valid, false);
+                strictEqual(valid, "NOT_RUNNABLE");
 
             });
 
@@ -311,10 +311,10 @@ describe("checkVersionValidity", () => {
 
         it("should test wrong pattern \"^~n.n.n\"", () => {
 
-            checkVersionValidity("^~1.1.1", false).then((valid) => {
+            return checkVersionValidity("^~1.1.1", false).then((valid) => {
 
                 strictEqual(typeof valid, "string");
-                strictEqual(valid, false);
+                strictEqual(valid, "NOT_RUNNABLE");
 
             });
 
