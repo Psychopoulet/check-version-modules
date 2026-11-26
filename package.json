@@ -1,7 +1,7 @@
 {
 
   "name": "check-version-modules",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Check modules's version for the package.",
 
   "type": "commonjs",
