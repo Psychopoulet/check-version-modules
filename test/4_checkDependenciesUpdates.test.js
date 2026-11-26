@@ -11,7 +11,7 @@
 
 // consts
 
-    const CURRENT_PUBLISHED_VERSION = "2.5.2";
+    const CURRENT_PUBLISHED_VERSION = "2.5.3";
 
 // private
 
