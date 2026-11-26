@@ -38,4 +38,10 @@ describe("getUpdateFailureLevel", () => {
 
     });
 
+    it("should return fail_patch when the range has no minimum version", () => {
+
+        strictEqual(getUpdateFailureLevel("<0.0.0", "1.2.3"), "fail_patch");
+
+    });
+
 });
